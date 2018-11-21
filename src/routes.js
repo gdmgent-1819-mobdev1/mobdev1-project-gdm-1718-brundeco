@@ -6,7 +6,7 @@ import MapboxView from './pages/mapbox-example';
 
 export default [
   { path: '/', view: LoginView },
-  { path: '/about', view: SignupAsView },
+  { path: '/signup-as', view: SignupAsView },
   { path: '/firebase', view: FirebaseView },
   { path: '/mapbox', view: MapboxView },
 ];
