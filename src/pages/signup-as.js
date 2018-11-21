@@ -3,11 +3,11 @@ import { compile } from 'handlebars';
 import update from '../helpers/update';
 
 // Import the template to use
-const homeTemplate = require('../templates/home.handlebars');
+const signupAsTemplate = require('../templates/signup-as.handlebars');
 
 export default () => {
   // Data to be passed to the template
-  const user = 'Test user';
+  const name = 'Test inc.';
   // Return the compiled template to the router
-  update(compile(homeTemplate)({ user }));
+  update(compile(signupAsTemplate)({ name }));
 };
