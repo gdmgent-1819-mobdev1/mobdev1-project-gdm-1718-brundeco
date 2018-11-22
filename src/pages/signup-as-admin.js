@@ -3,11 +3,12 @@ import { compile } from 'handlebars';
 import update from '../helpers/update';
 
 // Import the template to use
-const signupAsTemplate = require('../templates/signup-as-admin.handlebars');
+const signupAsAdminTemplate = require('../templates/signup-as-admin.handlebars');
 
 export default () => {
   // Data to be passed to the template
   const name = 'Test inc.';
   // Return the compiled template to the router
-  update(compile(signupAsTemplate)({ name }));
+  update(compile(signupAsAdminTemplate)({ name }));
 };
+

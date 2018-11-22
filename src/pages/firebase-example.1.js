@@ -1,3 +1,13 @@
+
+let txtFirstNameSt = document.getElementById('txtFirstNameSt').value;
+let txtLastNameSt = document.getElementById('txtLastNameSt').value;
+let txtAddressSt = document.getElementById('txtAddressSt').value;
+let txtEmailSt = document.getElementById('txtEmailSt').value;
+let txtPasswordSt = document.getElementById('txtPasswordSt').value;
+let txtEducationSt = document.getElementById('txtEducationSt').value;
+
+let btnSignupConfirm = document.getElementById('btnSignupConfirm');
+
 // Only import the compile function from handlebars instead of the entire library
 import { compile } from 'handlebars';
 
@@ -8,7 +18,9 @@ const { getInstance } = require('../firebase/firebase');
 
 const firebase = getInstance();
 // Import the template to use
-const aboutTemplate = require('../templates/list.handlebars');
+const aboutTemplate = require('../templates/signupas-admin.handlebars');
+console.log(aboutTemplate);
+console.log('hey');
 
 export default () => {
   // Data to be passed to the template
@@ -17,6 +29,7 @@ export default () => {
   const title = 'Firebase calls example';
   // Return the compiled template to the router
   update(compile(aboutTemplate)({ title, loading, posts }));
+
 
   if (firebase) {
     // firebase.auth().createUserWithEmailAndPassword('test@test.com', 'test333').catch((error) => {
@@ -35,5 +48,3 @@ export default () => {
     });
   }
 };
-
-

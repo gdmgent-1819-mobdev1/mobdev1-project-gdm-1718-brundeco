@@ -1,5 +1,7 @@
 import Navigo from 'navigo';
 import handlebars, { compile } from 'handlebars';
+import './materialize.js';
+import './css/vendors/materialize.css'
 import './styles/abstracts/colors.scss';
 import './styles/main.scss';
 import './styles/header.scss';

@@ -67,12 +67,13 @@
     color: $color-lightblue;
     font-size: 80% !important;
     height: 25px !important;
+    padding: 5px 20px !important;
 }
 
 .btnLogout:hover {
-    background-color: $color-none !important;
+    background-color: $color-lightblue !important;
     border: 1px solid $color-lightblue !important;
-    opacity: 0.6;
     cursor: pointer;
+    color: $color-white;
 }
 

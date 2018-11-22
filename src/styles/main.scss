@@ -65,12 +65,17 @@
 }
 
 .just-a-box {
-    max-width: 85%;
+    max-width: 75%;
     margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
+}
+
+.just-a-box img {
+    width: 30px;
+    margin-top: 20px;
+}
+
+.info-block img {
+    border-radius: $main-border-radius;
 }
 
 .info-block {
@@ -80,6 +85,7 @@
     align-items: center;
     background-color: $color-lighter-grey;
     border-radius: $main-border-radius;
+    padding-top: 8%;
 }
 
 .judge-block {
@@ -90,7 +96,7 @@
 }
 
 img.room-picture {
-    width: 100%;
+    width: 85%;
 }
 
 img.judge-icons {
@@ -100,10 +106,11 @@ img.judge-icons {
 
 // - - - - - containers listview  - - - - - -
 .info-list {
-    display: flex;
-    // background-color: $color-lighter-grey;
+    // display: flex;
+    background-color: $color-lighter-grey;
     border-radius: $main-border-radius;
     margin-top: 20px;
+    padding-left: 5%;
 }
 
 .info-list-img {
@@ -116,6 +123,7 @@ img.room-picture-list {
     display: inline-block;
     width: 100%;
     height: 100%;
+    border-radius: $main-border-radius;
 }
 
 .info-list-text {
@@ -172,7 +180,7 @@ h6.h6-message-name {
 
 h5.h5-messenger {
     color: $color-black;
-    font-size: 90% !important;
+    font-size: 90%;
 }
 
 
@@ -205,6 +213,7 @@ h1 {
 h2 {
     font-size: 110% !important;
     font-weight: 700 !important;
+    text-align: center;
 }
 
 h4 {

@@ -4,6 +4,11 @@ import PasswordResetView from './pages/password-reset';
 import SignupAsView from './pages/signup-as';
 import SignupAsStudentView from './pages/signup-as-student';
 import SignupAsAdminView from './pages/signup-as-admin';
+
+import StudentHomeView from './pages/home-student';
+import StudentListView from './pages/student-listview';
+import StudentMessagesView from './pages/student-messages';
+
 import FirebaseView from './pages/firebase-example';
 import MapboxView from './pages/mapbox-example';
 
@@ -13,6 +18,11 @@ export default [
   { path: '/password-reset', view: PasswordResetView },
   { path: '/signup-as-student', view: SignupAsStudentView },
   { path: '/signup-as-admin', view: SignupAsAdminView },
+
+  { path: '/home-student', view: StudentHomeView },
+  { path: '/student-listview', view: StudentListView },
+  { path: '/student-messages', view: StudentMessagesView },
+
   { path: '/firebase', view: FirebaseView },
   { path: '/mapbox', view: MapboxView },
 ];
