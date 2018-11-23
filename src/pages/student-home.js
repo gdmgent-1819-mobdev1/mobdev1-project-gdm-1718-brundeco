@@ -3,7 +3,7 @@ import { compile } from 'handlebars';
 import update from '../helpers/update';
 
 // Import the template to use
-const homeStudentTemplate = require('../templates/home-student.handlebars');
+const homeStudentTemplate = require('../templates/student-home.handlebars');
 
 export default () => {
   // Data to be passed to the template

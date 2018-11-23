@@ -63,11 +63,12 @@
 .btnLogout {
     background-color: $color-none !important;
     border: 1px solid $color-lightblue !important;
-    margin-top: $small-top-margin;
+    margin-top: 20px;
     color: $color-lightblue;
     font-size: 80% !important;
     height: 25px !important;
     padding: 5px 20px !important;
+    border-radius: $main-border-radius;
 }
 
 .btnLogout:hover {

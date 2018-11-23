@@ -6,7 +6,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $color-lighter-grey;
     position: fixed;
     width: 100%;
     top: 0;
@@ -15,21 +14,27 @@
 
 .header-top {
     width: 100%;
+    min-height: 100px;
     padding-top: 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-color: $color-lightblue;
 }
 
 .make-circle {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height:30px;
     background-color: rgb(247, 247, 247);
     border-radius: 50px;
+}
+
+.make-circle > img {
+    width: 12px;
 }
 
 .header-bottom {
@@ -38,4 +43,5 @@
     flex-direction: row;
     justify-content: center;
     padding: 0px 0px 30px;
+    background-color: $color-white;
 }
