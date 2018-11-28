@@ -62,9 +62,9 @@
 
 .btnLogout {
     background-color: $color-none !important;
-    border: 1px solid $color-lightblue !important;
+    border: 1px solid $color-pink !important;
     margin-top: 20px;
-    color: $color-lightblue;
+    color: $color-pink;
     font-size: 80% !important;
     height: 25px !important;
     padding: 5px 20px !important;
@@ -72,9 +72,18 @@
 }
 
 .btnLogout:hover {
-    background-color: $color-lightblue !important;
-    border: 1px solid $color-lightblue !important;
+    background-color: $color-pink !important;
+    border: 1px solid $color-pink !important;
     cursor: pointer;
     color: $color-white;
+}
+
+#add-room-submit {
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+#add-room-submit:hover {
+    color: $color-blue;
 }
 

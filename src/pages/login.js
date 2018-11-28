@@ -2,12 +2,24 @@
 import { compile } from 'handlebars';
 import update from '../helpers/update';
 
+update(compile(loginTemplate));
+
+function logData(){
+  let txtEmail = document.getElementById('txtEmail').value;
+  let txtPassword = document.getElementById('txtPassword').value;
+  console.log(txtEmail);
+  console.log(txtPassword);
+}
+
 // Import the template to use
 const loginTemplate = require('../templates/login.handlebars');
 
 export default () => {
-  // Data to be passed to the template
-  const user = 'Test user';
-  // Return the compiled template to the router
-  update(compile(loginTemplate)({ user }));
+  let btnLogin = document.getElementById('btnLogin');
+  btnLogin.addEventListener('click', logData);
 };
+
+
+
+
+
