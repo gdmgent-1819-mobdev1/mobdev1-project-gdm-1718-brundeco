@@ -1,25 +1,46 @@
-// Only import the compile function from handlebars instead of the entire library
 import { compile } from 'handlebars';
 import update from '../helpers/update';
+import { getInstance } from '../firebase/firebase';
 
-update(compile(loginTemplate));
-
-function logData(){
-  let txtEmail = document.getElementById('txtEmail').value;
-  let txtPassword = document.getElementById('txtPassword').value;
-  console.log(txtEmail);
-  console.log(txtPassword);
-}
-
-// Import the template to use
+const firebase = getInstance();
 const loginTemplate = require('../templates/login.handlebars');
 
-export default () => {
-  let btnLogin = document.getElementById('btnLogin');
-  btnLogin.addEventListener('click', logData);
+function loginSuccessful() {
+  const email = document.getElementById('txtEmail').value;
+  const text = 'You are now logged in with ' + email;
+  if (!("Notification" in window)) {
+    alert("This browser does not support system notifications");
+  }
+  else if (Notification.permission === "granted") {
+    let notification = new Notification("Welcome", {body: text});
+  }
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      if (permission === "granted") {
+        let notification = new Notification("Welcome", {body: text});
+      }
+    });
+  }
+}
+
+const login = (email, pass) => {
+  const message = document.getElementById('message');
+  firebase.auth().signInWithEmailAndPassword(email, pass)
+    .then
+    (() => window.location.replace('/#/student-home'))
+    loginSuccessful()
+    .catch(error => message.innerHTML = error)
 };
 
+export default () => {
+  update(compile(loginTemplate)());
 
+  const btnLogin = document.getElementById('btnLogin');
 
-
-
+  btnLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('txtEmail').value;
+    const password = document.getElementById('txtPassword').value;
+    login(email, password);
+  });
+};

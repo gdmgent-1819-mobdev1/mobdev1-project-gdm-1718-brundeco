@@ -2,12 +2,23 @@
 import { compile } from 'handlebars';
 import update from '../helpers/update';
 
+import { getInstance } from '../firebase/firebase';
+const firebase = getInstance();
+
 // Import the template to use
 const homeAdminTemplate = require('../templates/admin-home.handlebars');
 
 export default () => {
-  // Data to be passed to the template
-  const user = 'Test user';
   // Return the compiled template to the router
-  update(compile(homeAdminTemplate)({ user }));
+  update(compile(homeAdminTemplate)());
+
+    // firebase logout at buttonclick
+    const btnLogout = document.querySelector('.btnLogout');
+
+    btnLogout.addEventListener('click', e => {
+      firebase.auth().signOut().then(function() {
+        console.log('log uit');
+        window.location.replace('/#/');
+      });
+    });
 };

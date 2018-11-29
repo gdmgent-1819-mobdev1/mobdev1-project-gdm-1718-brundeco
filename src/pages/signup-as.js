@@ -6,8 +6,20 @@ import update from '../helpers/update';
 const signupAsTemplate = require('../templates/signup-as.handlebars');
 
 export default () => {
-  // Data to be passed to the template
-  const name = 'Test inc.';
+
+  update(compile(signupAsTemplate)());
+
+  let btnSignupAsStudent = document.getElementById('btnSignupAsStudent');
+  let btnSignupAsAdmin = document.getElementById('btnSignupAsAdmin');
+
+  btnSignupAsStudent.addEventListener('click', () => {
+    window.location.replace('/#/signup-as-student');
+    console.log('student wants to log in');
+  })
+
+  btnSignupAsAdmin.addEventListener('click', ()  => {
+    window.location.replace('/#/signup-as-admin');
+    console.log('kotbaas wants to log in');
+  })
   // Return the compiled template to the router
-  update(compile(signupAsTemplate)({ name }));
 };
