@@ -18,7 +18,7 @@ export default () => {
 
     // Get firebase reference and create a child object called adminInfo
     const database = firebase.database();
-    const ref = database.ref('userdata/adminInfo');
+    const ref = database.ref('userdata');
     console.log(ref);
 
     // Collect the values from the form inputfields
@@ -28,6 +28,7 @@ export default () => {
     const telephone = document.getElementById('txtTelAd').value;
     const email = document.getElementById('txtEmailAd').value;
     const pass = document.getElementById('txtPasswordAd').value;
+    const userType = 'admin';
     const auth = firebase.auth();
     const message = document.getElementById('message');
 
@@ -37,7 +38,8 @@ export default () => {
       lastname: lastName,
       address: address,
       telephone: telephone,
-      email: email
+      email: email,
+      type: userType
   }
 
     // Push the object data to firebase database

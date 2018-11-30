@@ -18,7 +18,7 @@ export default () => {
 
     // Get firebase reference and create a child object called studentInfo
     const database = firebase.database();
-    const ref = database.ref('userdata/studentInfo');
+    const ref = database.ref('userdata');
     console.log(ref);
 
     // Collect the values from the form inputfields
@@ -29,6 +29,7 @@ export default () => {
     const email = document.getElementById('txtEmailSt').value;
     const pass = document.getElementById('txtPasswordSt').value;
     const education = document.getElementById('txtEducationSt').value;
+    const userType = 'student';
     const auth = firebase.auth();
     const message = document.getElementById('message');
 
@@ -39,7 +40,8 @@ export default () => {
       address: address,
       telephone: telephone,
       email: email,
-      education: education
+      education: education,
+      type: userType
   }
 
     // Push the object data to firebase database

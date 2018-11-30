@@ -109,6 +109,7 @@ img.judge-icons {
     background-color: $color-lighter-grey;
     margin-top: 20px;
     display: flex;
+    flex-direction: column;
     // border-left: 3px solid $color-lightblue;
 }
 
