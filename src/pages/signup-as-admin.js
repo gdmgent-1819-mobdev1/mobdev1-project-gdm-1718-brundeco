@@ -8,50 +8,45 @@ const firebase = getInstance();
 // Import the template to use
 const signupAsAdminTemplate = require('../templates/signup-as-admin.handlebars');
 
-  // send email to registered address to complete sign up
-  function sendMeAnEmailPlease(email) {
-    email.sendEmailVerification()
-        .then(function() {
-            console.log('Email verification link sent');
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
-    }
-
-  // send register notification 
-  function registerSuccessful() {
-    const email = document.getElementById('txtEmailAd').value;
-    const text = 'You are now registered with ' + email;
-    if (!("Notification" in window)) {
-      alert("This browser does not support system notifications");
-    }
-    else if (Notification.permission === "granted") {
-      let notification = new Notification("Welcome!", {body: text});
-    }
-    else if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        if (permission === "granted") {
-          let notification = new Notification("Welcome!", {body: text});
-        }
-      });
-    }
-  }
-
 export default () => {
   // Return the compiled template to the router
   update(compile(signupAsAdminTemplate)());
 
-  const btnSignupConfirm = document.getElementById('btnSignupConfirm');
   // firebase signup at buttonclick
+  const btnSignupConfirm = document.getElementById('btnSignupConfirm');
   btnSignupConfirm.addEventListener('click', e => {
-    const message = document.getElementById('message');
-    const email = txtEmailAd.value;
-    const pass = txtPasswordAd.value;
+
+    // Get firebase reference and create a child object called adminInfo
+    const database = firebase.database();
+    const ref = database.ref('userdata/adminInfo');
+    console.log(ref);
+
+    // Collect the values from the form inputfields
+    const firstName = document.getElementById('txtFirstNameAd').value;
+    const lastName = document.getElementById('txtLastNameAd').value;
+    const address = document.getElementById('txtAddressAd').value;
+    const telephone = document.getElementById('txtTelAd').value;
+    const email = document.getElementById('txtEmailAd').value;
+    const pass = document.getElementById('txtPasswordAd').value;
     const auth = firebase.auth();
+    const message = document.getElementById('message');
+
+    // Put form data in a userdata oject
+    let userData = {
+      firstname: firstName,
+      lastname: lastName,
+      address: address,
+      telephone: telephone,
+      email: email
+  }
+
+    // Push the object data to firebase database
+    ref.push(userData);
+    console.log(ref);
+    console.log(userData);
 
     let user = email;
-    console.log(user)
+    console.log(user);
 
     const promise = auth.createUserWithEmailAndPassword(email, pass)
     promise.then(e => {

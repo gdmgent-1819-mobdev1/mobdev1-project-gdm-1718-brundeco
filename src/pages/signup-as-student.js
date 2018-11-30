@@ -8,61 +8,57 @@ const firebase = getInstance();
 // Import the template to use
 const signupAsStudentTemplate = require('../templates/signup-as-student.handlebars');
 
-  // send email to registered address to complete sign up
-  function sendMeAnEmailPlease(email) {
-    email.sendEmailVerification()
-        .then(function() {
-            console.log('Email verification link sent');
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
-    }
-  
-  // send register notification 
-  function registerSuccessful() {
+export default () => {
+  // Return the compiled template to the router
+  update(compile(signupAsStudentTemplate)());
+
+  // firebase signup at buttonclick
+  const btnSignupConfirm = document.getElementById('btnSignupConfirm');
+  btnSignupConfirm.addEventListener('click', e => {
+
+    // Get firebase reference and create a child object called studentInfo
+    const database = firebase.database();
+    const ref = database.ref('userdata/studentInfo');
+    console.log(ref);
+
+    // Collect the values from the form inputfields
+    const firstName = document.getElementById('txtFirstNameSt').value;
+    const lastName = document.getElementById('txtLastNameSt').value;
+    const address = document.getElementById('txtAddressSt').value;
+    const telephone = document.getElementById('txtTelSt').value;
     const email = document.getElementById('txtEmailSt').value;
-    const text = 'You are now registered with ' + email;
-    if (!("Notification" in window)) {
-      alert("This browser does not support system notifications");
-    }
-    else if (Notification.permission === "granted") {
-      let notification = new Notification("Welcome!", {body: text});
-    }
-    else if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        if (permission === "granted") {
-          let notification = new Notification("Welcome!", {body: text});
-        }
-      });
-    }
+    const pass = document.getElementById('txtPasswordSt').value;
+    const education = document.getElementById('txtEducationSt').value;
+    const auth = firebase.auth();
+    const message = document.getElementById('message');
+
+    // Put form data in a userdata oject
+    let userData = {
+      firstname: firstName,
+      lastname: lastName,
+      address: address,
+      telephone: telephone,
+      email: email,
+      education: education
   }
 
-  export default () => {
-    // Return the compiled template to the router
-    update(compile(signupAsStudentTemplate)());
+    // Push the object data to firebase database
+    ref.push(userData);
+    console.log(ref);
+    console.log(userData);
 
-    const btnSignupConfirm = document.getElementById('btnSignupConfirm');
-    // firebase signup at buttonclick
-    btnSignupConfirm.addEventListener('click', e => {
-      const message = document.getElementById('message');
-      const email = txtEmailSt.value;
-      const pass = txtPasswordSt.value;
-      const auth = firebase.auth();
+    let user = email;
+    console.log(user);
 
-      let user = email;
-      console.log(user)
-
-      const promise = auth.createUserWithEmailAndPassword(email, pass)
-      promise.then(e => {
-        // sign in and navigate to homepage
-        window.location.replace('/#/student-home');
-        // send email verification link
-        sendMeAnEmailPlease(e.user);
-        // call registerSuccessful to display notification
-        registerSuccessful();
-      })
-      promise.catch(error => message.innerHTML = error );
-    });
-  };
-
+    const promise = auth.createUserWithEmailAndPassword(email, pass)
+    promise.then(e => {
+      // sign in and navigate to homepage
+      window.location.replace('/#/student-home');
+      // send email verification link
+      sendMeAnEmailPlease(e.user);
+      // call registerSuccessful to display notification
+      registerSuccessful();
+    })
+    promise.catch(error => message.innerHTML = error );
+  });
+};

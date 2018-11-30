@@ -26,9 +26,8 @@ function loginSuccessful() {
 const login = (email, pass) => {
   const message = document.getElementById('message');
   firebase.auth().signInWithEmailAndPassword(email, pass)
-    .then
-    (() => window.location.replace('/#/student-home'))
-    loginSuccessful()
+    .then(() => window.location.replace('/#/student-home'))
+    // loginSuccessful()
     .catch(error => message.innerHTML = error)
 };
 
