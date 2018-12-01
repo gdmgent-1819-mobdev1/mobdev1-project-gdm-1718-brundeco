@@ -3,14 +3,51 @@
     <div class="content">
         <div class="just-a-box-2">
             <h2>Nieuw kot toevoegen</h2>
-            <input class="add-room-input" type="text" placeholder="Type kot">
-            <input class="add-room-input" type="text" placeholder="Adres">
+            <input class="add-room-input" type="text" placeholder="Huurprijs">
+            <input class="add-room-input" type="text" placeholder="Waarborg">
+            <select class="add-room-input" name="room-type">
+                <option value="volvo">Type</option>
+                <option value="volvo">Kamer</option>
+                <option value="saab">Studio</option>
+                <option value="mercedes">Appartement</option>
+            </select>
             <input class="add-room-input" type="text" placeholder="Oppervlakte">
-            <input class="add-room-input" type="text" placeholder="Beschrijving">
+            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
+                <option value="volvo">Aantal personen</option>
+                <option value="volvo">1</option>
+                <option value="saab">2</option>
+                <option value="mercedes">3</option>
+                <option value="mercedes">4</option>
+            </select>
+            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
+                <option value="volvo">Toilet</option>
+                <option value="volvo">Privé</option>
+                <option value="saab">Gedeeld</option>
+                <option value="saab">Niet aanwezig</option>
+            </select>
+            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
+                <option value="volvo">Douche</option>
+                <option value="volvo">Privé</option>
+                <option value="saab">Gedeeld</option>
+                <option value="saab">Niet aanwezig</option>
+            </select>
+            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
+                <option value="volvo">Keuken</option>
+                <option value="volvo">Privé</option>
+                <option value="saab">Gedeeld</option>
+                <option value="saab">Niet aanwezig</option>
+            </select>
+            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
+                <option value="volvo">Bemeubeld</option>
+                <option value="volvo">Ja</option>
+                <option value="saab">Neen</option>
+            </select>
+            <input class="add-room-input" type="text" placeholder="Adres">
             <p>Foto's</p>
-            <button class="add-room-picture" data-upload-button>
+            {{!-- <button class="add-room-picture" data-upload-button>
                 <img src="src/images/add-picture.png" alt="">
-            </button>
+            </button> --}}
+
             <a href="" id="add-room-submit">Kot plaatsen</a>
         </div>
     </div>

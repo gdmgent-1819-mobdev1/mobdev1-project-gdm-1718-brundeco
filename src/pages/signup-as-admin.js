@@ -54,10 +54,6 @@ export default () => {
     promise.then(e => {
       // sign in and navigate to homepage
       window.location.replace('/#/admin-home');
-      // send email verification link
-      sendMeAnEmailPlease(e.user);
-      // call registerSuccessful to display notification
-      registerSuccessful();
     })
     promise.catch(error => message.innerHTML = error );
   });
