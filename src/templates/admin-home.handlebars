@@ -6,10 +6,10 @@
             <input class="add-room-input" type="text" placeholder="Huurprijs">
             <input class="add-room-input" type="text" placeholder="Waarborg">
             <select class="add-room-input" name="room-type">
-                <option value="volvo">Type</option>
-                <option value="volvo">Kamer</option>
-                <option value="saab">Studio</option>
-                <option value="mercedes">Appartement</option>
+                <option value="Type">Type</option>
+                <option value="Kamer">Kamer</option>
+                <option value="Studio">Studio</option>
+                <option value="Appartement">Appartement</option>
             </select>
             <input class="add-room-input" type="text" placeholder="Oppervlakte">
             <select class="add-room-input" name="room-type" placeholder="Aantal personen">
@@ -44,9 +44,10 @@
             </select>
             <input class="add-room-input" type="text" placeholder="Adres">
             <p>Foto's</p>
-            {{!-- <button class="add-room-picture" data-upload-button>
+            {{!-- <button class="add-room-picture" type="file">
                 <img src="src/images/add-picture.png" alt="">
             </button> --}}
+            <input type="file" id="input_3" name="q3_fileUpload" class="form-upload validate[upload]" data-file-accept="pdf, doc, docx, xls, xlsx, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif" data-file-maxsize="9024" data-file-minsize="0" data-file-limit="0" data-component="fileupload">
 
             <a href="" id="add-room-submit">Kot plaatsen</a>
         </div>
