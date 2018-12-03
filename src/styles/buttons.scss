@@ -82,14 +82,17 @@
 }
 
 #add-room-submit {
-    margin-top: 30px;
-    padding: 10px 30px;
+    margin-top: 30px !important;
+    padding: 10px 30px !important;
+    border: 1px solid $color-black !important;
+    // width: 50% !important;
     border-radius: $main-border-radius;
     background-color: $color-darkblue;
-    color: $color-white;
 }
 
 #add-room-submit:hover {
-    background-color: $color-lightblue;
+    background-color: $color-black !important;
+    color: $color-white !important;
+    cursor: pointer;
 }
 

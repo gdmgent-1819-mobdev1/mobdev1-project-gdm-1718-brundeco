@@ -1,56 +1,61 @@
 <!-- - - - - - - - - - - - - - - Home page - - - - - - - - - - - - - - -->
 {{> header }}
     <div class="content">
-        <div class="just-a-box-2">
+        <form class="just-a-box-2">
             <h2>Nieuw kot toevoegen</h2>
-            <input class="add-room-input" type="text" placeholder="Huurprijs">
-            <input class="add-room-input" type="text" placeholder="Waarborg">
-            <select class="add-room-input" name="room-type">
+            <input class="add-room-input" type="text" placeholder="Huurprijs" id="rentalPrice">
+            <input class="add-room-input" type="text" placeholder="Waarborg" id="warrant">
+            <select class="add-room-input" id="roomType">
                 <option value="Type">Type</option>
                 <option value="Kamer">Kamer</option>
                 <option value="Studio">Studio</option>
                 <option value="Appartement">Appartement</option>
             </select>
-            <input class="add-room-input" type="text" placeholder="Oppervlakte">
-            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
-                <option value="volvo">Aantal personen</option>
-                <option value="volvo">1</option>
-                <option value="saab">2</option>
-                <option value="mercedes">3</option>
-                <option value="mercedes">4</option>
+            <input class="add-room-input" type="text" placeholder="Oppervlakte" id="surface">
+            <select class="add-room-input" placeholder="Aantal personen" id="numberOfPersons">
+                <option value="Aantal personen">Aantal personen</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
             </select>
-            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
-                <option value="volvo">Toilet</option>
-                <option value="volvo">Privé</option>
-                <option value="saab">Gedeeld</option>
-                <option value="saab">Niet aanwezig</option>
+            <select class="add-room-input" placeholder="Toilet" id="toilet">
+                <option value="Toilet">Toilet</option>
+                <option value="Privé">Privé</option>
+                <option value="Gedeeld">Gedeeld</option>
+                <option value="Niet aanwezig">Niet aanwezig</option>
             </select>
-            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
-                <option value="volvo">Douche</option>
-                <option value="volvo">Privé</option>
-                <option value="saab">Gedeeld</option>
-                <option value="saab">Niet aanwezig</option>
+            <select class="add-room-input" placeholder="Douche" id="douche">
+                <option value="Douche">Douche</option>
+                <option value="Privé">Privé</option>
+                <option value="Gedeeld">Gedeeld</option>
+                <option value="Niet aanwezig">Niet aanwezig</option>
             </select>
-            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
-                <option value="volvo">Keuken</option>
-                <option value="volvo">Privé</option>
-                <option value="saab">Gedeeld</option>
-                <option value="saab">Niet aanwezig</option>
+            <select class="add-room-input" placeholder="Bath" id="bath">
+                <option value="Douche">Bath</option>
+                <option value="Privé">Privé</option>
+                <option value="Gedeeld">Gedeeld</option>
+                <option value="Niet aanwezig">Niet aanwezig</option>
             </select>
-            <select class="add-room-input" name="room-type" placeholder="Aantal personen">
-                <option value="volvo">Bemeubeld</option>
-                <option value="volvo">Ja</option>
-                <option value="saab">Neen</option>
+            <select class="add-room-input" placeholder="Keuken" id="kitchen">
+                <option value="Keuken">Keuken</option>
+                <option value="Privé">Privé</option>
+                <option value="Gedeeld">Gedeeld</option>
+                <option value="Niet aanwezig">Niet aanwezig</option>
             </select>
-            <input class="add-room-input" type="text" placeholder="Adres">
+            <select class="add-room-input" placeholder="Bemeubeld" id="furnished">
+                <option value="Bemeubeld">Bemeubeld</option>
+                <option value="Ja">Ja</option>
+                <option value="Neen">Neen</option>
+            </select>
+            <input class="add-room-input" type="text" placeholder="Adres" id="address">
             <p>Foto's</p>
-            {{!-- <button class="add-room-picture" type="file">
+            <button class="add-room-picture" type="file">
                 <img src="src/images/add-picture.png" alt="">
-            </button> --}}
-            <input type="file" id="input_3" name="q3_fileUpload" class="form-upload validate[upload]" data-file-accept="pdf, doc, docx, xls, xlsx, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif" data-file-maxsize="9024" data-file-minsize="0" data-file-limit="0" data-component="fileupload">
-
-            <a href="" id="add-room-submit">Kot plaatsen</a>
-        </div>
+            </button>
+            <input type="file" id="roomPictures" name="q3_fileUpload" class="form-upload validate[upload]" data-file-accept="pdf, doc, docx, xls, xlsx, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif" data-file-maxsize="9024" data-file-minsize="0" data-file-limit="0" data-component="fileupload">
+            <input type="submit" id="add-room-submit" value="Kot plaatsen">
+        </form>
     </div>
 {{> footer }}
 
