@@ -1,8 +1,12 @@
 // Only import the compile function from handlebars instead of the entire library
-import { compile } from 'handlebars';
+import {
+  compile
+} from 'handlebars';
 import update from '../helpers/update';
 
-import { getInstance } from '../firebase/firebase';
+import {
+  getInstance
+} from '../firebase/firebase';
 const firebase = getInstance();
 
 // Import the template to use
@@ -16,11 +20,6 @@ export default () => {
   const btnSignupConfirm = document.getElementById('btnSignupConfirm');
   btnSignupConfirm.addEventListener('click', e => {
 
-    // Get firebase reference and create a child object called adminInfo
-    const database = firebase.database();
-    const ref = database.ref('userdata');
-    console.log(ref);
-
     // Collect the values from the form inputfields
     const firstName = document.getElementById('txtFirstNameAd').value;
     const lastName = document.getElementById('txtLastNameAd').value;
@@ -29,9 +28,10 @@ export default () => {
     const email = document.getElementById('txtEmailAd').value;
     const pass = document.getElementById('txtPasswordAd').value;
     const userType = 'admin';
-    const auth = firebase.auth();
     const message = document.getElementById('message');
 
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then((response) => {
+      console.log(response.user.uid);
     // Put form data in a userdata oject
     let userData = {
       firstname: firstName,
@@ -40,21 +40,25 @@ export default () => {
       telephone: telephone,
       email: email,
       type: userType
-  }
+    }
 
+    // Get firebase reference and create a child object called adminInfo
+    const database = firebase.database();
+    const ref = database.ref('userdata/' + response.user.uid);
+    // console.log(ref);
     // Push the object data to firebase database
-    ref.push(userData);
-    console.log(ref);
-    console.log(userData);
+    ref.update(userData);
+    // console.log(ref);
+    // console.log(userData);
 
     let user = email;
-    console.log(user);
-
-    const promise = auth.createUserWithEmailAndPassword(email, pass)
-    promise.then(e => {
+    // console.log(user);
       // sign in and navigate to homepage
       window.location.replace('/#/admin-home');
     })
-    promise.catch(error => message.innerHTML = error );
+    .catch((e) => {
+      message.innerHTML = e;
+    })
+    
   });
 };

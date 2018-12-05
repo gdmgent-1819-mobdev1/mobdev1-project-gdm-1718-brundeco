@@ -8,7 +8,13 @@ const loginTemplate = require('../templates/login.handlebars');
 const login = (email, pass) => {
   const message = document.getElementById('message');
   firebase.auth().signInWithEmailAndPassword(email, pass)
-    .then(() => window.location.replace('/#/student-home'))
+    .then(() => {
+
+      localStorage.setItem('isSignedIn', true);
+      let currentUser = localStorage.getItem('isSignedIn');
+      window.location.replace('/#/student-home');
+      
+    })
     .catch(error => message.innerHTML = error)
 };
 

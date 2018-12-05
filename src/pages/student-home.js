@@ -9,7 +9,10 @@ const firebase = getInstance();
 const homeStudentTemplate = require('../templates/student-home.handlebars');
 
 export default () => {
-  // Return the compiled template to the router
+       
+  let currentUser = localStorage.getItem('isSignedIn');
+  if(currentUser === 'true') {
+      // Return the compiled template to the router
   update(compile(homeStudentTemplate)());
 
   // firebase logout at buttonclick
@@ -17,8 +20,14 @@ export default () => {
 
   btnLogout.addEventListener('click', e => {
     firebase.auth().signOut().then(function() {
+      localStorage.setItem('isSignedIn', false)
       console.log('log uit');
       window.location.replace('/#/');
     });
   });
+
+  } else {
+    window.location.replace('/#/');
+    console.log('Niet gemachtigd');
+  }
 };
