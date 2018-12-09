@@ -33,7 +33,8 @@ export default () => {
 
     firebase.auth().createUserWithEmailAndPassword(email, pass).then((response) => {
       localStorage.setItem('IsSignedIn', true);
-        
+      localStorage.setItem('currentUser', email);
+      
         // Put form data in a userdata oject 
       let userData = {
         firstname: firstName,
@@ -45,17 +46,14 @@ export default () => {
         type: userType
       }
 
-      // Get firebase reference and create a child object called adminInfo
+      // Get firebase reference and create a child object
       const database = firebase.database();
       const ref = database.ref('userdata/' + response.user.uid);
-      // console.log(ref);
+      
       // Push the object data to firebase database
       ref.update(userData);
       // console.log(ref);
       // console.log(userData);
-
-      let user = email;
-      // console.log(user);
 
       // sign in and navigate to homepage
       window.location.replace('/#/student-home');

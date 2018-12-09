@@ -24,6 +24,7 @@ const btnLogout = document.querySelector('.btnLogout');
 
 btnLogout.addEventListener('click', e => {
   firebase.auth().signOut().then(function () {
+    localStorage.setItem('isSignedIn', false);
     console.log('log uit');
     window.location.replace('/#/');
   });
@@ -56,6 +57,7 @@ ref.on("value", function(data) {
       furnished: rooms[k].furnished,
       address: rooms[k].address
     }
+    
     console.log(Room);
       let parent = document.querySelector('.just-a-box');
 

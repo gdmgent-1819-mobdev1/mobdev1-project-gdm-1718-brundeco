@@ -9,11 +9,16 @@ const firebase = getInstance();
 const homeStudentTemplate = require('../templates/student-home.handlebars');
 
 export default () => {
+  
        
   let currentUser = localStorage.getItem('isSignedIn');
   if(currentUser === 'true') {
       // Return the compiled template to the router
   update(compile(homeStudentTemplate)());
+
+  let target = document.querySelector('.h6-main');
+  console.log(target);
+  target.innerHTML = 'Welcome, ' + localStorage.getItem('currentUser');
 
   // firebase logout at buttonclick
   const btnLogout = document.querySelector('.btnLogout');

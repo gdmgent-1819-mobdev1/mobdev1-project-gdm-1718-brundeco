@@ -31,6 +31,9 @@ export default () => {
     const message = document.getElementById('message');
 
     firebase.auth().createUserWithEmailAndPassword(email, pass).then((response) => {
+
+      localStorage.setItem('isSignedIn', true);
+      localStorage.setItem('currentUser', email);
       console.log(response.user.uid);
     // Put form data in a userdata oject
     let userData = {
