@@ -8,42 +8,36 @@ const database = firebase.database();
 
 const loginTemplate = require('../templates/login.handlebars');
 
-const login = (email, pass) => {
-  const message = document.getElementById('message');
-  firebase.auth().signInWithEmailAndPassword(email, pass)
-    .then(() => {
-
-      let currentUserUid = firebase.auth().currentUser.uid;
-      let ref = firebase.database().ref("userdata/" + currentUserUid);
-      
-      ref.once("value")
-        .then(function(snapshot) {
-          let userType = snapshot.child("type").val();
-
-          if(userType === 'admin') {
-            window.location.replace('/#/admin-home');
-          } else {
-            window.location.replace('/#/student-home');
-          }
-      });
-      
-      localStorage.setItem('isSignedIn', true);
-      localStorage.setItem('currentUser', email);
-
-    })
-    .catch(error => message.innerHTML = error)
-};
-
 export default () => {
   update(compile(loginTemplate)());
 
   const btnLogin = document.getElementById('btnLogin');
-
   btnLogin.addEventListener('click', (e) => {
-    e.preventDefault();
     const email = document.getElementById('txtEmail').value;
-    const password = document.getElementById('txtPassword').value;
-    const uid = 'auhsdiuhsd';
-    login(email, password);
+    const pass = document.getElementById('txtPassword').value;
+
+    firebase.auth().signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          let currentUserUid = firebase.auth().currentUser.uid;
+          let ref = firebase.database().ref("userdata/" + currentUserUid);
+          ref.once("value")
+            .then(function(snapshot) {
+              let userType = snapshot.child("type").val();
+              if(userType === 'admin') {
+                window.location.replace('/#/admin-home');
+              } else {
+                window.location.replace('/#/student-home');
+              }
+          });
+          localStorage.setItem('currentUser', email);
+        } else {
+          window.location.replace('/#/');
+          console.log('Something went wrong');
+        }
+    });
+      })
+      .catch(error => message.innerHTML = error)
   });
-};
+}

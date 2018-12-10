@@ -9,30 +9,33 @@ const firebase = getInstance();
 const homeStudentTemplate = require('../templates/student-home.handlebars');
 
 export default () => {
-  
-       
-  let currentUser = localStorage.getItem('isSignedIn');
-  if(currentUser === 'true') {
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
       // Return the compiled template to the router
-  update(compile(homeStudentTemplate)());
+      update(compile(homeStudentTemplate)());
+      console.log('We have a user');
 
-  let target = document.querySelector('.h6-main');
-  console.log(target);
-  target.innerHTML = 'Welcome, ' + localStorage.getItem('currentUser');
+      let target = document.querySelector('.h6-main');
+      console.log(target);
+      target.innerHTML = 'Welcome, ' + localStorage.getItem('currentUser');
 
-  // firebase logout at buttonclick
-  const btnLogout = document.querySelector('.btnLogout');
-
-  btnLogout.addEventListener('click', e => {
-    firebase.auth().signOut().then(function() {
-      localStorage.setItem('isSignedIn', false)
-      console.log('log uit');
+    } else {
       window.location.replace('/#/');
+      console.log('Something went wrong');
+    }
+
+    //firebase logout at buttonclick
+    const btnLogout = document.querySelector('.btnLogout');
+    btnLogout.addEventListener('click', e => {
+      firebase.auth().signOut().then(function() {
+        localStorage.setItem('isSignedIn', false)
+        console.log('log uit');
+        window.location.replace('/#/');
+      });
     });
   });
 
-  } else {
-    window.location.replace('/#/');
-    console.log('Niet gemachtigd');
-  }
-};
+
+
+}

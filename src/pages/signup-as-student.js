@@ -1,4 +1,3 @@
-// Only import the compile function from handlebars instead of the entire library
 import {
   compile
 } from 'handlebars';
@@ -16,10 +15,10 @@ export default () => {
   // Return the compiled template to the router
   update(compile(signupAsStudentTemplate)());
 
-  // firebase signup at buttonclick
   const btnSignupConfirm = document.getElementById('btnSignupConfirm');
-  btnSignupConfirm.addEventListener('click', e => {
+  btnSignupConfirm.addEventListener('click', authorize);
 
+  function authorize() {
     // Collect the values from the form inputfields
     const firstName = document.getElementById('txtFirstNameSt').value;
     const lastName = document.getElementById('txtLastNameSt').value;
@@ -31,11 +30,10 @@ export default () => {
     const userType = 'student';
     const message = document.getElementById('message');
 
-    firebase.auth().createUserWithEmailAndPassword(email, pass).then((response) => {
-      localStorage.setItem('IsSignedIn', true);
+    firebase.auth().createUserWithEmailAndPassword(email, pass)
+    .then((response) => {
       localStorage.setItem('currentUser', email);
-      
-        // Put form data in a userdata oject 
+      // Put form data in a userdata oject 
       let userData = {
         firstname: firstName,
         lastname: lastName,
@@ -45,22 +43,18 @@ export default () => {
         education: education,
         type: userType
       }
-
       // Get firebase reference and create a child object
       const database = firebase.database();
       const ref = database.ref('userdata/' + response.user.uid);
-      
       // Push the object data to firebase database
       ref.update(userData);
-      // console.log(ref);
-      // console.log(userData);
-
       // sign in and navigate to homepage
       window.location.replace('/#/student-home');
     })
     .catch((e) => {
       message.innerHTML = e;
+      console.log('Fout');
     })
-    
-  });
-};
+  }
+
+}

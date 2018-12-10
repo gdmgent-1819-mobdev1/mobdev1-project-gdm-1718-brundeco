@@ -96,6 +96,6 @@ console.log("The read failed: " + errorObject.code);
 
   } else {
     window.location.replace('/#/');
-    console.log('Niet gemachtigd');
+    console.log('Geen feestje');
   }
 }
