@@ -57,38 +57,10 @@ export default () => {
         ref.push(Room);
         allRooms.push(Room);
         // console.log(allRooms);
-
-        ref.on('value', (snapshot) => {
-          let objects = snapshot.val();
-          snapshot.forEach((childSnapshot) => {
-            let room = objects[Object.keys(objects)[0]];
-            console.log(room);
-          })
-        })
       });
-
-      // ref.on("value", function() {
-      //   const text = 'Your room has been added';
-      //   if (!("Notification" in window)) {
-      //     alert("This browser does not support system notifications");
-      //   } else if (Notification.permission === "granted") {
-      //     let notification = new Notification("Done!", {
-      //       body: text
-      //     });
-      //   } else if (Notification.permission !== 'denied') {
-      //     Notification.requestPermission(function (permission) {
-      //       if (permission === "granted") {
-      //         let notification = new Notification("Done!", {
-      //           body: text
-      //         });
-      //       }
-      //     });
-      //   }
-      // });
-
     } else {
       window.location.replace('/#/');
-      console.log('Something went wrong');
+      // console.log('Something went wrong');
     }
 
 
@@ -106,3 +78,10 @@ export default () => {
 
 
 }
+
+
+          // localStorage.setItem('room-collection', JSON.stringify(objects));
+          // let room = objects[Object.keys(objects)[0]];
+          // console.log(room);
+          // let roomLs = JSON.parse(localStorage.getItem('room-collection'));
+          // console.log(roomLs);

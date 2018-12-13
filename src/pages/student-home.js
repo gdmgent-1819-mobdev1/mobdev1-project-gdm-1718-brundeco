@@ -18,75 +18,93 @@ export default () => {
     if (user) {
       // Return the compiled template to the router
       update(compile(homeStudentTemplate)());
-      console.log('We have a user');
+      // console.log('We have a user');
+
+      let allRooms = [];
+      let indexCurrentRoom = 0;
+      let currentRoom;
 
       let target = document.querySelector('.h6-main');
-      console.log(target);
+      // console.log(target);
       target.innerHTML = 'Welcome, ' + localStorage.getItem('currentUser');
-      let counter;
 
-      let myRoom = localStorage.getItem('rooms');
+      const database = firebase.database();
+      const ref = database.ref('roomdata/');
 
-      let box = document.getElementsByClassName('just-a-box')[0];
-
-      let toggleListview = document.createElement('a');
-      toggleListview.setAttribute('class', 'fixed-anchor');
-      toggleListview.innerHTML = 'toggle list';
-      toggleListview.href = '/student-listview';
-
-      let mainTitle = document.createElement('h2');
-      mainTitle.innerHTML = 'Beschikbare kamers';
-
-      let infoBlock = document.createElement('div');
-      infoBlock.setAttribute('class', 'info-block');
-
-      let roomImage = document.createElement('img');
-      roomImage.setAttribute('class', 'room-picture');
-      roomImage.src = 'src/images/kot-1.png';
-
-      let roomType = document.createElement('h5');
-      roomType.setAttribute('class', 'h5-room-type');
-      // roomType.innerHTML = JSON.parse(myRoom)[counter].type;
-
-      let roomAddress = document.createElement('h6');
-      roomAddress.setAttribute('class', 'h6-address');
-      // roomAddress.innerHTML = JSON.parse(myRoom)[counter].address;
-
-      let roomSurface = document.createElement('p');
-      // roomSurface.innerHTML = JSON.parse(myRoom)[counter].surface;
-
-      let judgeBlock = document.createElement('div');
-      judgeBlock.setAttribute('class', 'judge-block');
-
-      let likeButton = document.createElement('button');
-      likeButton.setAttribute('class', 'judge-icons');
-      likeButton.innerHTML = 'LIKE';
-
-      let skipButton = document.createElement('button');
-      skipButton.setAttribute('class', 'judge-icons');
-      skipButton.innerHTML = 'SKIP';
-
-      box.appendChild(toggleListview);
-      box.appendChild(mainTitle);
-      box.appendChild(infoBlock);
-      box.appendChild(judgeBlock);
-
-      infoBlock.appendChild(roomImage);
-      infoBlock.appendChild(roomType);
-      infoBlock.appendChild(roomAddress);
-      infoBlock.appendChild(roomSurface);
-
-      judgeBlock.appendChild(likeButton);
-      judgeBlock.appendChild(skipButton);
+      ref.on('value', (snapshot) => {
+        snapshot.forEach(function (childSnapshot) {
+          let rooms = childSnapshot.val();
+          console.log(rooms);
+          allRooms.push(rooms);
+        })
+        returnRoom(indexCurrentRoom);
+      })
 
       function likeRoom() {
-        localStorage.setItem('likeCounter', counter++);
-        location.refresh();
-        // counter++;
-        // console.log(counter);
+        indexCurrentRoom++;
+        returnRoom(indexCurrentRoom);
       }
 
-      likeButton.addEventListener('click', likeRoom);
+      function returnRoom() {
+        currentRoom = allRooms[indexCurrentRoom];
+
+        let box = document.getElementsByClassName('just-a-box')[0];
+
+        box.innerHTML = '';
+        let toggleListview = document.createElement('a');
+        toggleListview.setAttribute('class', 'fixed-anchor');
+        toggleListview.innerHTML = 'toggle list';
+        toggleListview.href = '/student-listview';
+  
+        let mainTitle = document.createElement('h2');
+        mainTitle.innerHTML = 'Beschikbare kamers';
+  
+        let infoBlock = document.createElement('div');
+        infoBlock.setAttribute('class', 'info-block');
+  
+        let roomImage = document.createElement('img');
+        roomImage.setAttribute('class', 'room-picture');
+        roomImage.src = 'src/images/kot-1.png';
+  
+        let roomType = document.createElement('h5');
+        roomType.setAttribute('class', 'h5-room-type');
+        roomType.innerHTML = currentRoom.type;
+  
+        let roomAddress = document.createElement('h6');
+        roomAddress.setAttribute('class', 'h6-address');
+        roomAddress.innerHTML = currentRoom.address;
+  
+        let roomSurface = document.createElement('p');
+        roomSurface.innerHTML = currentRoom.surface;
+  
+        let judgeBlock = document.createElement('div');
+        judgeBlock.setAttribute('class', 'judge-block');
+  
+        let likeButton = document.createElement('button');
+        likeButton.setAttribute('class', 'judge-icons');
+        likeButton.innerHTML = 'LIKE';
+  
+        let skipButton = document.createElement('button');
+        skipButton.setAttribute('class', 'judge-icons');
+        skipButton.innerHTML = 'SKIP';
+  
+        box.appendChild(toggleListview);
+        box.appendChild(mainTitle);
+        box.appendChild(infoBlock);
+        box.appendChild(judgeBlock);
+  
+        infoBlock.appendChild(roomImage);
+        infoBlock.appendChild(roomType);
+        infoBlock.appendChild(roomAddress);
+        infoBlock.appendChild(roomSurface);
+  
+        judgeBlock.appendChild(likeButton);
+        judgeBlock.appendChild(skipButton);
+  
+        likeButton.addEventListener('click', likeRoom);
+      }
+
+
 
     } else {
       window.location.replace('/#/');
