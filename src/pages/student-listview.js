@@ -15,7 +15,6 @@ const studentListViewTemplate = require('../templates/student-listview.handlebar
 export default () => {
 
   let currentUser = localStorage.getItem('isSignedIn');
-  if (currentUser === 'true') {
  // Return the compiled template to the router
  update(compile(studentListViewTemplate)());
 
@@ -94,8 +93,4 @@ console.log("The read failed: " + errorObject.code);
 
 // - - - - - - - - -  - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - -- 
 
-  } else {
-    window.location.replace('/#/');
-    console.log('Geen feestje');
-  }
 }

@@ -270,14 +270,15 @@ input:focus {
     transition: 0.2s ease-in-out !important;
 }
 
-input.add-room-input, select.add-room-input {
+input#addRoomSubmit {
     border: 1px solid $color-lighter-grey !important;
-    color: $color-lightgrey !important;
+    color: $color-black !important;
     padding-left: 20px;
 }
 
-input.add-room-input:focus, select.add-room-input:focus {
+input#addRoomSubmit:hover {
     border: 1px solid $color-blue !important;
+    cursor: pointer;
 }
 
 
