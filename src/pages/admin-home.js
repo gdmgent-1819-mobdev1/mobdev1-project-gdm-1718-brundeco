@@ -23,7 +23,7 @@ export default () => {
       target.innerHTML = 'Welcome, ' + localStorage.getItem('currentUser');
 
       const database = firebase.database();
-      const ref = database.ref('roomdata');
+      const ref = database.ref('roomdata/');
 
       addRoomBtn.addEventListener('click', e => {
         let rentalPrice = document.getElementById("rentalPrice").value;
@@ -58,19 +58,13 @@ export default () => {
         allRooms.push(Room);
         // console.log(allRooms);
 
-        let query = firebase.database().ref("roomdata").orderByKey();
-        query.once("value")
-          .then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot){
-              let key = childSnapshot.key;
-              let rooms = childSnapshot.val();
-              console.log(key);
-              console.log(rooms);
-
-              localStorage.setItem('rooms', JSON.stringify(rooms));
-              let thisRoom = localStorage.getItem('rooms');
-            });
-          });
+        ref.on('value', (snapshot) => {
+          let objects = snapshot.val();
+          snapshot.forEach((childSnapshot) => {
+            let room = objects[Object.keys(objects)[0]];
+            console.log(room);
+          })
+        })
       });
 
       // ref.on("value", function() {

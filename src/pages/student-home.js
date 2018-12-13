@@ -27,8 +27,6 @@ export default () => {
 
       let myRoom = localStorage.getItem('rooms');
 
-      console.log(JSON.parse(myRoom)[counter]);
-
       let box = document.getElementsByClassName('just-a-box')[0];
 
       let toggleListview = document.createElement('a');
@@ -48,14 +46,14 @@ export default () => {
 
       let roomType = document.createElement('h5');
       roomType.setAttribute('class', 'h5-room-type');
-      roomType.innerHTML = JSON.parse(myRoom)[counter].type;
+      // roomType.innerHTML = JSON.parse(myRoom)[counter].type;
 
       let roomAddress = document.createElement('h6');
       roomAddress.setAttribute('class', 'h6-address');
-      roomAddress.innerHTML = JSON.parse(myRoom)[counter].address;
+      // roomAddress.innerHTML = JSON.parse(myRoom)[counter].address;
 
       let roomSurface = document.createElement('p');
-      roomSurface.innerHTML = JSON.parse(myRoom)[counter].surface;
+      // roomSurface.innerHTML = JSON.parse(myRoom)[counter].surface;
 
       let judgeBlock = document.createElement('div');
       judgeBlock.setAttribute('class', 'judge-block');
