@@ -1,18 +1,6 @@
 @import 'abstracts/variables';
 @import 'abstracts/colors';
 
-
-// view control
-// #screenSignUpType,
-// #screenSignUpConfirm,
-// #screenPasswordReset,
-// #screenHomePage,
-// #screenListView,
-// #screenMessages {
-//     display: none;
-// }
-
-
 // - - - - - start containers login  - - - - - -
 .wrapper-1, .wrapper-2 {
     // max-width: 519px;
@@ -300,13 +288,6 @@ h4 {
     margin-bottom: 50px;
     color: $color-white;
     font-size: 500%;
-}
-
-h6.h6-main {
-    color: $color-white;
-    font-size: 65% !important;
-    font-weight: 600;
-    letter-spacing: 1px;
 }
 
 a.page-arrow {

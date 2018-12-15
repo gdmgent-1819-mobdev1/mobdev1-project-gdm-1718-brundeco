@@ -32,17 +32,22 @@ export default () => {
       const ref = database.ref('roomdata/');
 
       ref.on('value', (snapshot) => {
+        
         snapshot.forEach(function (childSnapshot) {
+          let key = childSnapshot.key;
           let rooms = childSnapshot.val();
+          console.log(key);
           console.log(rooms);
           allRooms.push(rooms);
         })
         returnRoom(indexCurrentRoom);
       })
 
-      function likeRoom() {
+      function likeRoom(key) {
         indexCurrentRoom++;
         returnRoom(indexCurrentRoom);
+        const likes = database.ref('likes/');
+        likes.push(currentRoom)
       }
 
       function returnRoom() {
@@ -104,18 +109,15 @@ export default () => {
         likeButton.addEventListener('click', likeRoom);
       }
 
-
-
     } else {
       window.location.replace('/#/');
-      console.log('Something went wrong');
+      console.log('Logged out');
     }
 
     //firebase logout at buttonclick
     const btnLogout = document.querySelector('.btnLogout');
     btnLogout.addEventListener('click', e => {
       firebase.auth().signOut().then(function () {
-        localStorage.setItem('isSignedIn', false)
         console.log('log uit');
         window.location.replace('/#/');
       });
