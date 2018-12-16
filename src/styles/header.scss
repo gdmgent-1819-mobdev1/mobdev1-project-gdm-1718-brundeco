@@ -9,12 +9,11 @@
     position: fixed;
     width: 100%;
     top: 0;
-    min-height: 100px;
 }
 
 .header-top {
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,6 +51,5 @@ h6.h6-main {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-bottom: 20px;
     background-color: $color-white;
 }

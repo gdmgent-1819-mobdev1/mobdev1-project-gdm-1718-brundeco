@@ -2,6 +2,35 @@
 {{> header }}
     <div class="content">
         <div class="just-a-box">
+            <div class="toggleViews">
+                <button id="toggleListView">List</button>
+                <button id="toggleMapView">Map</button>
+            </div>
+            <div class="center-all">
+                <h2>Beschikbare kamers</h2>
+                <div class="image-block">
+                    <img src="src/images/kot-3.jpg" class="room-picture" alt="">
+                </div>
+                <div class="info-block">
+                    <h5 class="card-room-type">Studio</h5>
+                    <h6 class="card-address">Vlaanderenstraat 21, 9000 Gent</h6>
+                    <p class="card-surface">23 m2</p>
+                </div>
+                <div class="judge-block">
+                    <button id="likeBtn">Like</button>
+                    <button id="skipBtn">Skip</button>
+                </div>                
+            </div>
+        </div>
+    </div>
+{{> footer }}
+
+
+
+
+
+
+
             {{!-- <a href="/student-listview" data-path class="fixed-anchor"><img src="src/images/list-view.svg" alt=""></a>
             <h2>Beschikbare kamers</h2>
             <div class="info-block">
@@ -14,8 +43,3 @@
                 <a href=""><img src="src/images/skip.svg" class="judge-icons" alt=""></a>
                 <a href=""><img src="src/images/like.svg" class="judge-icons" alt=""></a>
             </div> --}}
-        </div>
-    </div>
-{{> footer }}
-
-
