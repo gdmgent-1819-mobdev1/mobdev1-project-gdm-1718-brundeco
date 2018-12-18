@@ -6143,14 +6143,14 @@ textarea.materialize-textarea {
   font-size: 12px;
   margin: 0 0 8px 0;
   padding: 0;
-  -webkit-box-shadow: none;
+  /* -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   -webkit-transition: border .3s, -webkit-box-shadow .3s;
   transition: border .3s, -webkit-box-shadow .3s;
   transition: box-shadow .3s, border .3s;
-  transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+  transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s; */
 }
 
 input:not([type]):disabled, input:not([type])[readonly="readonly"],
@@ -6225,8 +6225,8 @@ input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #26a69a;
-  -webkit-box-shadow: 0 1px 0 0 #26a69a;
-          box-shadow: 0 1px 0 0 #26a69a;
+  /* -webkit-box-shadow: 0 1px 0 0 #26a69a;
+          box-shadow: 0 1px 0 0 #26a69a; */
 }
 
 input:not([type]):focus:not([readonly]) + label,
@@ -6320,8 +6320,8 @@ input.valid[type=search]:not(.browser-default):focus,
 textarea.materialize-textarea.valid,
 textarea.materialize-textarea.valid:focus, .select-wrapper.valid > input.select-dropdown {
   border-bottom: 1px solid #4CAF50;
-  -webkit-box-shadow: 0 1px 0 0 #4CAF50;
-          box-shadow: 0 1px 0 0 #4CAF50;
+  /* -webkit-box-shadow: 0 1px 0 0 #4CAF50;
+          box-shadow: 0 1px 0 0 #4CAF50; */
 }
 
 input.invalid:not([type]), input.invalid:not([type]):focus,
@@ -6351,8 +6351,8 @@ textarea.materialize-textarea.invalid,
 textarea.materialize-textarea.invalid:focus, .select-wrapper.invalid > input.select-dropdown,
 .select-wrapper.invalid > input.select-dropdown:focus {
   border-bottom: 1px solid #F44336;
-  -webkit-box-shadow: 0 1px 0 0 #F44336;
-          box-shadow: 0 1px 0 0 #F44336;
+  /* -webkit-box-shadow: 0 1px 0 0 #F44336;
+          box-shadow: 0 1px 0 0 #F44336; */
 }
 
 input:not([type]).valid ~ .helper-text[data-success],
@@ -6629,15 +6629,15 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
   padding-left: 4rem;
   width: calc(100% - 4rem);
   border: 0;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  /* -webkit-box-shadow: none;
+          box-shadow: none; */
 }
 
 .input-field input[type=search]:focus:not(.browser-default) {
   background-color: #fff;
   border: 0;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  /* -webkit-box-shadow: none;
+          box-shadow: none; */
   color: #444;
 }
 
@@ -6802,8 +6802,8 @@ textarea.materialize-textarea {
 
 /* Focused styles */
 [type="radio"].tabbed:focus + span:before {
-  -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+  /* -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 /* Disabled Radio With gap */
@@ -6896,8 +6896,8 @@ textarea.materialize-textarea {
           transform: scale(1);
   border: 0;
   border-radius: 50%;
-  -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+  /* -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1); */
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -7419,8 +7419,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-webkit-slider-thumb {
-  -webkit-box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26);
-          box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26);
+  /* -webkit-box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26);
+          box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); */
 }
 
 input[type=range] {
@@ -7458,7 +7458,7 @@ input[type=range]:-moz-focusring {
 }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-moz-range-thumb {
-  box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26);
+  /* box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); */
 }
 
 input[type=range]::-ms-track {
@@ -7491,7 +7491,7 @@ input[type=range]::-ms-thumb {
 }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-ms-thumb {
-  box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26);
+  /* box-shadow: 0 0 0 10px rgba(38, 166, 154, 0.26); */
 }
 
 /***************

@@ -2,11 +2,6 @@
 @import 'abstracts/colors';
 
 // - - - - - buttons - - - - - -
-.box > a, .header-top a {
-    box-shadow: none !important;
-    border-radius: $main-border-radius !important;
-}
-
 #btnLogin,
 #btnSignup,
 #btnSignupAsAdmin,
@@ -17,25 +12,30 @@
     border: 1px solid rgba(250, 250, 250, 0);
     min-width: 220px !important;
     height: 45px !important;
+    border-radius: $main-border-radius;
+    box-shadow: none !important;
 }
 
 #btnSignupConfirm {
     max-width: 220px !important;
+    line-height: 0;
 }
 
 #btnLogin,
 #btnSignupAsStudent,
 #btnSignupConfirm,
-#btnPasswordReset {
+#btnPasswordForgotten {
     background-color: $color-lightblue !important;
     border: 1px solid $color-lightblue !important;
+    border-radius: $main-border-radius;
+    box-shadow: none !important;
 }
 
 #btnLogin:hover,
 #btnSignupAsAdmin:hover,
 #btnSignupAsStudent:hover,
-#btnSignupConfirm:hover,
-#btnPasswordReset:hover {
+#btnSignupConfirm:hover 
+{
     background-color: $color-none !important;
     color: $color-lightblue;
     border: 1px solid $color-lightblue !important;
@@ -58,6 +58,7 @@
     background-color: $color-none !important;
     color: $color-lightblue;
     text-decoration: underline;
+    border: none !important;
 }
 
 #btnPasswordForgotten:hover {
@@ -65,12 +66,12 @@
 }
 
 .btnLogout {
-    background-color: $color-none !important;
-    border: 0.5px solid $color-pink !important;
-    color: $color-pink;
+    background-color: rgba(245, 245, 245, 0) !important;
+    border: 0.5px solid #FB1C4E !important;
+    color: #FB1C4E;
     font-size: 70% !important;
-    padding: 3px 15px !important;
-    border-radius: $main-border-radius;
+    padding: 5px 15px !important;
+    border-radius: 20px !important;
 }
 
 .btnLogout:hover {

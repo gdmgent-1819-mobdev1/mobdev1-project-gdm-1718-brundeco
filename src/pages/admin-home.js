@@ -19,9 +19,6 @@ export default () => {
 
       let allRooms = [];
 
-      let target = document.querySelector('.h6-main');
-      target.innerHTML = 'Welcome, ' + localStorage.getItem('currentUser');
-
       const database = firebase.database();
       const ref = database.ref('roomdata/');
 
