@@ -27,3 +27,30 @@
     // padding: 3px;
     z-index: 30;
 }
+
+.first-image {
+    background-image: url('../../src/images/favoritesFull.svg');
+}
+
+.second-image {
+    background-image: url('../../src/images/homeFull.svg');
+}
+
+.third-image {
+    background-image: url('../../src/images/messagesFull.svg');
+}
+
+.nav-icons-bottom {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-clip: border-box;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    white-space:nowrap;
+    box-sizing: border-box;
+}

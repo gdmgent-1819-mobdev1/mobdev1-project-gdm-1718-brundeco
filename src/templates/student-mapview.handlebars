@@ -1,12 +1,12 @@
 {{> header }}
-    <div id='map' style='width: 400px; height: 300px;'></div>
-    <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYnJ1bmVsbGkiLCJhIjoiY2pwc3preGx3MDBxYjQzbzk4c2dtanpwaCJ9.J2IeUoqxBZCa5Aa5547rgA';
-    var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v10',
-    center: [-74.50, 40], // starting position
-    zoom: 9 // starting zoom
-    });
-    </script>
+    <div class="content">
+        <div class="just-a-box">
+            <div class="toggleViews">
+                <button id="toggleListView">List</button>
+                <button id="toggleMapView">Map</button>
+            </div>
+            <h2>Beschikbare kamers in kaart</h2>
+            <div id='map' style='height: 300px; border-radius: 10px;'></div>
+        </div>
+    </div>
 {{> footer }}
