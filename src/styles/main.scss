@@ -418,20 +418,38 @@ span.message-timestamp {
 .conversation-reply, .conversation-header {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: #ffffff;
     position: fixed;
     left: 0;
     right: 0;
+    padding-bottom: 15px;
 }
 
 .conversation-reply {
-    bottom: 6.5%;
+    bottom: 6%;
 }
 
 .conversation-header {
     top: 6%;
+}
+
+#sendMessage {
+    display: block;
+    border: 1px solid $color-greenblue;
+    border-radius: 20px;
+    padding: 5px 20px;
+    color: $color-greenblue;
+    font-size: 80%;
+    transition: 0.2s ease-in-out;
+}
+
+#sendMessage:hover {
+    background-color: $color-greenblue;
+    color: #fff;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 input.message-type-area {
