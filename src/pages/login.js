@@ -21,6 +21,7 @@ export default () => {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           let currentUserUid = firebase.auth().currentUser.uid;
+          localStorage.setItem('currentUserKey', currentUserUid);
           let ref = firebase.database().ref("userdata/" + currentUserUid);
           ref.once("value")
             .then(function(snapshot) {

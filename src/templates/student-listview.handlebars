@@ -1,5 +1,5 @@
-<!-- - - - - - - - - - - - - - - List view page - - - - - - - - - - - - - - -->
-<div class="wrapper-2" id="screenListView">
+
+<!-- - - - - - - - - - - - - - - List view - - - - - - - - - - - - - - -->
 {{> header }}
     <div class="content-lv">
         <div class="just-a-box-lv">
@@ -8,18 +8,53 @@
                 <button id="toggleMapView">Map</button>
             </div>
             <h2>Beschikbare kamers</h2>
-            <div class="info-list">
-                <div class="info-list-img">
-                    <img src="src/images/kot-3.jpg" class="room-picture-list" alt="">
+            {{#each allRooms }}
+                <div class="info-list">
+                        <h5 class="card-room-type-lv">Studio</h5>
+                    <div class="info-list-img">
+                        <img src="src/images/kot-3.jpg" class="room-picture-list" alt="">
+                    </div>
+                    <div class="info-list-text">
+                        <div class="sub-div">
+                            <p class="card-titles-lv">OPP</p>
+                            <p class="card-values-lv card-surface">{{ this.surface }}</p>
+                        </div>
+                        <div class="sub-div">
+                            <p class="card-titles-lv">AFSTAND</p>
+                            <p class="card-values-lv card-distance">34 SqM</p>
+                        </div>
+                        <div class="sub-div">
+                            <p class="card-titles-lv">PRIJS</p>
+                            <p class="card-values-lv card-price">{{ this.rentalPrice }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-list-text">
-                    <h5 class="card-room-type-lv">Studio</h5>
-                    <h6 class="card-address-lv">Willem van nassaus Pernasius Overpoortstraat 21, 9000 Gent</h6>
-                    <p class="card-surface-lv">23 m2</p>
-                    <p class="card-price-lv">520 €</p>
-                </div>
+             {{/each}}
+        </div>
+    </div>
+<!-- - - - - - - - - - - - - - - Detial view - - - - - - - - - - - - - - -->
+
+    <div class="content-wrapper">
+        <div class="center-all">
+            <h2>Vlaanderenstraat 21, 9000 Gent</h2>
+            <div class="room-image-block">
+                <img src="src/images/kot-3.jpg" class="room-image-detail" alt="">
             </div>
+            <div class="room-properties">
+                <h5 class="property-title">Type<span class="property-info"> {{@key}} {{ this.type }}</span></h5>
+                <h5 class="property-title">Locatie<span class="property-info"> {{@key}} {{ this.address }}</span></h5>
+                <h5 class="property-title">Oppervlakte<span class="property-info"> {{@key}} {{ this.surface }}</span></h5>
+                <h5 class="property-title">Prijs<span class="property-info"> {{@key}} {{ this.rentalPrice }}</span></h5>
+                <h5 class="property-title"> Bemeubeld<span class="property-info"> {{@key}} {{ this.furnished }}</span></h5>
+                <h5 class="property-title">Douche<span class="property-info"><script></script></span></h5>
+                {{!-- <h5 class="property-title">Beschrijving<span class="property-info"></span></h5>
+                <p class="room-description"></p> --}}
+            </div>
+            <div class="contact-owner">
+                <button id="messageToOwner">Send message to owner</button>
+                <button id="addToFavorites"><i class="fas fa-star"></i></button>
+            </div>                
         </div>
     </div>
 {{> footer }}
-</div> 
+

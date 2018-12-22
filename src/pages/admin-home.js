@@ -35,6 +35,7 @@ export default () => {
         let bath = document.getElementById("bath").value;
         let kitchen = document.getElementById("kitchen").value;
         let furnished = document.getElementById("furnished").value;
+        let key = localStorage.getItem('currentUserKey');
     
         let Room = {
           type: type,
@@ -49,6 +50,7 @@ export default () => {
           bath: bath,
           kitchen: kitchen,
           furnished: furnished,
+          ownerKey: key
         }
     
         ref.push(Room);

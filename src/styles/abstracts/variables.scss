@@ -1,3 +1,25 @@
+// @font-face {
+//     font-family: scriptFont;
+//     src: url('../../../src/styles/fonts/trench100free.ttf');
+//     src: url('../../../src/styles/fonts/trench100free.otf');
+//     font-weight: bold;
+//   }
+
+// mixins
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+}
+
 // margin 
 $btn-top-margin: 40px;
 $main-top-margin: 50px;
@@ -12,9 +34,8 @@ $main-form-padding: 50px;
 $main-border-radius: 7px;
 
 //fonts
-// $script-font: 'Indie Flower', cursive;
-// $script-font: 'Nothing You Could Do', cursive;
-$script-font: 'Nothing You Could Do', cursive;
+$script-font: 'Lato', sans-serif;
+$script-font-2: 'Poiret One', cursive;
 $page-arrow-size: 30px;
 $page-arrow-weight: 100;
 

@@ -1,5 +1,5 @@
-@import 'abstracts/variables';
-@import 'abstracts/colors';
+@import '../abstracts/variables';
+@import '../abstracts/colors';
 
 // - - - - - buttons - - - - - -
 #btnLogin,
@@ -11,9 +11,10 @@
     margin-top: $small-top-margin;
     border: 1px solid rgba(250, 250, 250, 0);
     min-width: 220px !important;
-    height: 45px !important;
+    height: 40px !important;
     border-radius: $main-border-radius;
     box-shadow: none !important;
+    line-height: 40px;
 }
 
 #btnSignupConfirm {

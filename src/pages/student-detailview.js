@@ -9,5 +9,5 @@ export default () => {
   // Data to be passed to the template
   const name = 'Test inc.';
   // Return the compiled template to the router
-  update(compile(studentDetailViewTemplate)({ name }));
+  update(compile(studentDetailViewTemplate)());
 };

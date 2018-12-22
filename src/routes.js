@@ -13,6 +13,9 @@ import StudentMessagesDetailView from './pages/student-messages-detail';
 import StudentMapView from './pages/student-mapview';
 
 import AdminHomeView from './pages/admin-home';
+import AdminListView from './pages/admin-listview';
+import AdminMessagesView from './pages/admin-messages';
+import AdminMessagesDetailView from './pages/admin-messages-detail';
 
 import FirebaseView from './pages/firebase-example';
 import MapboxView from './pages/mapbox-example';
@@ -32,6 +35,9 @@ export default [
   { path: '/student-mapview', view: StudentMapView },
 
   { path: '/admin-home', view: AdminHomeView },
+  { path: '/admin-listview', view: AdminListView },
+  { path: '/admin-messages', view: AdminMessagesView },
+  { path: '/admin-messages-detail', view: AdminMessagesDetailView },
 
   { path: '/firebase', view: FirebaseView },
   { path: '/mapbox', view: MapboxView },

@@ -5,18 +5,20 @@ import './css/vendors/materialize.css';
 import './css/vendors/animate.css';
 import './styles/abstracts/colors.scss';
 import './styles/main.scss';
-import './styles/header.scss';
-import './styles/footer.scss';
-import './styles/buttons.scss';
+import './styles/components/header.scss';
+import './styles/components/footer.scss';
+import './styles/components/buttons.scss';
 import routes from './routes';
 
 // Partials
 const header = require('./partials/header.handlebars');
 const footer = require('./partials/footer.handlebars');
+const footerAdmin = require('./partials/footer-admin.handlebars');
 
 // Register the partial components
 handlebars.registerPartial('header', compile(header)({ title: 'Just another web app' }));
 handlebars.registerPartial('footer', compile(footer)({ text: 'Template made with love by GDM Ghent' }));
+handlebars.registerPartial('footer-admin', compile(footerAdmin)({ text: 'Template made with love by GDM Ghent' }));
 
 // Router logic to load the correct template when needed
 const router = new Navigo(window.location.origin, true);

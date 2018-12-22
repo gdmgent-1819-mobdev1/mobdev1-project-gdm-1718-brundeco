@@ -1,11 +1,10 @@
-@import 'abstracts/variables';
-@import 'abstracts/colors';
+@import '../abstracts/variables';
+@import '../abstracts/colors';
+
 
 // - - - - - - footer - - - - - - 
 .footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    @include flex-column;
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -16,28 +15,30 @@
 }
 
 .footer-links {
-    display: flex;
-    flex-direction: row;
+    @include flex-row;
     justify-content: space-between;
     padding: 10px 0px;
     width: 85%;  
 }
 
 .footer-links a {
-    // padding: 3px;
     z-index: 30;
 }
 
 .first-image {
-    background-image: url('../../src/images/favoritesFull.svg');
+    background-image: url('../../../src/images/favoritesFull.svg');
+}
+
+.first-image-admin {
+    background-image: url('../../../src/images/adminRooms.svg');  
 }
 
 .second-image {
-    background-image: url('../../src/images/homeFull.svg');
+    background-image: url('../../../src/images/homeFull.svg');
 }
 
 .third-image {
-    background-image: url('../../src/images/messagesFull.svg');
+    background-image: url('../../../src/images/messagesFull.svg');
 }
 
 .nav-icons-bottom {
