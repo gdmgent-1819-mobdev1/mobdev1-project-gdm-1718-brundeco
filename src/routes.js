@@ -11,6 +11,7 @@ import StudentDetailView from './pages/student-detailview';
 import StudentMessagesView from './pages/student-messages';
 import StudentMessagesDetailView from './pages/student-messages-detail';
 import StudentMapView from './pages/student-mapview';
+import StudentFavoritesView from './pages/student-favorites';
 
 import AdminHomeView from './pages/admin-home';
 import AdminListView from './pages/admin-listview';
@@ -33,7 +34,8 @@ export default [
   { path: '/student-messages', view: StudentMessagesView },
   { path: '/student-messages-detail', view: StudentMessagesDetailView },
   { path: '/student-mapview', view: StudentMapView },
-
+  { path: '/student-favorites', view: StudentFavoritesView },
+  
   { path: '/admin-home', view: AdminHomeView },
   { path: '/admin-listview', view: AdminListView },
   { path: '/admin-messages', view: AdminMessagesView },

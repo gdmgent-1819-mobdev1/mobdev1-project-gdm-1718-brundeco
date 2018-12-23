@@ -18,8 +18,8 @@ export default () => {
     if (user) {
       // Return the compiled template to the router
       update(compile(homeStudentTemplate)());
-      // console.log('We have a user');
 
+      let currentUser = localStorage.getItem('currentUserKey');
       let allRooms = [];
       let indexCurrentRoom = 0;
       let currentRoom;
@@ -27,11 +27,11 @@ export default () => {
       likeBtn.addEventListener('click', likeRoom);
 
       let toggleListview = document.getElementById('toggleListView');
-      toggleListview.addEventListener('click', function() {
+      toggleListview.addEventListener('click', function () {
         window.location.replace('/#/student-listview');
       })
       let toggleMapview = document.getElementById('toggleMapView');
-      toggleMapview.addEventListener('click', function() {
+      toggleMapview.addEventListener('click', function () {
         window.location.replace('/#/student-mapview');
       })
 
@@ -51,7 +51,7 @@ export default () => {
       function likeRoom(key) {
         indexCurrentRoom++;
         returnRoom(indexCurrentRoom);
-        const likes = database.ref('favorites');
+        const likes = database.ref('favorites/' + currentUser);
         likes.push(currentRoom)
       }
 
@@ -69,7 +69,7 @@ export default () => {
         roomAddress.innerHTML = allRooms[indexCurrentRoom].address;
         roomSurface.innerHTML = allRooms[indexCurrentRoom].surface;
       }
-        
+
     } else {
       window.location.replace('/#/');
       console.log('Logged out');
@@ -85,7 +85,4 @@ export default () => {
       });
     });
   });
-
-
-
 }

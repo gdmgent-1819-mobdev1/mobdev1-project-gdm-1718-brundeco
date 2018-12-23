@@ -54,7 +54,7 @@ export default () => {
         address: usersRooms[i].address,
         ownerKey: usersRooms[i].ownerKey
       }
-      console.log(Room.rentalPrice);
+      // console.log(Room.rentalPrice);
       allRooms.push(Room);
       console.log(allRooms);
     }
@@ -63,6 +63,10 @@ export default () => {
       update(compile(adminListViewTemplate)({
         allRooms
       }));
+
+      // const hide = document.getElementsByClassName('contact-owner')[0];
+      // console.log(hide);
+      // hide.style.display = 'none';
 
       // firebase logout at buttonclick
       const btnLogout = document.querySelector('.btnLogout');

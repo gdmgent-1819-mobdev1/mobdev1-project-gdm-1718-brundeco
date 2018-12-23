@@ -1,0 +1,32 @@
+
+<!-- - - - - - - - - - - - - - - List view - - - - - - - - - - - - - - -->
+{{> header }}
+    <div class="content-lv">
+        <div class="just-a-box-lv">
+            <h2>Mijn favorieten</h2>
+            {{#each allRooms }}
+                <div class="info-list">
+                        <h5 class="card-room-type-lv">Studio</h5>
+                    <div class="info-list-img">
+                        <img src="src/images/kot-3.jpg" class="room-picture-list" alt="">
+                    </div>
+                    <div class="info-list-text">
+                        <div class="sub-div">
+                            <p class="card-titles-lv width"></p>
+                            <p class="card-values-lv card-surface">{{ this.surface }}</p>
+                        </div>
+                        <div class="sub-div">
+                            <p class="card-titles-lv distance"></p>
+                            <p class="card-values-lv card-distance">34 SqM</p>
+                        </div>
+                        <div class="sub-div">
+                            <p class="card-titles-lv price"></p>
+                            <p class="card-values-lv card-price">{{ this.rentalPrice }}</p>
+                        </div>
+                    </div>
+                </div>
+             {{/each}}
+        </div>
+    </div>
+{{> footer }}
+

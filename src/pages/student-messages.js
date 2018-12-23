@@ -1,13 +1,29 @@
 // Only import the compile function from handlebars instead of the entire library
-import { compile } from 'handlebars';
+import {
+  compile
+} from 'handlebars';
 import update from '../helpers/update';
+
+import {
+  getInstance
+} from '../firebase/firebase';
+const firebase = getInstance();
+
 
 // Import the template to use
 const studentMessagesViewTemplate = require('../templates/student-messages.handlebars');
-
 export default () => {
-  // Data to be passed to the template
-  const name = 'Test inc.';
-  // Return the compiled template to the router
-  update(compile(studentMessagesViewTemplate)({ name }));
+
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // Return the compiled template to the router
+      update(compile(studentMessagesViewTemplate)({
+        name
+      }));
+      console.log('User check')
+
+    } else {
+      console.log('No valid user!')
+    }
+  });
 };

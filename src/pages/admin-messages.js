@@ -13,7 +13,25 @@ const firebase = getInstance();
 const adminMessagesViewTemplate = require('../templates/admin-messages.handlebars');
 
 export default () => {
-  // Data to be passed to the template
+  let currentUser = localStorage.getItem('currentUserKey');
+  const database = firebase.database();
+  const ref = database.ref('userdata/' + currentUser);
+  let messageList = [];
+
+  function convertObjectToArray(objects) {
+    return Object.keys(objects).map(i => objects[i]);
+  }
+
+  ref.once("value")
+  .then(function(data) {
+    let messages = convertObjectToArray(data.val());
+    messages.forEach(message => {
+      let content = message.content;
+      console.log(content);
+      messageList.push(content);
+    });
+    console.log(messageList);
+  });
 
   // Return the compiled template to the router
   update(compile(adminMessagesViewTemplate)({

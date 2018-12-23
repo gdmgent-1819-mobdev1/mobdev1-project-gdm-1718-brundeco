@@ -31,8 +31,12 @@ export default () => {
 
     firebase.auth().createUserWithEmailAndPassword(email, pass)
     .then((response) => {
+      
+      const email = document.getElementById('txtEmailAd').value;
+      localStorage.setItem('currentUser', email);
       let currentUserUid = firebase.auth().currentUser.uid;
-      localStorage.setItem('currentUserKey', currentUserUid); 
+      localStorage.setItem('currentUserKey', currentUserUid);
+
       let userData = {
         firstname: firstName,
         lastname: lastName,

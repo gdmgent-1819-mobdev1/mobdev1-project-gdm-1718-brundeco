@@ -20,7 +20,7 @@ export default () => {
       let allRooms = [];
 
       const database = firebase.database();
-      const ref = database.ref('roomdata/');
+      const ref = database.ref('roomdata');
 
       addRoomBtn.addEventListener('click', e => {
         let rentalPrice = document.getElementById("rentalPrice").value;
@@ -36,26 +36,43 @@ export default () => {
         let kitchen = document.getElementById("kitchen").value;
         let furnished = document.getElementById("furnished").value;
         let key = localStorage.getItem('currentUserKey');
-    
-        let Room = {
-          type: type,
-          rentalPrice: rentalPrice,
-          warrant: warrant,
-          surface: surface,
-          address: address,
-          floors: floors,
-          numberOfPersons: numberOfPersons,
-          toilet: toilet,
-          douche: douche,
-          bath: bath,
-          kitchen: kitchen,
-          furnished: furnished,
-          ownerKey: key
-        }
-    
-        ref.push(Room);
-        allRooms.push(Room);
-        // console.log(allRooms);
+        
+        let geocoder = new google.maps.Geocoder();
+        let currentAddress = address;
+        let lat;
+        let lon;
+        
+        geocoder.geocode( { 'address': currentAddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+            lat = results[0].geometry.location.lat();
+            lon = results[0].geometry.location.lng();
+            console.log(lat);
+            console.log(lon);
+            let Room = {
+              type: type,
+              rentalPrice: rentalPrice,
+              warrant: warrant,
+              surface: surface,
+              address: address,
+              floors: floors,
+              numberOfPersons: numberOfPersons,
+              toilet: toilet,
+              douche: douche,
+              bath: bath,
+              kitchen: kitchen,
+              furnished: furnished,
+              ownerKey: key,
+              lat: lat,
+              lon: lon
+            }
+        
+            ref.push(Room);
+            allRooms.push(Room);
+            // console.log(allRooms);
+          } 
+        });
+      
       });
     } else {
       window.location.replace('/#/');

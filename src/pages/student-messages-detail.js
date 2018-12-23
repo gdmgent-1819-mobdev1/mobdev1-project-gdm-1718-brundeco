@@ -15,46 +15,55 @@ const studentMessagesDetailViewTemplate = require('../templates/student-messages
 export default () => {
   // Data to be passed to the template
 
-  let ownerKey = localStorage.getItem('ownerKey');
-  let currentUser = localStorage.getItem('currentUserKey');
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
 
-  const database = firebase.database();
-  const ref = database.ref('userdata/' + ownerKey);
-  ref.once("value")
-    .then(function (snapshot) {
-      let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
-      const messageTo = document.getElementsByClassName('message-person')[0];
-      messageTo.textContent = name;
-    });
+      let ownerKey = localStorage.getItem('ownerKey');
+      let currentUser = localStorage.getItem('currentUserKey');
 
-  // Return the compiled template to the router
-  update(compile(studentMessagesDetailViewTemplate)({
-    name
-  }));
+      const database = firebase.database();
+      const ref = database.ref('userdata/' + ownerKey);
 
-  function addMessageToDb() {
-    const messageRef = database.ref('userdata/' + ownerKey + '/');
-    let messageContent = document.querySelectorAll('input.message-type-area')[0].value;
-    let Message = {
-      admin: ownerKey,
-      currentUser: currentUser,
-      content: messageContent
-    }
-    messageRef.push(Message);
-  }
+      // Get persons name 
+      ref.once("value")
+        .then(function (snapshot) {
+          let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+          let messageTo = document.getElementsByClassName('message-person')[0];
+          messageTo.textContent = name;
+        });
 
-  let sendMessage = document.getElementById('sendMessage');
-  sendMessage.addEventListener('click', addMessageToDb);
+      // Return the compiled template to the router
+      update(compile(studentMessagesDetailViewTemplate)({
+        name
+      }));
 
-    // firebase logout at buttonclick
-    const btnLogout = document.querySelector('.btnLogout');
-    console.log(btnLogout);
-    btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function () {
-        console.log('log uit');
-        window.location.replace('/#/');
+      function addMessageToDb() {
+        const messageRef = database.ref('userdata/' + ownerKey + '/');
+        let messageContent = document.querySelectorAll('input.message-type-area')[0].value;
+        let Message = {
+          admin: ownerKey,
+          currentUser: currentUser,
+          content: messageContent
+        }
+        messageRef.push(Message);
+      }
+
+      let sendMessage = document.getElementById('sendMessage');
+      sendMessage.addEventListener('click', addMessageToDb);
+
+      // firebase logout at buttonclick
+      const btnLogout = document.querySelector('.btnLogout');
+      console.log(btnLogout);
+      btnLogout.addEventListener('click', e => {
+        firebase.auth().signOut().then(function () {
+          console.log('log uit');
+          window.location.replace('/#/');
+        });
       });
-    });
-
+      console.log('User check')
+    } else {
+      console.log('No valid user!')
+    }
+  });
 
 };

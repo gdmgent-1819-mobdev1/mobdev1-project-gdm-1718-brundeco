@@ -10,14 +10,15 @@ import {
 const firebase = getInstance();
 
 // Import the template to use
-const studentListViewTemplate = require('../templates/student-listview.handlebars');
+const studentFavoritesViewTemplate = require('../templates/student-favorites.handlebars');
 
 export default () => {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      let currentUserKey = localStorage.getItem('currentUserKey');
       const database = firebase.database();
-      const ref = database.ref('roomdata');
+      const ref = database.ref('favorites/' + currentUserKey);
       let allRooms = [];
       let index;
       let roomKeys = [];
@@ -28,6 +29,7 @@ export default () => {
         // console.log(rooms);
         let keys = Object.keys(rooms);
         roomKeys.push(keys);
+        console.log(allRooms);
 
         for (let i = 0; i < keys.length; i++) {
           let k = keys[i];
@@ -50,39 +52,9 @@ export default () => {
           // console.log(allRooms);
         }
 
-        update(compile(studentListViewTemplate)({
+        update(compile(studentFavoritesViewTemplate)({
           allRooms
         }));
-
-        console.log(allRooms);
-
-        // var objs = [ 
-        //   { first_nom: 'Lazslo', last_nom: 'Jamf'     },
-        //   { first_nom: 'Pig',    last_nom: 'Bodine'   },
-        //   { first_nom: 'Pirate', last_nom: 'Prentice' }
-        // ];
-
-        // for(var i = 0; i < allRooms.length; i++){
-        //   allRooms[i]['distance'] = allRooms[i]['last_nom'];
-        // }
-
-        // function compare(a,b) {
-        //   if (a.distance < b.distance)
-        //     return -1;
-        //   if (a.distance > b.distance)
-        //     return 1;
-        //   return 0;
-        // }
-
-        // objs.sort(compare);
-        // alert(JSON.stringify(objs));
-
-
-
-        let toggleMapview = document.getElementById('toggleMapView');
-        toggleMapview.addEventListener('click', function () {
-          window.location.replace('/#/student-mapview');
-        })
 
         let room = document.querySelectorAll('.info-list');
         for (let i = 0; i < room.length; i++) {

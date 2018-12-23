@@ -2,24 +2,29 @@
 {{> header }}
     <div class="content-wrapper">
         <div class="center-all">
-            <h2>Vlaanderenstraat 21, 9000 Gent</h2>
+            {{#each clickedRoom }}
+            <h2>{{ this.address }}</h2>
             <div class="room-image-block">
                 <img src="src/images/kot-3.jpg" class="room-image-detail" alt="">
             </div>
             <div class="room-properties">
-                <h5 class="property-title">Type<span class="property-info"> Loft</span></h5>
-                <h5 class="property-title">Locatie<span class="property-info"> Vlaanderenstraat 21, 9000 Gent</span></h5>
-                <h5 class="property-title">Oppervlakte<span class="property-info"> 68 SqM</span></h5>
-                <h5 class="property-title">Prijs<span class="property-info"> 580 €</span></h5>
-                <h5 class="property-title"> Bemeubeld<span class="property-info"> Bemeubeld</span></h5>
-                <h5 class="property-title">Douche<span class="property-info"> Niet aanwezig</span></h5>
-                <h5 class="property-title">Beschrijving<span class="property-info"></span></h5>
-                <p class="room-description">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet </p>
+                <h5 class="property-title">Type<span class="property-info"> {{ this.type }}</span></h5>
+                <h5 class="property-title">Locatie<span class="property-info"> {{ this.address }}</span></h5>
+                <h5 class="property-title">Oppervlakte<span class="property-info"> {{ this.surface }}</span></h5>
+                <h5 class="property-title">Prijs<span class="property-info"> {{ this.rentalPrice }}</span></h5>
+                <h5 class="property-title"> Bemeubeld<span class="property-info"> {{ this.furnished }}</span></h5>
+                <h5 class="property-title">Verdiepingen<span class="property-info"> {{ this.floors }}</span></h5>
+                <h5 class="property-title">Aantal personen<span class="property-info"> {{ this.numberOfPersons }}</span></h5>
+                <h5 class="property-title">Douche<span class="property-info"> {{ this.douche }}</span></h5>
+                <h5 class="property-title">Toilet<span class="property-info"> {{ this.toilet }}</span></h5>
+                <h5 class="property-title">Bath<span class="property-info"> {{ this.bath }}</span></h5>
+                <h5 class="property-title">Waarborg<span class="property-info"> {{ this.warrant }}</span></h5>
             </div>
             <div class="contact-owner">
                 <button id="messageToOwner">Send message to owner</button>
                 <button id="addToFavorites"><i class="fas fa-star"></i></button>
-            </div>                
+            </div>
+             {{/each}}              
         </div>
     </div>
 {{> footer }}

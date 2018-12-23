@@ -197,6 +197,30 @@ h6.card-title-lv {
     line-height: 18px;
 }
 
+p.width {
+    background-image: url('../../src/images/ruler.svg');
+    height: 20px;
+    width: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+p.distance {
+    background-image: url('../../src/images/distance.svg');
+    height: 20px;
+    width: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+p.price {
+    background-image: url('../../src/images/euro.svg');
+    height: 20px;
+    width: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
 p.card-values-lv {
     font-size: 80%;
     color: $color-lightgrey;
@@ -260,9 +284,13 @@ h5.property-title {
     font-weight: 700;
 }
 
-div.room-properties > h5:nth-last-child(2) {
-    margin-top: 30px;
+div.room-properties {
+    margin-right: auto;
 }
+
+// div.room-properties > h5:nth-last-child(2) {
+//     margin-top: 30px;
+// }
 
 span.property-info {
     font-weight: 300;
@@ -466,8 +494,8 @@ input, textarea, select {
 }
 
 input.add-room-input, select {
-    box-shadow: 0px 3px 5px #e2e2e2;
-    border-radius: 3px !important;
+    border: 1px solid $color-blue !important;
+    border-radius: $main-border-radius !important;
 }
 
 input:placeholder, textarea:placeholder, select:placeholder {
@@ -475,7 +503,6 @@ input:placeholder, textarea:placeholder, select:placeholder {
 }
 
 select {
-    border-radius: $main-border-radius !important;
     outline: none !important;
     padding: 10px 0px !important;
     margin-top: 20px !important;
@@ -490,21 +517,21 @@ input:focus {
 
 input#addRoomSubmit {
     border: 1px solid #2265DF !important;
-    padding: 10px 30px;
-    color: #2265DF;
+    padding: 10px 0px !important;
+    background-color: #2265DF !important;
+    color: $color-white !important;
     font-size: 80%;
     font-weight: 700;
     border-radius: 50px !important;
     transition: 0.2s ease-in-out;
-    margin-top: 20px !important;
+    margin-top: 40px !important;
     width: 50% !important;
 }
 
 input#addRoomSubmit:hover {
-    // box-shadow: 0px -3px 5px #e2e2e2;
-    background-color: #2265DF !important;
     cursor: pointer;
-    color: $color-white;
+    color: $color-blue !important;
+    background-color: $color-white !important;
     transition: 0.2s ease-in-out;
 }
 

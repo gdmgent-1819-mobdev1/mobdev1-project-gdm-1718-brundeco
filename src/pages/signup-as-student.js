@@ -26,26 +26,60 @@ export default () => {
     const telephone = document.getElementById('txtTelSt').value;
     const email = document.getElementById('txtEmailSt').value;
     const pass = document.getElementById('txtPasswordSt').value;
-    const education = document.getElementById('txtEducationSt').value;
     const userType = 'student';
     const message = document.getElementById('message');
+    const select = document.getElementById('txtCampusSt');
+    const campus = parseInt(select.options[select.selectedIndex].value);
+    let lat;
+    let lon;
+    switch(campus) {
+      case 1:
+        lat = 51.087550;
+        lon = 3.670820;
+        break;
+      case 2:
+        lat = 51.055510;
+        lon = 3.723390;
+        break;
+      case 3:
+        lat = 51.040970;
+        lon = 3.728000;
+        break;
+      case 4:
+        lat = 51.059940;
+        lon = 3.727950;
+        break;
+      default:
+        lat = 'No lat';
+        lon = 'No lon';
+    }
+
+    localStorage.setItem('userLat', lat);
+    localStorage.setItem('userLon', lon);
 
     firebase.auth().createUserWithEmailAndPassword(email, pass)
     .then((response) => {
+
+      const email = document.getElementById('txtEmailSt').value;
       localStorage.setItem('currentUser', email);
-      // Put form data in a userdata oject 
+      let currentUserUid = firebase.auth().currentUser.uid;
+      localStorage.setItem('currentUserKey', currentUserUid); 
+
       let userData = {
         firstname: firstName,
         lastname: lastName,
         address: address,
         telephone: telephone,
         email: email,
-        education: education,
-        type: userType
+        campus: campus,
+        type: userType,
+        lat: lat,
+        lon: lon
       }
-      // Get firebase reference and create a child object
+
       const database = firebase.database();
       const ref = database.ref('userdata/' + response.user.uid);
+      
       // Push the object data to firebase database
       ref.update(userData);
       // sign in and navigate to homepage
