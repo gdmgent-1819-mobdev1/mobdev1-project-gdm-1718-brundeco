@@ -14,19 +14,65 @@ const adminListViewTemplate = require('../templates/admin-listview.handlebars');
 
 export default () => {
 
-  let currentUser = localStorage.getItem('isSignedIn');
- // Return the compiled template to the router
- update(compile(adminListViewTemplate)());
+  function convertObjectToArray(objects) {
+    return Object.keys(objects).map(i => objects[i]);
+  }
 
+  let currentUser = localStorage.getItem('currentUserKey');
+  let usersRooms = [];
+  let allRooms = [];
 
-    // firebase logout at buttonclick
-    const btnLogout = document.querySelector('.btnLogout');
-    console.log(btnLogout);
-    btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function () {
-        console.log('log uit');
-        window.location.replace('/#/');
-      });
+  const database = firebase.database();
+  const ref = database.ref('roomdata');
+
+  ref.once("value")
+  .then(function(data) {
+    let rooms = convertObjectToArray(data.val());
+    rooms.forEach(room => {
+      let userKey = room.ownerKey;
+      if(currentUser === userKey){
+        usersRooms.push(room);
+        // console.log(usersRooms);
+      }
     });
+    // console.log(usersRooms);
+
+    for (let i = 0; i < usersRooms.length; i++) {
+      // console.log(usersRooms);
+      let Room = {
+        rentalPrice: usersRooms[i].rentalPrice,
+        warrant: usersRooms[i].warrant,
+        type: usersRooms[i].type,
+        surface: usersRooms[i].surface + ' sq m',
+        floors: usersRooms[i].floors,
+        numberOfPersons: usersRooms[i].numberOfPersons,
+        toilet: usersRooms[i].toilet,
+        douche: usersRooms[i].douche,
+        bath: usersRooms[i].bath,
+        kitchen: usersRooms[i].kitchen,
+        furnished: usersRooms[i].furnished,
+        address: usersRooms[i].address,
+        ownerKey: usersRooms[i].ownerKey
+      }
+      console.log(Room.rentalPrice);
+      allRooms.push(Room);
+      console.log(allRooms);
+    }
+
+      // Return the compiled template to the router
+      update(compile(adminListViewTemplate)({
+        allRooms
+      }));
+
+      // firebase logout at buttonclick
+      const btnLogout = document.querySelector('.btnLogout');
+      btnLogout.addEventListener('click', e => {
+        firebase.auth().signOut().then(function () {
+          window.location.replace('/#/');
+        });
+      });
+  });
+
+
 
 }

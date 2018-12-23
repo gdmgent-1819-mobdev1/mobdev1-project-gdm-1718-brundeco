@@ -23,6 +23,7 @@ export default () => {
 
   ref.on("value", function (data) {
     let rooms = data.val();
+    console.log(rooms);
     let keys = Object.keys(rooms);
     roomKeys.push(keys);
 
@@ -44,10 +45,11 @@ export default () => {
         ownerKey: rooms[k].ownerKey
       }
       allRooms.push(Room);
+      console.log(allRooms);
     }
 
     update(compile(studentListViewTemplate)({
-      allRooms, index
+      allRooms
     }));
 
     // Get elements to toggle between list and detail view
@@ -82,7 +84,6 @@ export default () => {
       listBlock.style.display = 'none';
       detailBlock.style.display = 'block';
     };
-
 
 
     // firebase logout at buttonclick

@@ -10,16 +10,15 @@ import {
 const firebase = getInstance();
 
 // Import the template to use
-const adminMessagesDetailViewTemplate = require('../templates/admin-messages-detail.handlebars');
+const adminMessagesViewTemplate = require('../templates/admin-messages.handlebars');
 
 export default () => {
   // Data to be passed to the template
 
   // Return the compiled template to the router
-  update(compile(adminMessagesDetailViewTemplate)({
+  update(compile(adminMessagesViewTemplate)({
     name
   }));
-
 
     // firebase logout at buttonclick
     const btnLogout = document.querySelector('.btnLogout');
