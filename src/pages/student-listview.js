@@ -9,7 +9,6 @@ import {
 } from '../firebase/firebase';
 const firebase = getInstance();
 
-// Import the template to use
 const studentListViewTemplate = require('../templates/student-listview.handlebars');
 
 export default () => {
@@ -18,24 +17,26 @@ export default () => {
     if (user) {
       const database = firebase.database();
       const ref = database.ref('roomdata');
+      let Room;
       let allRooms = [];
       let index;
       let roomKeys = [];
       let clickedRoomKey;
+      let userLat = parseFloat(localStorage.getItem('userLat'));
+      let userLon = parseFloat(localStorage.getItem('userLon'));
 
       ref.on("value", function (data) {
         let rooms = data.val();
-        // console.log(rooms);
         let keys = Object.keys(rooms);
         roomKeys.push(keys);
 
         for (let i = 0; i < keys.length; i++) {
           let k = keys[i];
-          let Room = {
+          Room = {
             rentalPrice: rooms[k].rentalPrice,
             warrant: rooms[k].warrant,
             type: rooms[k].type,
-            surface: rooms[k].surface + ' sq m',
+            surface: rooms[k].surface + ' m²',
             floors: rooms[k].floors,
             numberOfPersons: rooms[k].numberOfPersons,
             toilet: rooms[k].toilet,
@@ -44,44 +45,58 @@ export default () => {
             kitchen: rooms[k].kitchen,
             furnished: rooms[k].furnished,
             address: rooms[k].address,
-            ownerKey: rooms[k].ownerKey
+            ownerKey: rooms[k].ownerKey,
+            lat: rooms[k].lat,
+            lon: rooms[k].lon,
           }
+
           allRooms.push(Room);
-          // console.log(allRooms);
+        }
+
+        // Calculate distance between listed rooms and user's university longitude and latitude
+        for(let i = 0; i < allRooms.length; i++) {
+          let roomLat = allRooms[i].lat;
+          let roomLon = allRooms[i].lon;
+          function getDistanceFromLatLonInKm(userLat,userLon,roomLat,roomLon) {
+
+            let R = 6371; // Radius of the earth in km
+            let dLat = deg2rad(roomLat-userLat);  // deg2rad below
+            let dLon = deg2rad(roomLon-userLon); 
+            let a = 
+              Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(deg2rad(userLat)) * Math.cos(deg2rad(roomLat)) * 
+              Math.sin(dLon/2) * Math.sin(dLon/2)
+              ; 
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            let d = R * c; // Distance in km
+            allRooms[i].distance = parseFloat(d).toFixed(2);
+          }
+          getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon);
+          
+          function deg2rad(deg) {
+            return deg * (Math.PI/180)
+          }
+        }
+
+        let a = allRooms.distance;
+        console.log(a);
+        
+        for(let i = 0; i < allRooms.length; i++) {
+          let a = allRooms[i].distance;
+          console.log(a);
+          // a.sort(function(a,b) {
+          //   console.log(a);
+          //   return a - b;
+          // })
         }
 
         update(compile(studentListViewTemplate)({
           allRooms
         }));
 
-        console.log(allRooms);
-
-        // var objs = [ 
-        //   { first_nom: 'Lazslo', last_nom: 'Jamf'     },
-        //   { first_nom: 'Pig',    last_nom: 'Bodine'   },
-        //   { first_nom: 'Pirate', last_nom: 'Prentice' }
-        // ];
-
-        // for(var i = 0; i < allRooms.length; i++){
-        //   allRooms[i]['distance'] = allRooms[i]['last_nom'];
-        // }
-
-        // function compare(a,b) {
-        //   if (a.distance < b.distance)
-        //     return -1;
-        //   if (a.distance > b.distance)
-        //     return 1;
-        //   return 0;
-        // }
-
-        // objs.sort(compare);
-        // alert(JSON.stringify(objs));
-
-
-
         let toggleMapview = document.getElementById('toggleMapView');
         toggleMapview.addEventListener('click', function () {
-          window.location.replace('/#/student-mapview');
+          window.location.replace('#/student-mapview');
         })
 
         let room = document.querySelectorAll('.info-list');
@@ -96,14 +111,14 @@ export default () => {
           localStorage.setItem('roomDetail', JSON.stringify(roomDetail));
           // clickedRoomKey = roomKeys[0][index];
           // console.log(clickedRoomKey);
-          window.location.replace('/#/student-detailview');
+          window.location.replace('#/student-detailview');
         };
 
         // firebase logout at buttonclick
         const btnLogout = document.querySelector('.btnLogout');
         btnLogout.addEventListener('click', e => {
           firebase.auth().signOut().then(function () {
-            window.location.replace('/#/');
+            window.location.replace('#/');
           });
         });
 

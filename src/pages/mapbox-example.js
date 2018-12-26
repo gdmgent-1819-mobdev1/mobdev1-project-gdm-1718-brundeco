@@ -22,8 +22,17 @@ export default () => {
       container: 'map',
       center: [-74.50, 40],
       style: 'mapbox://styles/mapbox/streets-v9',
-      zoom: 1,
+      zoom: 30,
     });
+
+    new mapboxgl.Marker()
+    .setLngLat([3.717655, 51.039935])
+    .addTo(map);
+    // .setLngLat([room.directions.coords.lng, room.directions.coords.lat])
+
+    
+
+
   } else {
     console.error('Mapbox will crash the page if no access token is given.');
   }

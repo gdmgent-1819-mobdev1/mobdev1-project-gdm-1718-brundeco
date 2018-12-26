@@ -1,8 +1,12 @@
 // Only import the compile function from handlebars instead of the entire library
-import { compile } from 'handlebars';
+import {
+  compile
+} from 'handlebars';
 import update from '../helpers/update';
 
-import { getInstance } from '../firebase/firebase';
+import {
+  getInstance
+} from '../firebase/firebase';
 const firebase = getInstance();
 
 // Import the template to use
@@ -10,19 +14,23 @@ const homeAdminTemplate = require('../templates/admin-home.handlebars');
 
 export default () => {
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // Return the compiled template to the router
       update(compile(homeAdminTemplate)());
       // console.log('We have a user');
       const addRoomBtn = document.getElementById('addRoomSubmit');
-
       let allRooms = [];
 
       const database = firebase.database();
       const ref = database.ref('roomdata');
+      let roomImage = document.getElementById('roomImage');
+      roomImage.addEventListener('click', function(e) {
+        e.preventDefault()
+        console.log('clicked');
+      });
 
-      addRoomBtn.addEventListener('click', e => {
+      function collectFormData() {
         let rentalPrice = document.getElementById("rentalPrice").value;
         let warrant = document.getElementById("warrant").value;
         let surface = document.getElementById("surface").value;
@@ -36,19 +44,23 @@ export default () => {
         let kitchen = document.getElementById("kitchen").value;
         let furnished = document.getElementById("furnished").value;
         let key = localStorage.getItem('currentUserKey');
-        
+
         let geocoder = new google.maps.Geocoder();
         let currentAddress = address;
         let lat;
         let lon;
-        
-        geocoder.geocode( { 'address': currentAddress}, function(results, status) {
+
+        geocoder.geocode({
+          'address': currentAddress
+        }, function (results, status) {
 
           if (status == google.maps.GeocoderStatus.OK) {
+
             lat = results[0].geometry.location.lat();
             lon = results[0].geometry.location.lng();
             console.log(lat);
             console.log(lon);
+
             let Room = {
               type: type,
               rentalPrice: rentalPrice,
@@ -66,38 +78,35 @@ export default () => {
               lat: lat,
               lon: lon
             }
-        
             ref.push(Room);
             allRooms.push(Room);
             // console.log(allRooms);
-          } 
+          }
         });
-      
-      });
+      }
+
+      addRoomBtn.addEventListener('click', collectFormData);
+        
     } else {
       window.location.replace('/#/');
       // console.log('Something went wrong');
     }
 
-
     //firebase logout at buttonclick
     const btnLogout = document.querySelector('.btnLogout');
     btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function() {
+      firebase.auth().signOut().then(function () {
         localStorage.setItem('isSignedIn', false)
         console.log('log uit');
         window.location.replace('/#/');
       });
     });
   });
-
-
-
 }
 
 
-          // localStorage.setItem('room-collection', JSON.stringify(objects));
-          // let room = objects[Object.keys(objects)[0]];
-          // console.log(room);
-          // let roomLs = JSON.parse(localStorage.getItem('room-collection'));
-          // console.log(roomLs);
+// localStorage.setItem('room-collection', JSON.stringify(objects));
+// let room = objects[Object.keys(objects)[0]];
+// console.log(room);
+// let roomLs = JSON.parse(localStorage.getItem('room-collection'));
+// console.log(roomLs);
