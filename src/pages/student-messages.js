@@ -20,6 +20,15 @@ export default () => {
       update(compile(studentMessagesViewTemplate)({
         name
       }));
+
+
+        // firebase logout at buttonclick
+        const btnLogout = document.querySelector('.btnLogout');
+        btnLogout.addEventListener('click', e => {
+          firebase.auth().signOut().then(function () {
+            window.location.replace('#/');
+          });
+        });
       console.log('User check')
 
     } else {

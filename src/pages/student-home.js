@@ -26,6 +26,9 @@ export default () => {
       let likeBtn = document.getElementById('likeBtn');
       likeBtn.addEventListener('click', likeRoom);
 
+      let icon = document.getElementsByClassName('second-image')[0];
+      // icon.style.backgroundImage = url('../../../src/images/homeFullActive.svg');
+
       let toggleListview = document.getElementById('toggleListView');
       toggleListview.addEventListener('click', function () {
         window.location.replace('/#/student-listview');

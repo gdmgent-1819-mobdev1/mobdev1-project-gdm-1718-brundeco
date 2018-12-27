@@ -143,6 +143,7 @@ p.card-surface {
     color: $color-white;
     font-weight: 900;
     margin: 0px 20px;
+    transition: all 0.2s ease-in-out;
 }
 
 #likeBtn {
@@ -154,9 +155,11 @@ p.card-surface {
 }
 
 #skipBtn:hover, #likeBtn:hover {
-    flex-grow: 0.05;
+    transform: scale(1.1);
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
+
 
 .info-block img {
     border-radius: $main-border-radius;
@@ -183,10 +186,13 @@ p.card-surface {
 h5.card-room-type-lv {
     font-size: 100%;
     text-transform: uppercase;
-    color: $color-greenblue;
+    color: #74EEF3;
     position: absolute;
-    top: 0px;
-    left: 127px;
+    top: -40px;
+    left: auto;
+    padding: 10px 60px;
+    border-radius: 4px;
+    box-shadow: 0px 5px 10px #e0e0e0;
 }
 
 h6.card-title-lv {
@@ -230,7 +236,7 @@ p.card-values-lv {
     @include flex-row;
     box-shadow: 0px 7px 17px #e0e0e0;
     border-radius: $main-border-radius;
-    margin-top: 40px;
+    margin-top: 80px;
     padding: 20px 10px;
     position: relative;
     flex: 1;
@@ -250,7 +256,6 @@ p.card-values-lv {
 
 .info-list-img {
     display: inline-block;
-    width: 30%;
     height: 100%;
 }
 
@@ -272,11 +277,40 @@ img.room-picture-list {
     justify-content: space-between;
 }
 
+@media only screen and (min-width: 600px) {
+    .info-list{
+        flex-direction: column;
+    }
+
+    .info-list-img {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        margin-top: 20px;
+    }
+
+    img.room-picture-list {
+        display: inline-block;
+        width: 239%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+  }
+
 // - - - - - - room detail view - - - - - - 
 .content-wrapper {
-    @include flex-column;
+    display: flex;
+    flex-direction: column;
     width: 80%;
     margin: 80px auto;
+}
+
+.content-wrapper-2 {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 50px auto;
 }
 
 h5.property-title {
@@ -321,6 +355,12 @@ p.room-description {
     border-radius: 3px;
 }
 
+@media only screen and (min-width: 600px) {
+    .room-image-block{
+        height: 300px;
+    }
+  }
+
 .contact-owner {
     @include flex-row;
     border-radius: 7px;
@@ -328,20 +368,20 @@ p.room-description {
 }
 
 #messageToOwner {
-    border: none;
     padding: 10px 30px;
-    color: #0fffed;
+    color: $color-greenblue;
     font-size: 80%;
     font-weight: 700;
-    box-shadow: 0px 3px 5px #e2e2e2;
-    border-radius: 10px;
+    border-radius: 80px;
     transition: 0.2s ease-in-out;
+    border: 1px solid $color-greenblue !important;
 }
 
 #messageToOwner:hover {
-    box-shadow: 0px -3px 5px #e2e2e2;
+    background-color: $color-greenblue;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    color: $color-white;
 }
 
 #messageToOwner:focus {
@@ -434,7 +474,7 @@ span.message-timestamp {
     top: 6%;
 }
 
-#sendMessage {
+#sendMessage, #sortByDistance {
     display: block;
     border: 1px solid $color-greenblue;
     border-radius: 20px;
@@ -444,7 +484,11 @@ span.message-timestamp {
     transition: 0.2s ease-in-out;
 }
 
-#sendMessage:hover {
+#sortByDistance {
+    margin: 30px auto;
+}
+
+#sendMessage:hover, #sortByDistance:hover {
     background-color: $color-greenblue;
     color: $color-white;
     transition: 0.2s ease-in-out;
@@ -487,7 +531,7 @@ button.add-room-picture img {
 // - - - - - forms - - - - - -
 input, textarea, select {
     background-color: $color-white !important;
-    height: 30px !important;
+    // height: 30px !important;
     width: 70% !important;
     border-radius: $main-border-radius !important;
     border: none !important;
@@ -497,9 +541,19 @@ input, textarea, select {
     margin-top: 10px !important;
 }
 
-input.add-room-input, select {
-    border: 1px solid $color-blue !important;
-    border-radius: $main-border-radius !important;
+// input.add-room-input {
+//     border: 1px solid $color-blue !important;
+//     border-radius: $main-border-radius !important;
+// }
+
+input.edit-room-input, input.add-room-input, select {
+    border-bottom: 1px solid $color-blue !important;
+    border-radius: 0px !important;
+}
+
+#editRoom {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
 }
 
 input:placeholder, textarea:placeholder, select:placeholder {
@@ -519,7 +573,7 @@ input:focus {
     transition: 0.2s ease-in-out !important;
 }
 
-input#addRoomSubmit {
+input#addRoomSubmit, #editRoomSubmit, #btnEditRoom {
     border: 1px solid #2265DF !important;
     padding: 10px 0px !important;
     background-color: #2265DF !important;
@@ -532,20 +586,25 @@ input#addRoomSubmit {
     width: 50% !important;
 }
 
-input#addRoomSubmit:hover {
+#btnEditRoom {
+    width: 100% !important;
+    padding: 10px 40px !important;
+}
+
+input#addRoomSubmit:hover, #editRoomSubmit:hover, #btnEditRoom:hover {
     cursor: pointer;
     color: $color-blue !important;
     background-color: $color-white !important;
     transition: 0.2s ease-in-out;
 }
 
-input#roomImage {
-    height: 100px;
-    width: 100px;
-    background-image: url('../../src/images/imageUpload.svg');
-    background-size: cover;
-    background-position: center;
-}
+// input#roomImage {
+//     height: 100px;
+//     width: 100px;
+//     background-image: url('../../src/images/imageUpload.svg');
+//     background-size: cover;
+//     background-position: center;
+// }
 
 // - - - - - trivia - - - - - -
 h1 {
@@ -600,7 +659,6 @@ p.mapbox-pop-up-title {
     color: $color-blue;
     border-bottom: 1px solid $color-lighter-grey;
     font-weight: 200;
-
 }
 
 a.page-arrow {

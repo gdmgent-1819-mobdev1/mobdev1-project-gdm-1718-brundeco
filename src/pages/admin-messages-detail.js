@@ -13,23 +13,23 @@ const firebase = getInstance();
 const adminMessagesDetailViewTemplate = require('../templates/admin-messages-detail.handlebars');
 
 export default () => {
-  // Data to be passed to the template
 
-  // Return the compiled template to the router
-  update(compile(studentMessagesDetailViewTemplate)({
-    name
-  }));
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      
+      update(compile(studentMessagesDetailViewTemplate)({
+        name
+      }));
 
-
-    // firebase logout at buttonclick
-    const btnLogout = document.querySelector('.btnLogout');
-    console.log(btnLogout);
-    btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function () {
-        console.log('log uit');
-        window.location.replace('/#/');
+      // firebase logout at buttonclick
+      const btnLogout = document.querySelector('.btnLogout');
+      console.log(btnLogout);
+      btnLogout.addEventListener('click', e => {
+        firebase.auth().signOut().then(function () {
+          console.log('log uit');
+          window.location.replace('/#/');
+        });
       });
-    });
-
-
+    }
+  })
 };

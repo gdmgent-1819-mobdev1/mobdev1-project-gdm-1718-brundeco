@@ -78,8 +78,8 @@ export default () => {
           }
         }
 
-        let a = allRooms.distance;
-        console.log(a);
+        // let a = allRooms.distance;
+        // console.log(a);
         
         for(let i = 0; i < allRooms.length; i++) {
           let a = allRooms[i].distance;

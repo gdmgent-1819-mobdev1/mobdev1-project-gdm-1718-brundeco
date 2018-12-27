@@ -1,0 +1,53 @@
+<!-- - - - - - - - - - - - - - - List view page - - - - - - - - - - - - - - -->
+{{> header }}
+    <div class="content-wrapper-2" id="contentBlock">
+        <div class="center-all">
+            {{#each clickedRoom }}
+            <h2>{{ this.address }}</h2>
+            <div class="room-image-block">
+                <img src="src/images/kot-3.jpg" class="room-image-detail" alt="">
+            </div>
+            <div class="room-properties">
+                <h5 class="property-title">Type<span class="property-info"> {{ this.type }}</span></h5>
+                <h5 class="property-title">Locatie<span class="property-info"> {{ this.address }}</span></h5>
+                <h5 class="property-title">Oppervlakte<span class="property-info"> {{ this.surface }}</span></h5>
+                <h5 class="property-title">Prijs<span class="property-info"> {{ this.rentalPrice }}</span></h5>
+                <h5 class="property-title"> Bemeubeld<span class="property-info"> {{ this.furnished }}</span></h5>
+                <h5 class="property-title">Verdiepingen<span class="property-info"> {{ this.floors }}</span></h5>
+                <h5 class="property-title">Aantal personen<span class="property-info"> {{ this.numberOfPersons }}</span></h5>
+                <h5 class="property-title">Douche<span class="property-info"> {{ this.douche }}</span></h5>
+                <h5 class="property-title">Toilet<span class="property-info"> {{ this.toilet }}</span></h5>
+                <h5 class="property-title">Bath<span class="property-info"> {{ this.bath }}</span></h5>
+                <h5 class="property-title">Waarborg<span class="property-info"> {{ this.warrant }}</span></h5>
+            </div>
+            <div class="contact-owner">
+                <button id="btnEditRoom">Edit room</button>
+            </div>
+             {{/each}}              
+        </div>
+    </div>
+
+<div class="content-wrapper" id="contentBlock">
+    <div class="no-wrap">
+        <form class="just-a-box-2" id="editRoom">
+            {{#each clickedRoom }}
+            <h2>Kot wijzigen</h2>
+            <input class="edit-room-input" type="text" placeholder="{{ this.rentalPrice }}" id="rentalPrice">
+            <input class="edit-room-input" type="text" placeholder="{{ this.warrant }}" id="warrant">
+            <input class="edit-room-input" type="text" placeholder="{{ this.surface }}" id="surface">
+            <input class="edit-room-input" type="text" placeholder="{{ this.address }}" id="address">
+            <input class="edit-room-input" type="text" placeholder="{{ this.type }}" id="roomType">
+            <input class="edit-room-input" type="text" placeholder="{{ this.floors }}" id="floors">
+            <input class="edit-room-input" type="text" placeholder="{{ this.numberOfPersons }}" id="numberOfPersons">
+            <input class="edit-room-input" type="text" placeholder="{{ this.toilet }}" id="toilet">
+            <input class="edit-room-input" type="text" placeholder="{{ this.douche }}" id="douche">
+            <input class="edit-room-input" type="text" placeholder="{{ this.bath }}" id="bath">
+            <input class="edit-room-input" type="text" placeholder="{{ this.kitchen }}" id="kitchen">
+            <input class="edit-room-input" type="text" placeholder="{{ this.furnished }}" id="furnished">
+            <input type="file" name="pic" accept="image/*" id="roomImage">
+            <input type="submit" id="editRoomSubmit" value="Kot wijzigen">
+             {{/each}}              
+        </form>
+    </div>
+</div>
+{{> footer-admin }}

@@ -13,40 +13,43 @@ const firebase = getInstance();
 const adminMessagesViewTemplate = require('../templates/admin-messages.handlebars');
 
 export default () => {
-  let currentUser = localStorage.getItem('currentUserKey');
-  const database = firebase.database();
-  const ref = database.ref('userdata/' + currentUser);
-  let messageList = [];
 
-  function convertObjectToArray(objects) {
-    return Object.keys(objects).map(i => objects[i]);
-  }
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      let currentUser = localStorage.getItem('currentUserKey');
+      const database = firebase.database();
+      const ref = database.ref('userdata/' + currentUser);
+      let messageList = [];
 
-  ref.once("value")
-  .then(function(data) {
-    let messages = convertObjectToArray(data.val());
-    messages.forEach(message => {
-      let content = message.content;
-      console.log(content);
-      messageList.push(content);
-    });
-    console.log(messageList);
-  });
+      function convertObjectToArray(objects) {
+        return Object.keys(objects).map(i => objects[i]);
+      }
 
-  // Return the compiled template to the router
-  update(compile(adminMessagesViewTemplate)({
-    name
-  }));
+      ref.once("value")
+        .then(function (data) {
+          let messages = convertObjectToArray(data.val());
+          messages.forEach(message => {
+            let content = message.content;
+            console.log(content);
+            messageList.push(content);
+          });
+          console.log(messageList);
+        });
 
-    // firebase logout at buttonclick
-    const btnLogout = document.querySelector('.btnLogout');
-    console.log(btnLogout);
-    btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function () {
-        console.log('log uit');
-        window.location.replace('/#/');
+      // Return the compiled template to the router
+      update(compile(adminMessagesViewTemplate)({
+        name
+      }));
+
+      // firebase logout at buttonclick
+      const btnLogout = document.querySelector('.btnLogout');
+      console.log(btnLogout);
+      btnLogout.addEventListener('click', e => {
+        firebase.auth().signOut().then(function () {
+          console.log('log uit');
+          window.location.replace('/#/');
+        });
       });
-    });
-
-
+    }
+  })
 };
