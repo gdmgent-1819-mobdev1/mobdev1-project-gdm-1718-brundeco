@@ -18,13 +18,16 @@ export default () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
+      var currentdate = new Date(); 
+      var datetime = currentdate.getDate() + '/' + currentdate.getMonth()  + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
+      
       let ownerKey = localStorage.getItem('ownerKey');
       let currentUser = localStorage.getItem('currentUserKey');
-
+      let userName = localStorage.getItem('currentUserName');
       const database = firebase.database();
       const ref = database.ref('userdata/' + ownerKey);
 
-      // Get persons name 
+      // Get room owner's name 
       ref.once("value")
         .then(function (snapshot) {
           let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
@@ -37,15 +40,19 @@ export default () => {
         name
       }));
 
+      // Add message to database
       function addMessageToDb() {
-        const messageRef = database.ref('userdata/' + ownerKey + '/');
+        const messageRef = database.ref('messages/');
         let messageContent = document.querySelectorAll('input.message-type-area')[0].value;
         let Message = {
-          admin: ownerKey,
-          currentUser: currentUser,
-          content: messageContent
+          receiver: ownerKey,
+          senderKey: currentUser,
+          senderName: userName,
+          content: messageContent,
+          date: datetime
         }
         messageRef.push(Message);
+        window.location.reload();
       }
 
       let sendMessage = document.getElementById('sendMessage');

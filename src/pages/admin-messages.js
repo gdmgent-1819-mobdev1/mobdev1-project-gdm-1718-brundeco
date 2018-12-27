@@ -16,29 +16,35 @@ export default () => {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      let currentUser = localStorage.getItem('currentUserKey');
+      let currentUserKey = localStorage.getItem('currentUserKey');
       const database = firebase.database();
-      const ref = database.ref('userdata/' + currentUser);
+      const ref = database.ref('messages/').orderByChild('receiver').equalTo(currentUserKey);
       let messageList = [];
+      let Message;
 
       function convertObjectToArray(objects) {
         return Object.keys(objects).map(i => objects[i]);
       }
 
-      ref.once("value")
-        .then(function (data) {
-          let messages = convertObjectToArray(data.val());
-          messages.forEach(message => {
-            let content = message.content;
-            console.log(content);
-            messageList.push(content);
-          });
-          console.log(messageList);
+      ref.on("value", function (snap) {
+        snap.forEach(function (childSnapshot) {
+            let data = childSnapshot.val();
+            if (data.receiver === currentUserKey) {
+              Message = {
+                content: data.content,
+                sender: data.senderName,
+                receiver: currentUserKey,
+                date: data.date
+              }
+            }
+            messageList.push(Message);
+            // console.log(messageList);
         });
+      });
 
       // Return the compiled template to the router
       update(compile(adminMessagesViewTemplate)({
-        name
+        messageList
       }));
 
       // firebase logout at buttonclick

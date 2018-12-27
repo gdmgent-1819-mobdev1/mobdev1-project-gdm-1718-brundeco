@@ -51,6 +51,7 @@ export default () => {
           }
 
           allRooms.push(Room);
+          console.log(allRooms);
         }
 
         // Calculate distance between listed rooms and user's university longitude and latitude

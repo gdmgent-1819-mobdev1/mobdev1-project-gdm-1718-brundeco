@@ -21,14 +21,20 @@ export default () => {
       // console.log('We have a user');
       const addRoomBtn = document.getElementById('addRoomSubmit');
       let allRooms = [];
-
       const database = firebase.database();
+      let currentUser = localStorage.getItem('currentUserKey');
+
+
+      // get users name to use in messages
+      const userRef = database.ref('userdata/' + currentUser);
+      userRef.once("value")
+      .then(function (snapshot) {
+        let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+        localStorage.setItem('currentUserName', name);
+      });
+
       const ref = database.ref('roomdata');
       let roomImage = document.getElementById('roomImage');
-      roomImage.addEventListener('click', function(e) {
-        e.preventDefault()
-        console.log('clicked');
-      });
 
       function collectFormData() {
         let rentalPrice = document.getElementById("rentalPrice").value;
@@ -103,10 +109,3 @@ export default () => {
     });
   });
 }
-
-
-// localStorage.setItem('room-collection', JSON.stringify(objects));
-// let room = objects[Object.keys(objects)[0]];
-// console.log(room);
-// let roomLs = JSON.parse(localStorage.getItem('room-collection'));
-// console.log(roomLs);

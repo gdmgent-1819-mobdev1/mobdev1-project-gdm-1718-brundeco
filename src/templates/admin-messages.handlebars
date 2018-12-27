@@ -1,15 +1,18 @@
-<!-- - - - - - - - - - - - - - - Messages page - - - - - - - - - - - - - - -->
 <div class="wrapper-2" id="screenMessages">
 {{> header }}
     <div class="content-lv">
         <div class="just-a-box-lv extra-box-margin">
             <h2 class="messages-page-title">Berichten</h2>
-            <div class="messages-list">
-                <div class="messages-list-text">
-                    <h5 class="message-person">Eveline Verstappen</h5>
-                    <p class="message-content">Laatste bericht <span class="message-timestamp"> 23/11 om 15:45u</span></p>
+            {{#each messageList }}
+                <div class="messages-list">
+                    <div class="messages-list-text">
+                        <h5 class="message-person">{{ this.sender }}</h5>
+                        <p class="message-content">{{ this.content }}</p>
+                        <p class="message-timestamp">{{ this.date }}</p>
+                    
+                    </div>
                 </div>
-            </div>
+            {{/each}}
         </div>
     </div>
 {{> footer-admin }}

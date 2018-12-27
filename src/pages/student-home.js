@@ -19,12 +19,25 @@ export default () => {
       // Return the compiled template to the router
       update(compile(homeStudentTemplate)());
 
+
+
+
       let currentUser = localStorage.getItem('currentUserKey');
       let allRooms = [];
       let indexCurrentRoom = 0;
       let currentRoom;
       let likeBtn = document.getElementById('likeBtn');
       likeBtn.addEventListener('click', likeRoom);
+
+      const database = firebase.database();
+
+      // get users name to use in messages
+      const userRef = database.ref('userdata/' + currentUser);
+      userRef.once("value")
+      .then(function (snapshot) {
+        let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+        localStorage.setItem('currentUserName', name);
+      });
 
       let icon = document.getElementsByClassName('second-image')[0];
       // icon.style.backgroundImage = url('../../../src/images/homeFullActive.svg');
@@ -38,7 +51,6 @@ export default () => {
         window.location.replace('/#/student-mapview');
       })
 
-      const database = firebase.database();
       const ref = database.ref('roomdata/');
 
       ref.on('value', (snapshot) => {
