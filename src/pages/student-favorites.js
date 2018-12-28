@@ -13,7 +13,6 @@ const firebase = getInstance();
 const studentFavoritesViewTemplate = require('../templates/student-favorites.handlebars');
 
 export default () => {
-  window.location.reload();
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -32,11 +31,7 @@ export default () => {
       ref.on("value", function (data) {
         let rooms = data.val();
         if (rooms === undefined || rooms === null) {
-          let alert = document.createElement('p');
-          alert.innerHTML = 'Nog geen favorieten toegevoegd';
-          alert.style.textAlign = 'center';
-          document.body.appendChild(alert);
-          // alert.innerHTML = '';
+          console.log('geen data');
         } else {
           console.log(rooms);
           let keys = Object.keys(rooms);

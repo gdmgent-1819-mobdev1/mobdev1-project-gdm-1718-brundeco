@@ -61,7 +61,7 @@ export default () => {
         snapshot.forEach(function (childSnapshot) {
           let key = childSnapshot.key;
           let rooms = childSnapshot.val();
-          // console.log(key);
+          console.log(rooms);
           allRooms.push(rooms);
         })
         returnRoom(indexCurrentRoom);
