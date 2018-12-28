@@ -33,6 +33,7 @@ export default () => {
       let addToFavorites = document.getElementById('addToFavorites');
       addToFavorites.addEventListener('click', function () {
         ref.push(roomDetail);
+        alert('Kamer werd toegevoegd aan favorietenlijst');
       })
 
       let contactOwner = document.getElementById('messageToOwner');

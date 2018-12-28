@@ -18,7 +18,9 @@ export default () => {
   const btnSignupConfirm = document.getElementById('btnSignupConfirm');
   btnSignupConfirm.addEventListener('click', authorize);
 
-  function authorize() {
+  function authorize(e) {
+    e.preventDefault();
+
     // Collect the values from the form inputfields
     const firstName = document.getElementById('txtFirstNameSt').value;
     const lastName = document.getElementById('txtLastNameSt').value;
@@ -32,6 +34,7 @@ export default () => {
     const campus = parseInt(select.options[select.selectedIndex].value);
     let lat;
     let lon;
+
     switch(campus) {
       case 1:
         lat = 51.087550;
@@ -83,7 +86,7 @@ export default () => {
       // Push the object data to firebase database
       ref.update(userData);
       // sign in and navigate to homepage
-      window.location.replace('/#/student-home');
+      window.location.replace('#/student-home');
     })
     .catch((e) => {
       message.innerHTML = e;

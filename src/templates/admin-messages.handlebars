@@ -9,9 +9,10 @@
                         <h5 class="message-person">{{ this.sender }}</h5>
                         <p class="message-content">{{ this.content }}</p>
                         <p class="message-timestamp">{{ this.date }}</p>
-                    
                     </div>
                 </div>
+                {{else}}
+                    <p style="text-align:center">Nog geen berichten om weer te geven</p>
             {{/each}}
         </div>
     </div>

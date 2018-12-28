@@ -18,7 +18,8 @@ export default () => {
   const btnSignupConfirm = document.getElementById('btnSignupConfirm');
   btnSignupConfirm.addEventListener('click', authorize);
 
-  function authorize() {
+  function authorize(e) {
+    e.preventDefault();
     // Collect the values from the form inputfields
     const firstName = document.getElementById('txtFirstNameAd').value;
     const lastName = document.getElementById('txtLastNameAd').value;
@@ -51,7 +52,7 @@ export default () => {
       // Push the object data to firebase database
       ref.update(userData);
       // sign in and navigate to homepage
-      window.location.replace('/#/admin-home');
+      window.location.replace('#/admin-home');
     })
     .catch((e) => {
       message.innerHTML = e;

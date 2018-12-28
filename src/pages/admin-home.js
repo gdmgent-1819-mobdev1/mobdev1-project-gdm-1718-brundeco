@@ -16,27 +16,51 @@ export default () => {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      // Return the compiled template to the router
+
       update(compile(homeAdminTemplate)());
-      // console.log('We have a user');
+
       const addRoomBtn = document.getElementById('addRoomSubmit');
       let allRooms = [];
       const database = firebase.database();
       let currentUser = localStorage.getItem('currentUserKey');
-
+      let imageUrl;
 
       // get users name to use in messages
       const userRef = database.ref('userdata/' + currentUser);
       userRef.once("value")
-      .then(function (snapshot) {
-        let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
-        localStorage.setItem('currentUserName', name);
+        .then(function (snapshot) {
+          let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+          localStorage.setItem('currentUserName', name);
+        });
+
+      let ref = database.ref('roomdata');
+
+
+      let imagePathInStorage;
+      let imageUpload = document.getElementById('roomImage');
+      imageUpload.addEventListener('change', (evt) => {
+
+        if (imageUpload.value !== '') {
+          let fileName = evt.target.files[0].name.replace(/\s+/g, '-').toLowerCase();
+          let storageRef = firebase.storage().ref(`images/${fileName}`);
+
+          storageRef.put(evt.target.files[0]).then(() => {
+
+            imagePathInStorage = `images/${fileName}`;
+            const storageImage = firebase.storage().ref(imagePathInStorage);
+
+            storageImage.getDownloadURL().then((url) => {
+              localStorage.setItem('imageLink', url);
+              imageUrl = url;
+            })
+          })
+        } else {
+          console.log('empty');
+        }
       });
 
-      const ref = database.ref('roomdata');
-      let roomImage = document.getElementById('roomImage');
 
-      function collectFormData() {
+      function collectFormData(e) {
         let rentalPrice = document.getElementById("rentalPrice").value;
         let warrant = document.getElementById("warrant").value;
         let surface = document.getElementById("surface").value;
@@ -55,6 +79,8 @@ export default () => {
         let currentAddress = address;
         let lat;
         let lon;
+
+
 
         geocoder.geocode({
           'address': currentAddress
@@ -82,19 +108,20 @@ export default () => {
               furnished: furnished,
               ownerKey: key,
               lat: lat,
-              lon: lon
+              lon: lon,
+              image: imageUrl
             }
             ref.push(Room);
             allRooms.push(Room);
             // console.log(allRooms);
           }
         });
+        e.preventDefault();
       }
-
       addRoomBtn.addEventListener('click', collectFormData);
-        
+
     } else {
-      window.location.replace('/#/');
+      // window.location.replace('/#/');
       // console.log('Something went wrong');
     }
 

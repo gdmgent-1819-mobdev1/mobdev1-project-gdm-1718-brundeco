@@ -36,7 +36,7 @@ export default () => {
             rentalPrice: rooms[k].rentalPrice,
             warrant: rooms[k].warrant,
             type: rooms[k].type,
-            surface: rooms[k].surface + ' m²',
+            surface: rooms[k].surface,
             floors: rooms[k].floors,
             numberOfPersons: rooms[k].numberOfPersons,
             toilet: rooms[k].toilet,
@@ -48,6 +48,7 @@ export default () => {
             ownerKey: rooms[k].ownerKey,
             lat: rooms[k].lat,
             lon: rooms[k].lon,
+            image: rooms[k].image
           }
 
           allRooms.push(Room);
@@ -78,18 +79,7 @@ export default () => {
             return deg * (Math.PI/180)
           }
         }
-
-        // let a = allRooms.distance;
-        // console.log(a);
         
-        for(let i = 0; i < allRooms.length; i++) {
-          let a = allRooms[i].distance;
-          console.log(a);
-          // a.sort(function(a,b) {
-          //   console.log(a);
-          //   return a - b;
-          // })
-        }
 
         update(compile(studentListViewTemplate)({
           allRooms

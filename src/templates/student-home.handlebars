@@ -1,26 +1,26 @@
 {{> header }}
-    <div class="content">
-        <div class="just-a-box">
-            <div class="toggleViews">
-                <button id="toggleListView">List</button>
-                <button id="toggleMapView">Map</button>
+<div class="content">
+    <div class="just-a-box">
+        <div class="toggleViews">
+            <button id="toggleListView">List</button>
+            <button id="toggleMapView">Map</button>
+        </div>
+        <div class="center-all">
+            <h2>Beschikbare kamers</h2>
+            <div class="image-block">
+                <img class="room-picture" alt="">
+                {{!-- <img src="src/images/kot-3.jpg" class="room-picture" alt=""> --}}
             </div>
-            <div class="center-all">
-                <h2>Beschikbare kamers</h2>
-                <div class="image-block">
-                    <img class="room-picture" alt="">
-                    {{!-- <img src="src/images/kot-3.jpg" class="room-picture" alt=""> --}}
-                </div>
-                <div class="info-block">
-                    <h5 class="card-room-type"></h5>
-                    <h6 class="card-address"></h6>
-                    <p class="card-surface"></p>
-                </div>
-                <div class="judge-block">
-                    <button id="likeBtn">Like</button>
-                    <button id="skipBtn">Skip</button>
-                </div>                
+            <div class="info-block">
+                <h5 class="card-room-type"></h5>
+                <h6 class="card-address"></h6>
+                <p class="card-surface"></p>
+            </div>
+            <div class="judge-block">
+                <button id="likeBtn">Like</button>
+                <button id="skipBtn">Skip</button>
             </div>
         </div>
     </div>
+</div>
 {{> footer }}
