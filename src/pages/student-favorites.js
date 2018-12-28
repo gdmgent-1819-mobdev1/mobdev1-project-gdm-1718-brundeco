@@ -105,8 +105,8 @@ export default () => {
           index = this.id.substr(4);
           let roomDetail = allRooms[index];
           localStorage.setItem('roomDetail', JSON.stringify(roomDetail));
-          // clickedRoomKey = roomKeys[0][index];
-          // console.log(clickedRoomKey);
+          clickedRoomKey = roomKeys[0][index];
+          console.log(clickedRoomKey);
           window.location.replace('/#/student-detailview');
         };
 

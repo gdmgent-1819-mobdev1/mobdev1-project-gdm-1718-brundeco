@@ -28,6 +28,7 @@ export default () => {
       ref.on("value", function (data) {
         let rooms = data.val();
         let keys = Object.keys(rooms);
+        // console.log(keys[0]);
         roomKeys.push(keys);
 
         for (let i = 0; i < keys.length; i++) {
@@ -48,12 +49,13 @@ export default () => {
             ownerKey: rooms[k].ownerKey,
             lat: rooms[k].lat,
             lon: rooms[k].lon,
-            image: rooms[k].image
+            image: rooms[k].image,
+            roomKey: keys[i]
           }
-
           allRooms.push(Room);
-          console.log(allRooms);
         }
+        // console.log(allRooms[1].roomKey);
+
 
         // Calculate distance between listed rooms and user's university longitude and latitude
         for(let i = 0; i < allRooms.length; i++) {
@@ -100,8 +102,9 @@ export default () => {
           index = this.id.substr(4);
           let roomDetail = allRooms[index];
           localStorage.setItem('roomDetail', JSON.stringify(roomDetail));
-          // clickedRoomKey = roomKeys[0][index];
-          // console.log(clickedRoomKey);
+          clickedRoomKey = roomKeys[0][index];
+          localStorage.setItem('roomKey', clickedRoomKey);
+          console.log(clickedRoomKey);
           window.location.replace('#/student-detailview');
         };
 

@@ -69,7 +69,7 @@ export default () => {
 
       function likeRoom() {
         allRooms.shift();
-        console.log(allRooms);
+        // console.log(allRooms);
         // indexCurrentRoom++;
         returnRoom(indexCurrentRoom);
         const likes = database.ref('favorites/' + currentUser);
@@ -78,7 +78,7 @@ export default () => {
 
       function skipRoom() {
         allRooms.shift();
-        console.log(allRooms);
+        // console.log(allRooms);
         // indexCurrentRoom++;
         returnRoom(indexCurrentRoom);
       }

@@ -22,6 +22,7 @@ export default () => {
       const ref = database.ref('favorites/' + currentUserKey);
       let clickedRoom = [];
       let roomDetail = JSON.parse(localStorage.getItem('roomDetail'));
+      let roomKey = localStorage.getItem('roomKey');
       clickedRoom.push(roomDetail);
       // console.log(clickedRoom);
 
@@ -30,11 +31,33 @@ export default () => {
         clickedRoom
       }));
 
-      let addToFavorites = document.getElementById('addToFavorites');
-      addToFavorites.addEventListener('click', function () {
-        ref.push(roomDetail);
-        alert('Kamer werd toegevoegd aan favorietenlijst');
-      })
+      let addToFavoritesBtn = document.getElementById('addToFavorites');
+      addToFavoritesBtn.addEventListener('click', addToFavorites);
+
+      function addToFavorites() {
+        const favoRef = database.ref('favorites/' + currentUserKey)
+        .orderByChild('roomKey')
+        .equalTo(roomKey)
+        .once("value", snapshot => {
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            alert("Kamer reeds toegevoegd aan favorieten!", userData);
+          } else {
+            ref.push(roomDetail);
+            alert('Kamer werd toegevoegd aan favorietenlijst!');
+          }
+        });
+
+      }
+
+
+      // favoRef.on("value", function (snap) {
+      //   let data = snap.val();
+      //   console.log(data);
+      // });
+
+
+
 
       let contactOwner = document.getElementById('messageToOwner');
       contactOwner.addEventListener('click', function () {
