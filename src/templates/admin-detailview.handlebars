@@ -1,31 +1,32 @@
 <!-- - - - - - - - - - - - - - - Room detail view - - - - - - - - - - - - - - -->
 {{> header }}
-    <div class="content-wrapper-2" id="contentBlock">
-        <div class="center-all">
-            {{#each clickedRoom }}
-            <h2>{{ this.address }}</h2>
-            <div class="room-image-block">
-                <img src="src/images/kot-3.jpg" class="room-image-detail" alt="">
-            </div>
-            <div class="room-properties">
-                <h5 class="property-title">Type<span class="property-info"> {{ this.type }}</span></h5>
-                <h5 class="property-title">Locatie<span class="property-info"> {{ this.address }}</span></h5>
-                <h5 class="property-title">Oppervlakte<span class="property-info"> {{ this.surface }}</span></h5>
-                <h5 class="property-title">Prijs<span class="property-info"> {{ this.rentalPrice }}</span></h5>
-                <h5 class="property-title"> Bemeubeld<span class="property-info"> {{ this.furnished }}</span></h5>
-                <h5 class="property-title">Verdiepingen<span class="property-info"> {{ this.floors }}</span></h5>
-                <h5 class="property-title">Aantal personen<span class="property-info"> {{ this.numberOfPersons }}</span></h5>
-                <h5 class="property-title">Douche<span class="property-info"> {{ this.douche }}</span></h5>
-                <h5 class="property-title">Toilet<span class="property-info"> {{ this.toilet }}</span></h5>
-                <h5 class="property-title">Bath<span class="property-info"> {{ this.bath }}</span></h5>
-                <h5 class="property-title">Waarborg<span class="property-info"> {{ this.warrant }}</span></h5>
-            </div>
-            <div class="contact-owner">
-                <button id="btnEditRoom">Edit room</button>
-            </div>
-             {{/each}}              
+<div class="content-wrapper-2" id="contentBlock">
+    <div class="center-all">
+        {{#each clickedRoom }}
+        <h2>{{ this.address }}</h2>
+        <div class="room-image-block">
+            <img src="{{ this.image }}" class="room-image-detail" alt="">
         </div>
+        <div class="room-properties">
+            <h5 class="property-title">Type<span class="property-info"> {{ this.type }}</span></h5>
+            <h5 class="property-title">Locatie<span class="property-info"> {{ this.address }}</span></h5>
+            <h5 class="property-title">Oppervlakte<span class="property-info"> {{ this.surface }} m²</span></h5>
+            <h5 class="property-title">Prijs<span class="property-info">€ {{ this.rentalPrice }}</span></h5>
+            <h5 class="property-title"> Bemeubeld<span class="property-info"> {{ this.furnished }}</span></h5>
+            <h5 class="property-title">Verdiepingen<span class="property-info"> {{ this.floors }}</span></h5>
+            <h5 class="property-title">Aantal personen<span class="property-info"> {{ this.numberOfPersons }}</span></h5>
+            <h5 class="property-title">Douche<span class="property-info"> {{ this.douche }}</span></h5>
+            <h5 class="property-title">Toilet<span class="property-info"> {{ this.toilet }}</span></h5>
+            <h5 class="property-title">Bath<span class="property-info"> {{ this.bath }}</span></h5>
+            <h5 class="property-title">Waarborg<span class="property-info">€ {{ this.warrant }}</span></h5>
+        </div>
+        <div class="edit-owner">
+            <button id="btnEditRoom">Edit room</button>
+            <button id="btnRemoveRoom">Remove room</button>
+        </div>
+        {{/each}}
     </div>
+</div>
 
 <!-- - - - - - - - - - - - - - - Room edit view - - - - - - - - - - - - - - -->
 <div class="content-wrapper" id="contentBlock">
@@ -45,9 +46,12 @@
             <input class="edit-room-input" type="text" value="{{ this.bath }}" id="bath">
             <input class="edit-room-input" type="text" value="{{ this.kitchen }}" id="kitchen">
             <input class="edit-room-input" type="text" value="{{ this.furnished }}" id="furnished">
-            <input type="file" name="pic" accept="image/*" id="roomImage">
+            <input type="file" name="image" id="roomImage">
+            <p id="fullImageName"></p>
+            <p id="progress" style="display:none">Even geduld ... uw foto wordt verwerkt</p>
             <input type="submit" id="editRoomSubmit" value="Kot wijzigen">
-             {{/each}}              
+        </form>
+        {{/each}}
         </form>
     </div>
 </div>

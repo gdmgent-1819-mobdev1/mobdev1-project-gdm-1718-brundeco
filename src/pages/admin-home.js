@@ -40,10 +40,14 @@ export default () => {
       let imageUpload = document.getElementById('roomImage');
       imageUpload.addEventListener('change', (evt) => {
 
+        let progress = document.getElementById('progress');
+        progress.style.display = 'block';
+
         if (imageUpload.value !== '') {
           let fileName = evt.target.files[0].name.replace(/\s+/g, '-').toLowerCase();
+          document.getElementById('fullImageName').innerHTML = fileName;
           let storageRef = firebase.storage().ref(`images/${fileName}`);
-
+          // console.log(storageRef);
           storageRef.put(evt.target.files[0]).then(() => {
 
             imagePathInStorage = `images/${fileName}`;
@@ -51,7 +55,13 @@ export default () => {
 
             storageImage.getDownloadURL().then((url) => {
               localStorage.setItem('imageLink', url);
-              imageUrl = url;
+              if(imageUrl = null) {
+                progress.style.display = 'block';
+              } else {
+                imageUrl = url;
+                progress.style.display = 'none';
+              }
+              console.log(imageUrl);
             })
           })
         } else {
@@ -107,14 +117,14 @@ export default () => {
               ownerKey: key,
               lat: lat,
               lon: lon,
-              image: imageUrl
+              image: imageUrl,
             }
           }
           ref.push(Room);
           allRooms.push(Room);
           // console.log(allRooms);
         });
-        // location.reload();
+        window.location.replace('#/admin-listview');
       }
       addRoomBtn.addEventListener('click', collectFormData);
 

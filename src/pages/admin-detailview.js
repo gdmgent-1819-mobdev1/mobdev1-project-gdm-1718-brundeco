@@ -21,28 +21,32 @@ export default () => {
         const text = 'Kot werd aangepast';
         if (!("Notification" in window)) {
           alert("This browser does not support system notifications");
-        }
-        else if (Notification.permission === "granted") {
-          let notification = new Notification("Done!", {body: text});
-        }
-        else if (Notification.permission !== 'denied') {
+        } else if (Notification.permission === "granted") {
+          let notification = new Notification("Done!", {
+            body: text
+          });
+        } else if (Notification.permission !== 'denied') {
           Notification.requestPermission(function (permission) {
             if (permission === "granted") {
-              let notification = new Notification("Done!", {body: text});
+              let notification = new Notification("Done!", {
+                body: text
+              });
             }
           });
         }
       }
 
       let currentUserKey = localStorage.getItem('currentUserKey');
-      let currentRoomKey = localStorage.getItem('currentRoomKey');
+      let currentRoomKey = localStorage.getItem('roomKey');
+      let currentRoomImgUrl = localStorage.getItem('currentRoomImgUrl');
       const database = firebase.database();
       const ref = database.ref('roomdata/' + currentRoomKey);
       let clickedRoom = [];
+      let imageUrl;
       let Room;
       let roomDetail = JSON.parse(localStorage.getItem('roomDetail'));
       clickedRoom.push(roomDetail);
-      console.log(clickedRoom);
+      // console.log(clickedRoom);
 
       update(compile(adminDetailViewTemplate)({
         clickedRoom
@@ -52,6 +56,7 @@ export default () => {
       const roomEditForm = document.getElementById('editRoom');
       const btnEditRoom = document.getElementById('btnEditRoom');
       const editRoomSubmit = document.getElementById('editRoomSubmit');
+      const removeRoom = document.getElementById('btnRemoveRoom');
 
       roomEditForm.style.display = 'none';
       btnEditRoom.addEventListener('click', showEditForm);
@@ -61,7 +66,41 @@ export default () => {
         contentBlock.style.display = 'none';
       }
 
-      function editRoomData() {
+      let imagePathInStorage;
+      let imageUpload = document.getElementById('roomImage');
+      imageUpload.addEventListener('change', (evt) => {
+
+        let progress = document.getElementById('progress');
+        progress.style.display = 'block';
+
+        if (imageUpload.value !== '') {
+          let fileName = evt.target.files[0].name.replace(/\s+/g, '-').toLowerCase();
+          document.getElementById('fullImageName').innerHTML = fileName;
+          let storageRef = firebase.storage().ref(`images/${fileName}`);
+          // console.log(storageRef);
+          storageRef.put(evt.target.files[0]).then(() => {
+
+            imagePathInStorage = `images/${fileName}`;
+            const storageImage = firebase.storage().ref(imagePathInStorage);
+
+            storageImage.getDownloadURL().then((url) => {
+              localStorage.setItem('imageLink', url);
+              if (imageUrl = null) {
+                progress.style.display = 'block';
+              } else {
+                imageUrl = url;
+                progress.style.display = 'none';
+              }
+              console.log(imageUrl);
+            })
+          })
+        } else {
+          console.log('empty');
+        }
+      });
+
+      function editRoomData(e) {
+        e.preventDefault();
         let rentalPrice = document.getElementById("rentalPrice").value;
         let warrant = document.getElementById("warrant").value;
         let surface = document.getElementById("surface").value;
@@ -92,32 +131,61 @@ export default () => {
             console.log(lon);
 
           } else {
-            console.log('Google niet ok');
+            console.log('Onbestaand adres, google API niet beschikbaar, controleer adres');
           }
-
-          ref.set({
-            type: type,
-            rentalPrice: rentalPrice,
-            warrant: warrant,
-            surface: surface,
-            address: address,
-            floors: floors,
-            numberOfPersons: numberOfPersons,
-            toilet: toilet,
-            douche: douche,
-            bath: bath,
-            kitchen: kitchen,
-            furnished: furnished,
-            ownerKey: key,
-            lat: lat,
-            lon: lon
-          });
+          if (imageUrl == null) {
+            ref.set({
+              type: type,
+              rentalPrice: rentalPrice,
+              warrant: warrant,
+              surface: surface,
+              address: address,
+              floors: floors,
+              numberOfPersons: numberOfPersons,
+              toilet: toilet,
+              douche: douche,
+              bath: bath,
+              kitchen: kitchen,
+              furnished: furnished,
+              ownerKey: key,
+              lat: lat,
+              lon: lon,
+              image: currentRoomImgUrl
+            });
+          } else {
+            ref.set({
+              type: type,
+              rentalPrice: rentalPrice,
+              warrant: warrant,
+              surface: surface,
+              address: address,
+              floors: floors,
+              numberOfPersons: numberOfPersons,
+              toilet: toilet,
+              douche: douche,
+              bath: bath,
+              kitchen: kitchen,
+              furnished: furnished,
+              ownerKey: key,
+              lat: lat,
+              lon: lon,
+              image: imageUrl
+            });
+          }
           roomEditSucces();
+          window.location.replace('#/admin-listview');
         });
       }
 
-      editRoomSubmit.addEventListener('click', editRoomData);
+      function removeCurrentRoom() {
+        const ref = database.ref('roomdata/');
+        let removeRoomKey = localStorage.getItem('roomKey');
+        ref.child(removeRoomKey).remove();
+        window.location.replace('#/admin-listview');
+      }
 
+      editRoomSubmit.addEventListener('click', editRoomData);
+      removeRoom.addEventListener('click', removeCurrentRoom)
 
       // firebase logout at buttonclick
       const btnLogout = document.querySelector('.btnLogout');

@@ -75,6 +75,7 @@
     font-size: 70% !important;
     padding: 5px 15px !important;
     border-radius: 20px !important;
+    transition: 0.2s ease-in-out !important;
 }
 
 .btnLogout:hover {
@@ -82,6 +83,7 @@
     border: 1px solid $color-pink !important;
     cursor: pointer;
     color: $color-white;
+    transition: 0.2s ease-in-out !important;
 }
 
 #add-room-submit {

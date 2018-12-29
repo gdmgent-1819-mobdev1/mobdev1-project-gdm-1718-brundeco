@@ -25,6 +25,7 @@ export default () => {
       let index;
       let roomKeys = [];
       let clickedRoomKey;
+      let imageUrlLs;
       let Room;
 
       const database = firebase.database();
@@ -88,7 +89,8 @@ export default () => {
             localStorage.setItem('roomDetail', JSON.stringify(roomDetail));
             clickedRoomKey = roomKeys[0][index];
             localStorage.setItem('roomKey', clickedRoomKey);
-            console.log(clickedRoomKey);
+            imageUrlLs = allRooms[index].image;
+            localStorage.setItem('currentRoomImgUrl', imageUrlLs);
             window.location.replace('#/admin-detailview');
           };
 

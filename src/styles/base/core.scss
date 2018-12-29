@@ -3,7 +3,8 @@
 
 
 // - - - - - start containers login  - - - - - -
-.wrapper-1, .wrapper-2 {
+.wrapper-1,
+.wrapper-2 {
     min-height: 100vh;
 }
 
@@ -36,10 +37,10 @@
 .content {
     @include flex-column;
     position: fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .just-a-box {
@@ -58,7 +59,8 @@
     @include flex-row;
 }
 
-#toggleGameView, #toggleMapView {
+#toggleGameView,
+#toggleMapView {
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: 0px 2px 3px rgb(233, 233, 233);
@@ -69,14 +71,16 @@
     transition: all 0.2s ease-in-out;
 }
 
-#toggleGameView:hover, #toggleMapView:hover {
+#toggleGameView:hover,
+#toggleMapView:hover {
     color: #000;
     cursor: pointer;
     flex-grow: 0.05;
     transition: all 0.2s ease-in-out;
 }
 
-#toggleGameView:focus, #toggleMapView:focus {
+#toggleGameView:focus,
+#toggleMapView:focus {
     outline: none;
 }
 
@@ -89,7 +93,7 @@
 .image-block:after {
     content: "";
     display: block;
-    padding-bottom: 100%;  
+    padding-bottom: 100%;
 }
 
 .image-block img {
@@ -134,7 +138,8 @@ p.card-surface {
     margin-top: 30px;
 }
 
-#likeBtn, #skipBtn {
+#likeBtn,
+#skipBtn {
     border-radius: $main-border-radius;
     padding: 7px 20px;
     font-size: 90%;
@@ -154,7 +159,8 @@ p.card-surface {
     background-color: #FB1C4E;
 }
 
-#skipBtn:hover, #likeBtn:hover {
+#skipBtn:hover,
+#likeBtn:hover {
     transform: scale(1.1);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -179,7 +185,7 @@ p.card-surface {
     margin-bottom: 80px;
 }
 
-.extra-box-margin  {
+.extra-box-margin {
     margin-bottom: 80px;
 }
 
@@ -278,7 +284,7 @@ img.room-picture-list {
 }
 
 @media only screen and (min-width: 600px) {
-    .info-list{
+    .info-list {
         flex-direction: column;
     }
 
@@ -296,7 +302,7 @@ img.room-picture-list {
         object-fit: cover;
         border-radius: 5px;
     }
-  }
+}
 
 // - - - - - - room detail view - - - - - - 
 .content-wrapper {
@@ -356,15 +362,26 @@ p.room-description {
 }
 
 @media only screen and (min-width: 600px) {
-    .room-image-block{
+    .room-image-block {
         height: 300px;
     }
-  }
+}
 
 .contact-owner {
     @include flex-row;
     border-radius: 7px;
-    margin-top: 30px;   
+    margin-top: 30px;
+}
+
+.edit-owner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.edit-owner button:first-child {
+    margin-bottom: 10px;
 }
 
 #messageToOwner {
@@ -404,7 +421,7 @@ p.room-description {
     opacity: 0.8;
 }
 
-.fas .fa-star   {
+.fas .fa-star {
     font-size: 100%;
 }
 
@@ -448,7 +465,8 @@ p.message-timestamp {
     z-index: -5;
 }
 
-.message-sender, .message-receiver {
+.message-sender,
+.message-receiver {
     box-shadow: 0px 6px 22px #e2e2e2;
     border-radius: 15px;
     padding: 5px 20px;
@@ -463,7 +481,8 @@ p.message-timestamp {
     margin-left: auto;
 }
 
-.conversation-reply, .conversation-header {
+.conversation-reply,
+.conversation-header {
     @include flex-column;
     background-color: $color-white;
     position: fixed;
@@ -480,25 +499,58 @@ p.message-timestamp {
     top: 6%;
 }
 
-#sendMessage, #sortByDistance {
+#sendMessage,
+#sortByDistance,
+#addRoomSubmit,
+#btnEditRoom,
+#editRoomSubmit,
+#btnRemoveRoom {
     display: block;
-    border: 1px solid $color-greenblue;
+    border: 1px solid $color-greenblue !important;
     border-radius: 20px;
     padding: 5px 20px;
     color: $color-greenblue;
     font-size: 80%;
     transition: 0.2s ease-in-out;
+    background-color: $color-white !important;
+    outline: none !important;
 }
 
 #sortByDistance {
     margin: 30px auto;
 }
 
-#sendMessage:hover, #sortByDistance:hover {
-    background-color: $color-greenblue;
+
+
+#sendMessage:hover,
+#sortByDistance:hover,
+#addRoomSubmit:hover,
+#btnEditRoom:hover,
+#editRoomSubmit:hover, {
+    background-color: $color-greenblue !important;
     color: $color-white;
     transition: 0.2s ease-in-out;
     cursor: pointer;
+}
+
+#btnRemoveRoom {
+    background-color: $color-pink !important;
+    border: 1px solid $color-pink !important;
+    color: $color-white;
+}
+
+#btnRemoveRoom:hover {
+    background-color: $color-white !important;
+    color: $color-pink;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+#addRoomSubmit,
+#editRoomSubmit {
+    margin-top: 40px !important;
+    border-radius: 50px !important;
+    width: 50% !important;
 }
 
 input.message-type-area {
@@ -535,7 +587,9 @@ button.add-room-picture img {
 }
 
 // - - - - - forms - - - - - -
-input, textarea, select {
+input,
+textarea,
+select {
     background-color: $color-white !important;
     // height: 30px !important;
     width: 70% !important;
@@ -547,30 +601,47 @@ input, textarea, select {
     margin-top: 10px !important;
 }
 
-// input.add-room-input {
-//     border: 1px solid $color-blue !important;
-//     border-radius: $main-border-radius !important;
-// }
 
-input.edit-room-input, input.add-room-input, select {
-    border-bottom: 1px solid $color-blue !important;
-    border-radius: 0px !important;
+input.edit-room-input,
+input.add-room-input,
+select {
+    background-color: #f7f7f7 !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(100, 100, 100, 0);
+    transition: 0.2s ease-in-out !important;
+    color: $color-lightgrey !important;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-top: 20px !important;
+    appearance: none !important;
+    padding-left: 20px !important;
+    border: 1px solid rgba(100, 100, 100, 0);
+    color: $color-lightgrey !important;
+}
+
+input.edit-room-input:focus,
+input.add-room-input:focus,
+select:focus {
+    border-bottom: 1px solid $color-greenblue !important;
+    background-color: $color-white !important;
+    border-radius: 0px !important;
+    outline: 0 !important;
+    transition: 0.2s ease-in-out !important;
+}
+
 
 #editRoom {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
 
-input:placeholder, textarea:placeholder, select:placeholder {
-    color: blue; 
-}
-
-select {
-    outline: none !important;
-    padding: 10px 0px !important;
-    margin-top: 20px !important;
-    color: $color-lightgrey;
+input:placeholder,
+textarea:placeholder,
+select:placeholder {
+    color: blue;
 }
 
 input:focus {
@@ -579,38 +650,47 @@ input:focus {
     transition: 0.2s ease-in-out !important;
 }
 
-input#addRoomSubmit, #editRoomSubmit, #btnEditRoom {
-    border: 1px solid #2265DF !important;
-    padding: 10px 0px !important;
-    background-color: #2265DF !important;
-    color: $color-white !important;
-    font-size: 80%;
-    font-weight: 700;
-    border-radius: 50px !important;
-    transition: 0.2s ease-in-out;
-    margin-top: 40px !important;
-    width: 50% !important;
+
+input#roomImage {
+    color: transparent !important;
+    padding: 0px !important;
+    border-radius: 0px !important;
+    margin-top: 30px !important;
+    transition: 0.2s ease-in-out !important;
+    outline: none !important;
 }
 
-#btnEditRoom {
-    width: 100% !important;
-    padding: 10px 40px !important;
+input#roomImage::-webkit-file-upload-button {
+    visibility: hidden !important;
+    transition: 0.2s ease-in-out !important;
 }
 
-input#addRoomSubmit:hover, #editRoomSubmit:hover, #btnEditRoom:hover {
-    cursor: pointer;
-    color: $color-blue !important;
+input#roomImage::before {
+    content: 'Voeg een foto toe';
+    color: black !important;
+    display: inline-block !important;
+    border: 1px solid #f7f7f7 !important;
+    background-color: #f7f7f7 !important;
+    border-radius: 5px !important;
+    padding: 10px 20px !important;
+    outline: none !important;
+    white-space: nowrap !important;
+    -webkit-user-select: none !important;
+    cursor: pointer !important;
+    transition: 0.2s ease-in-out !important;
+}
+
+input#roomImage:hover::before {
     background-color: $color-white !important;
-    transition: 0.2s ease-in-out;
+    border: 1px solid $color-lightgrey !important;
+    transition: 0.2s ease-in-out !important;
 }
 
-// input#roomImage {
-//     height: 100px;
-//     width: 100px;
-//     background-image: url('../../src/images/imageUpload.svg');
-//     background-size: cover;
-//     background-position: center;
-// }
+input#roomImage:active {
+    outline: 0 !important;
+}
+
+
 
 // - - - - - trivia - - - - - -
 h1 {
@@ -681,10 +761,10 @@ a.page-arrow img {
 }
 
 .header-top img {
-    height: 20px; 
+    height: 20px;
 }
 
-.nav-icons-bottom img{
+.nav-icons-bottom img {
     height: 20px;
 }
 

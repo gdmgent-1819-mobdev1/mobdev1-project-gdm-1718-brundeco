@@ -4,7 +4,7 @@
             <h2>Nieuw kot toevoegen</h2>
             <input class="add-room-input" type="text" placeholder="Huurprijs" id="rentalPrice" required>
             <input class="add-room-input" type="text" placeholder="Waarborg" id="warrant" required>
-            <input class="add-room-input" type="text" placeholder="Adres" id="address" required>
+            <input class="add-room-input" type="text" placeholder="Adres: straat huisnummer postcode stad" id="address" required>
             <input class="add-room-input" type="text" placeholder="Oppervlakte" id="surface" required>
             <select class="add-room-input" id="roomType" required>
                 <option value="Type">Type</option>
@@ -56,6 +56,8 @@
                 <option value="Neen">Neen</option>
             </select>
             <input type="file" name="image" id="roomImage">
+            <p id="fullImageName"></p>
+            <p id="progress" style="display:none">Even geduld ... uw foto wordt verwerkt</p>
             <input type="submit" id="addRoomSubmit" value="Kot plaatsen">
         </form>
     </div>
