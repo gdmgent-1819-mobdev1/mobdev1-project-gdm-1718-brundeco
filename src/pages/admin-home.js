@@ -21,6 +21,7 @@ export default () => {
 
       const addRoomBtn = document.getElementById('addRoomSubmit');
       let allRooms = [];
+      let Room;
       const database = firebase.database();
       let currentUser = localStorage.getItem('currentUserKey');
       let imageUrl;
@@ -34,7 +35,6 @@ export default () => {
         });
 
       let ref = database.ref('roomdata');
-
 
       let imagePathInStorage;
       let imageUpload = document.getElementById('roomImage');
@@ -59,8 +59,8 @@ export default () => {
         }
       });
 
-
       function collectFormData(e) {
+        e.preventDefault();
         let rentalPrice = document.getElementById("rentalPrice").value;
         let warrant = document.getElementById("warrant").value;
         let surface = document.getElementById("surface").value;
@@ -80,8 +80,6 @@ export default () => {
         let lat;
         let lon;
 
-
-
         geocoder.geocode({
           'address': currentAddress
         }, function (results, status) {
@@ -93,7 +91,7 @@ export default () => {
             console.log(lat);
             console.log(lon);
 
-            let Room = {
+            Room = {
               type: type,
               rentalPrice: rentalPrice,
               warrant: warrant,
@@ -111,12 +109,12 @@ export default () => {
               lon: lon,
               image: imageUrl
             }
-            ref.push(Room);
-            allRooms.push(Room);
-            // console.log(allRooms);
           }
+          ref.push(Room);
+          allRooms.push(Room);
+          // console.log(allRooms);
         });
-        e.preventDefault();
+        // location.reload();
       }
       addRoomBtn.addEventListener('click', collectFormData);
 
@@ -124,15 +122,17 @@ export default () => {
       // window.location.replace('/#/');
       // console.log('Something went wrong');
     }
+          //firebase logout at buttonclick
+          const btnLogout = document.querySelector('.btnLogout');
+          btnLogout.addEventListener('click', e => {
+            firebase.auth().signOut().then(function () {
+              window.location.replace('/#/');
+            });
+          });
 
-    //firebase logout at buttonclick
-    const btnLogout = document.querySelector('.btnLogout');
-    btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function () {
-        localStorage.setItem('isSignedIn', false)
-        console.log('log uit');
-        window.location.replace('/#/');
-      });
-    });
+
   });
+
+
+
 }

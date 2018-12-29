@@ -30,7 +30,7 @@ export default () => {
               if(userType === 'admin') {
                 window.location.replace('/#/admin-home');
               } else {
-                window.location.replace('/#/student-home');
+                window.location.replace('/#/student-listview');
               }
           });
           localStorage.setItem('currentUser', email);

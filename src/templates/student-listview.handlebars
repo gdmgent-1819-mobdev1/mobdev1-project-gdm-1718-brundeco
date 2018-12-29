@@ -3,7 +3,7 @@
     <div class="content-lv">
         <div class="just-a-box-lv">
             <div class="toggleViews">
-                <button id="toggleListView">List</button>
+                <button id="toggleGameView">Game</button>
                 <button id="toggleMapView">Map</button>
             </div>
                 <button id="sortByDistance">Dichtsbijzijnde koten eerst</button>
@@ -29,6 +29,8 @@
                         </div>
                     </div>
                 </div>
+                {{else}}
+                    <p style="text-align:center">Nog geen koten om weer te geven</p>
              {{/each}}
         </div>
     </div>

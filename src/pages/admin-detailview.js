@@ -17,7 +17,7 @@ export default () => {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      function blogPostSuccessful() {
+      function roomEditSucces() {
         const text = 'Kot werd aangepast';
         if (!("Notification" in window)) {
           alert("This browser does not support system notifications");
@@ -112,7 +112,7 @@ export default () => {
             lat: lat,
             lon: lon
           });
-          blogPostSuccessful();
+          roomEditSucces();
         });
       }
 

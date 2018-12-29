@@ -23,6 +23,8 @@ export default () => {
 
       let currentUser = localStorage.getItem('currentUserKey');
       let allRooms = [];
+      let roomKeys = [];
+      let roomKey;
       let indexCurrentRoom = 0;
       let currentRoom;
       let likeBtn = document.getElementById('likeBtn');
@@ -42,14 +44,11 @@ export default () => {
           localStorage.setItem('currentUserName', name);
         });
 
-      let icon = document.getElementsByClassName('second-image')[0];
-      // icon.style.backgroundImage = url('../../../src/images/homeFullActive.svg');
-
-      let toggleListview = document.getElementById('toggleListView');
-      toggleListview.addEventListener('click', function () {
-        window.location.replace('/#/student-listview');
+      // Switch between game or map view
+      let toggleGameView = document.getElementById('toggleGameView');
+      toggleGameView.addEventListener('click', function () {
+        window.location.replace('/#/student-home');
       })
-
       let toggleMapview = document.getElementById('toggleMapView');
       toggleMapview.addEventListener('click', function () {
         window.location.replace('/#/student-mapview');
@@ -61,16 +60,31 @@ export default () => {
         snapshot.forEach(function (childSnapshot) {
           let key = childSnapshot.key;
           let rooms = childSnapshot.val();
-          console.log(rooms);
+          roomKeys.push(key);
           allRooms.push(rooms);
         })
+        // console.log(roomKeys);
         returnRoom(indexCurrentRoom);
       })
 
       function likeRoom() {
-        allRooms.shift();
+        let roomKey = localStorage.getItem('roomKey');
+        console.log(roomKey);
+        const favoRef = database.ref('favorites/' + currentUser)
+          .orderByChild('roomKey')
+          .equalTo(roomKey)
+          .once("value", snapshot => {
+            if (snapshot.exists()) {
+              const userData = snapshot.val();
+              alert("Kamer reeds toegevoegd aan favorieten!", userData);
+            } else {
+              ref.push(currentRoom);
+              alert('Kamer werd toegevoegd aan favorietenlijst!');
+            }
+          });
+        // allRooms.shift();
         // console.log(allRooms);
-        // indexCurrentRoom++;
+        indexCurrentRoom++;
         returnRoom(indexCurrentRoom);
         const likes = database.ref('favorites/' + currentUser);
         likes.push(currentRoom)
@@ -88,6 +102,8 @@ export default () => {
           alert('U heeft alle kamers bekeken');
         } else {
           currentRoom = allRooms[indexCurrentRoom];
+          let thisRoomKey = roomKeys[indexCurrentRoom];
+          localStorage.setItem('roomKey', thisRoomKey);
           let box = document.getElementsByClassName('center-all')[0];
           let roomImage = document.getElementsByClassName('room-picture')[0];
           let roomType = document.getElementsByClassName('card-room-type')[0];

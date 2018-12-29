@@ -25,7 +25,8 @@
 #btnLogin,
 #btnSignupAsStudent,
 #btnSignupConfirm,
-#btnPasswordForgotten {
+#btnPasswordForgotten,
+#btnPasswordReset {
     background-color: $color-lightblue !important;
     border: 1px solid $color-lightblue !important;
     border-radius: $main-border-radius;
@@ -35,7 +36,8 @@
 #btnLogin:hover,
 #btnSignupAsAdmin:hover,
 #btnSignupAsStudent:hover,
-#btnSignupConfirm:hover 
+#btnSignupConfirm:hover,
+#btnPasswordReset:hover
 {
     background-color: $color-none !important;
     color: $color-lightblue;

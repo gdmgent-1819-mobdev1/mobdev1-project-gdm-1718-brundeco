@@ -17,9 +17,9 @@ export default () => {
   const database = firebase.database();
   const ref = database.ref('roomdata');
 
-    let toggleListView = document.getElementById('toggleListView');
-    toggleListView.addEventListener('click', function() {
-      window.location.replace('/#/student-listview');
+    let toggleGameView = document.getElementById('toggleGameView');
+    toggleGameView.addEventListener('click', function() {
+      window.location.replace('/#/student-home');
     })
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYnJ1bmVsbGkiLCJhIjoiY2pwc3preGx3MDBxYjQzbzk4c2dtanpwaCJ9.J2IeUoqxBZCa5Aa5547rgA';

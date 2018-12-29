@@ -58,7 +58,7 @@
     @include flex-row;
 }
 
-#toggleListView, #toggleMapView {
+#toggleGameView, #toggleMapView {
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: 0px 2px 3px rgb(233, 233, 233);
@@ -69,14 +69,14 @@
     transition: all 0.2s ease-in-out;
 }
 
-#toggleListView:hover, #toggleMapView:hover {
+#toggleGameView:hover, #toggleMapView:hover {
     color: #000;
     cursor: pointer;
     flex-grow: 0.05;
     transition: all 0.2s ease-in-out;
 }
 
-#toggleListView:focus, #toggleMapView:focus {
+#toggleGameView:focus, #toggleMapView:focus {
     outline: none;
 }
 
