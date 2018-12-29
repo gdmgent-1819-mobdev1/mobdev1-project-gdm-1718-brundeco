@@ -47,16 +47,17 @@ export default () => {
             alert('Kamer werd toegevoegd aan favorietenlijst!');
           }
         });
-
       }
 
-
-      // favoRef.on("value", function (snap) {
-      //   let data = snap.val();
-      //   console.log(data);
-      // });
-
-
+      let fbButton = document.getElementById('fbShareButton');
+      let url = 'https://www.flavorpaper.com/';
+      fbButton.addEventListener('click', function() {
+          window.open('https://www.facebook.com/sharer/sharer.php?u=' + url,
+              'facebook-share-dialog',
+              'width=800,height=600'
+          );
+          return false;
+      });
 
 
       let contactOwner = document.getElementById('messageToOwner');

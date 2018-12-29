@@ -367,10 +367,20 @@ p.room-description {
     }
 }
 
-.contact-owner {
+.contact-owner, .share-on-social-media {
     @include flex-row;
     border-radius: 7px;
     margin-top: 30px;
+}
+
+.fa-facebook-f {
+    font-size: 18px;
+    transition: 0.2s ease-in-out;
+}
+
+.fa-facebook-f:hover {
+    transform: scale(1.2);
+    transition: 0.2s ease-in-out;
 }
 
 .edit-owner {
@@ -504,7 +514,8 @@ p.message-timestamp {
 #addRoomSubmit,
 #btnEditRoom,
 #editRoomSubmit,
-#btnRemoveRoom {
+#btnRemoveRoom,
+#sortByRecent {
     display: block;
     border: 1px solid $color-greenblue !important;
     border-radius: 20px;
@@ -516,11 +527,21 @@ p.message-timestamp {
     outline: none !important;
 }
 
-#sortByDistance {
+#sortByDistance,
+#sortByRecent {
     margin: 30px auto;
 }
 
+#sortByRecent {
+    display: none;
+}
 
+
+.absolute {
+    position: absolute;
+    z-index: 10;
+    border-radius: 6px !important;
+}
 
 #sendMessage:hover,
 #sortByDistance:hover,

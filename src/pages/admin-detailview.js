@@ -184,6 +184,16 @@ export default () => {
         window.location.replace('#/admin-listview');
       }
 
+      let fbButton = document.getElementById('fbShareButton');
+      let url = 'https://www.flavorpaper.com/';
+      fbButton.addEventListener('click', function() {
+          window.open('https://www.facebook.com/sharer/sharer.php?u=' + url,
+              'facebook-share-dialog',
+              'width=800,height=600'
+          );
+          return false;
+      });
+
       editRoomSubmit.addEventListener('click', editRoomData);
       removeRoom.addEventListener('click', removeCurrentRoom)
 
@@ -194,9 +204,9 @@ export default () => {
           window.location.replace('/#/');
         });
       });
-      console.log('User check')
+      // console.log('User check')
     } else {
-      console.log('No valid user!')
+      // console.log('No valid user!')
     }
   });
 };

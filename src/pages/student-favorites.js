@@ -33,9 +33,10 @@ export default () => {
         if (rooms === undefined || rooms === null) {
           console.log('geen data');
         } else {
-          console.log(rooms);
+          // console.log(rooms);
           let keys = Object.keys(rooms);
           roomKeys.push(keys);
+          console.log(keys);
           // console.log(allRooms);
 
           for (let i = 0; i < keys.length; i++) {
@@ -60,7 +61,7 @@ export default () => {
             }
             allRooms.push(Room);
           }
-          console.log(allRooms);
+          // console.log(allRooms);
 
 
           // Calculate distance between listed rooms and user's university longitude and latitude
@@ -90,11 +91,24 @@ export default () => {
           }
         }
 
-
         update(compile(studentFavoritesViewTemplate)({
           allRooms
         }));
 
+        let removeBtns = document.querySelectorAll('button#btnRemoveRoom');
+        console.log(roomKeys);
+
+          for(let i = 0; i < removeBtns.length; i++) {
+            let clickedRoom = roomKeys[0][i];
+            removeBtns[i].addEventListener('click', function() {
+              console.log('clicked');
+              const ref = database.ref('favorites/' + currentUserKey);
+              console.log(clickedRoom);
+              ref.child(clickedRoom).remove();
+              window.location.reload();
+            })
+          }
+        
         let room = document.querySelectorAll('.info-list');
         for (let i = 0; i < room.length; i++) {
           room[i].id = "room" + i;

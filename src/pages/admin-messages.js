@@ -13,6 +13,7 @@ const firebase = getInstance();
 const adminMessagesViewTemplate = require('../templates/admin-messages.handlebars');
 
 export default () => {
+  // window.location.reload();
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {

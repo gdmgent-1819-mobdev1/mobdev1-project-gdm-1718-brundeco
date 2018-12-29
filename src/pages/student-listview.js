@@ -33,7 +33,7 @@ export default () => {
           let keys = Object.keys(rooms);
           // console.log(keys[0]);
           roomKeys.push(keys);
-  
+
           for (let i = 0; i < keys.length; i++) {
             let k = keys[i];
             Room = {
@@ -57,55 +57,78 @@ export default () => {
             }
             allRooms.push(Room);
           }
-          console.log(allRooms);
-  
-  
+
           // Calculate distance between listed rooms and user's university longitude and latitude
-          for(let i = 0; i < allRooms.length; i++) {
+          for (let i = 0; i < allRooms.length; i++) {
             let roomLat = allRooms[i].lat;
             let roomLon = allRooms[i].lon;
-            function getDistanceFromLatLonInKm(userLat,userLon,roomLat,roomLon) {
-  
+
+            function getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon) {
+
               let R = 6371; // Radius of the earth in km
-              let dLat = deg2rad(roomLat-userLat);  // deg2rad below
-              let dLon = deg2rad(roomLon-userLon); 
-              let a = 
-                Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(deg2rad(userLat)) * Math.cos(deg2rad(roomLat)) * 
-                Math.sin(dLon/2) * Math.sin(dLon/2)
-                ; 
-              let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+              let dLat = deg2rad(roomLat - userLat); // deg2rad below
+              let dLon = deg2rad(roomLon - userLon);
+              let a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(userLat)) * Math.cos(deg2rad(roomLat)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+              let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
               let d = R * c; // Distance in km
               allRooms[i].distance = parseFloat(d).toFixed(2);
             }
             getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon);
-            
+
             function deg2rad(deg) {
-              return deg * (Math.PI/180)
+              return deg * (Math.PI / 180)
             }
           }
-          
-  
+
           update(compile(studentListViewTemplate)({
             allRooms
           }));
-  
+
+          let sortByRecent = document.getElementById('sortByRecent');
+          let sortByDistance = document.getElementById('sortByDistance');
+
+          sortByDistance.addEventListener('click', function (e) {
+            // e.preventDefault();
+            sortByRecent.style.display = 'block';
+            sortByDistance.style.display = 'none';
+            console.log(sortByDistance.style.display);
+            for (let i = 0; i < allRooms.length; i++) {
+              allRooms[i]['distance'] = allRooms[i]['distance'];
+            }
+
+            function compare(a, b) {
+              if (a.distance < b.distance)
+                return -1;
+              if (a.distance > b.distance)
+                return 1;
+              return 0;
+            }
+            allRooms.sort(compare);
+          })
+
+          sortByRecent.addEventListener('click', function() {
+            window.location.reload();
+          })
+
           let toggleMapview = document.getElementById('toggleMapView');
           toggleMapview.addEventListener('click', function () {
             window.location.replace('#/student-mapview');
           })
-  
+
           let toggleGameView = document.getElementById('toggleGameView');
           toggleGameView.addEventListener('click', function () {
             window.location.replace('#/student-home');
           })
-  
+
           let room = document.querySelectorAll('.info-list');
           for (let i = 0; i < room.length; i++) {
             room[i].id = "room" + i;
             room[i].addEventListener('click', showDetail);
           };
-  
+
           function showDetail() {
             index = this.id.substr(4);
             let roomDetail = allRooms[index];
@@ -115,7 +138,7 @@ export default () => {
             console.log(clickedRoomKey);
             window.location.replace('#/student-detailview');
           };
-  
+
           // firebase logout at buttonclick
           const btnLogout = document.querySelector('.btnLogout');
           btnLogout.addEventListener('click', e => {
@@ -124,13 +147,10 @@ export default () => {
             });
           });
         }
-       
-
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
       console.log('User check')
-
     } else {
       console.log('No valid user!')
     }
