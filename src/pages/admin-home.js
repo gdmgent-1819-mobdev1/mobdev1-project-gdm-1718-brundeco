@@ -84,6 +84,7 @@ export default () => {
         let kitchen = document.getElementById("kitchen").value;
         let furnished = document.getElementById("furnished").value;
         let key = localStorage.getItem('currentUserKey');
+        let adminName = localStorage.getItem('currentUserName');
 
         let geocoder = new google.maps.Geocoder();
         let currentAddress = address;
@@ -118,6 +119,7 @@ export default () => {
               lat: lat,
               lon: lon,
               image: imageUrl,
+              adminName: adminName
             }
           }
           ref.push(Room);
