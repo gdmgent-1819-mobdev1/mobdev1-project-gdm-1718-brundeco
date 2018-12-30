@@ -69,24 +69,18 @@ export default () => {
 
       function likeRoom() {
         let tinderRoomKey = localStorage.getItem('roomKey');
-        // console.log(roomKey);
-        const favoRef = database.ref('favorites/' + currentUser);
-        favoRef.once('value', function(snapshot) {
-          let key = snapshot.child('roomKey').val();
-          console.log(key);
-          // if (snapshot.hasChild(tinderRoomKey)) {
-          //   alert('Kamer werd al toegevoegd aan favorieten');
-          // } else {
-          //   alert('Kamer nog niet toegevoegd');
-          //   console.log(snapshot.hasChild(roomKey));
-          //   favoRef.push(currentRoom);
-          // }
+        console.log(tinderRoomKey);
+        const favoRef = database.ref('favorites/' + currentUser + '/' + tinderRoomKey);
+        favoRef.once('value', function (snapshot) {
+          favoRef.set(currentRoom);
+          // console.log(key);
+          returnRoom(indexCurrentRoom);
+          allRooms.shift();
         });
 
         // // allRooms.shift();
         // // console.log(allRooms);
-        // indexCurrentRoom++;
-        // returnRoom(indexCurrentRoom);
+
         // const likes = database.ref('favorites/' + currentUser);
         // likes.push(currentRoom)
       }
@@ -99,6 +93,8 @@ export default () => {
       }
 
       function returnRoom() {
+        console.log('hey');
+        console.log(allRooms);
         if (allRooms === undefined || allRooms.length == 0) {
           alert('U heeft alle kamers bekeken');
         } else {

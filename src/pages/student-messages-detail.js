@@ -18,14 +18,20 @@ export default () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
-      var currentdate = new Date(); 
-      var datetime = currentdate.getDate() + '/' + currentdate.getMonth()  + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
-      
+      var currentdate = new Date();
+      var datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
+
       let ownerKey = localStorage.getItem('ownerKey');
       let currentUser = localStorage.getItem('currentUserKey');
       let userName = localStorage.getItem('currentUserName');
       const database = firebase.database();
       const ref = database.ref('userdata/' + ownerKey);
+
+
+      // Return the compiled template to the router
+      update(compile(studentMessagesDetailViewTemplate)({
+        name
+      }));
 
       // Get room owner's name 
       ref.once("value")
@@ -34,11 +40,6 @@ export default () => {
           let messageTo = document.getElementsByClassName('message-person')[0];
           messageTo.textContent = name;
         });
-
-      // Return the compiled template to the router
-      update(compile(studentMessagesDetailViewTemplate)({
-        name
-      }));
 
       // Add message to database
       function addMessageToDb() {

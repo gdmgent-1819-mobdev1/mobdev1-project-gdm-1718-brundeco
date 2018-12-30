@@ -31,22 +31,13 @@ export default () => {
         clickedRoom
       }));
 
+
       let addToFavoritesBtn = document.getElementById('addToFavorites');
       addToFavoritesBtn.addEventListener('click', addToFavorites);
 
       function addToFavorites() {
-        const favoRef = database.ref('favorites/' + currentUserKey)
-        .orderByChild('roomKey')
-        .equalTo(roomKey)
-        .once("value", snapshot => {
-          if (snapshot.exists()) {
-            const userData = snapshot.val();
-            alert("Kamer reeds toegevoegd aan favorieten!", userData);
-          } else {
-            ref.push(roomDetail);
-            alert('Kamer werd toegevoegd aan favorietenlijst!');
-          }
-        });
+        const favoRef = database.ref('favorites/' + currentUserKey + '/' + roomKey);
+          favoRef.set(roomDetail);
       }
 
       let fbButton = document.getElementById('fbShareButton');
