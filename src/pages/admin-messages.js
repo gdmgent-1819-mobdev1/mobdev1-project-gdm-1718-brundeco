@@ -56,8 +56,7 @@ export default () => {
       });
       // console.log(messageList);
 
-      console.log(messageList[0].sender)
-
+      console.log(messageList)
 
       function showDetail() {
         index = this.id.substr(13);
@@ -72,6 +71,7 @@ export default () => {
         window.location.replace('#/admin-messages-detail');
       };
 
+      
       // Return the compiled template to the router
       update(compile(adminMessagesViewTemplate)({
         messageList
