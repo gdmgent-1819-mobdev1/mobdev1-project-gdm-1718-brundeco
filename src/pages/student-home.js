@@ -87,8 +87,6 @@ export default () => {
 
       function skipRoom() {
         allRooms.shift();
-        // console.log(allRooms);
-        // indexCurrentRoom++;
         returnRoom(indexCurrentRoom);
       }
 

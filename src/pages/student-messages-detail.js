@@ -18,8 +18,8 @@ export default () => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
-      var currentdate = new Date();
-      var datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
+      let currentdate = new Date();
+      let datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
 
       let ownerKey = localStorage.getItem('ownerKey');
       let currentUser = localStorage.getItem('currentUserKey');
