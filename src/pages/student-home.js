@@ -68,26 +68,27 @@ export default () => {
       })
 
       function likeRoom() {
-        let roomKey = localStorage.getItem('roomKey');
-        console.log(roomKey);
-        const favoRef = database.ref('favorites/' + currentUser)
-          .orderByChild('roomKey')
-          .equalTo(roomKey)
-          .once("value", snapshot => {
-            if (snapshot.exists()) {
-              const userData = snapshot.val();
-              alert("Kamer reeds toegevoegd aan favorieten!", userData);
-            } else {
-              ref.push(currentRoom);
-              alert('Kamer werd toegevoegd aan favorietenlijst!');
-            }
-          });
-        // allRooms.shift();
-        // console.log(allRooms);
-        indexCurrentRoom++;
-        returnRoom(indexCurrentRoom);
-        const likes = database.ref('favorites/' + currentUser);
-        likes.push(currentRoom)
+        let tinderRoomKey = localStorage.getItem('roomKey');
+        // console.log(roomKey);
+        const favoRef = database.ref('favorites/' + currentUser);
+        favoRef.once('value', function(snapshot) {
+          let key = snapshot.child('roomKey').val();
+          console.log(key);
+          // if (snapshot.hasChild(tinderRoomKey)) {
+          //   alert('Kamer werd al toegevoegd aan favorieten');
+          // } else {
+          //   alert('Kamer nog niet toegevoegd');
+          //   console.log(snapshot.hasChild(roomKey));
+          //   favoRef.push(currentRoom);
+          // }
+        });
+
+        // // allRooms.shift();
+        // // console.log(allRooms);
+        // indexCurrentRoom++;
+        // returnRoom(indexCurrentRoom);
+        // const likes = database.ref('favorites/' + currentUser);
+        // likes.push(currentRoom)
       }
 
       function skipRoom() {
