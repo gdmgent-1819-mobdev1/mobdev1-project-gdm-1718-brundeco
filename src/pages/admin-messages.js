@@ -52,9 +52,12 @@ export default () => {
         let messages = snap.val();
         let keys = Object.keys(messages);
         messageKeys.push(keys);
-        console.log(messageKeys);
+        // console.log(messageKeys);
       });
-      console.log(messageList);
+      // console.log(messageList);
+
+      console.log(messageList[0].sender)
+
 
       function showDetail() {
         index = this.id.substr(13);

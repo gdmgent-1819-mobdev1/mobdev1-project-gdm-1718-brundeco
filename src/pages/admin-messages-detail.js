@@ -55,7 +55,7 @@ export default () => {
           date: datetime
         }
         messageRef.push(Message);
-        window.location.reload();
+        window.location.replace('#/admin-home');
       }
 
       let sendMessage = document.getElementById('sendMessage');

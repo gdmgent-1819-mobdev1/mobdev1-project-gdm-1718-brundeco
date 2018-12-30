@@ -20,12 +20,27 @@ export default () => {
 
       let currentdate = new Date();
       let datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
+      // let Message = JSON.parse(localStorage.getItem('messageDetail'));
+      // let mesageList = [];
+      // console.log(Message);
+      // mesageList.push(Message)
+      // console.log(mesageList);
+
 
       let ownerKey = localStorage.getItem('ownerKey');
       let currentUser = localStorage.getItem('currentUserKey');
       let userName = localStorage.getItem('currentUserName');
+      let senderName;
       const database = firebase.database();
-      const ref = database.ref('userdata/' + ownerKey);
+
+      // Get sender name
+      const nameRef = database.ref('userdata/' + currentUser);
+      nameRef.once("value")
+        .then(function (snapshot) {
+          let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+          senderName = name;
+          console.log(senderName);
+        });
 
 
       // Return the compiled template to the router
@@ -33,7 +48,17 @@ export default () => {
         name
       }));
 
+      // let parent = document.querySelector('div.message-sender');
+      // for (let i = 0; i < mesageList.length; i++) {
+      //   let kid = document.createElement('p');
+      //   kid.setAttribute('class', 'message-content');
+      //   console.log(kid);
+      //   kid.innerHTML = mesageList[i].content;
+      //   parent.appendChild(kid);
+      // }
+
       // Get room owner's name 
+      const ref = database.ref('userdata/' + ownerKey);
       ref.once("value")
         .then(function (snapshot) {
           let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
@@ -48,12 +73,12 @@ export default () => {
         let Message = {
           receiver: ownerKey,
           senderKey: currentUser,
-          senderName: userName,
+          senderName: senderName,
           content: messageContent,
           date: datetime
         }
         messageRef.push(Message);
-        window.location.reload();
+        window.location.replace('#/student-listview');
       }
 
       let sendMessage = document.getElementById('sendMessage');
