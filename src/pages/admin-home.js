@@ -126,7 +126,7 @@ export default () => {
           allRooms.push(Room);
           // console.log(allRooms);
         });
-        window.location.replace('#/admin-listview');
+        window.location.reload();
       }
       addRoomBtn.addEventListener('click', collectFormData);
 

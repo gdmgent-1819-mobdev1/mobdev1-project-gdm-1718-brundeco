@@ -95,6 +95,7 @@ export default () => {
         console.log(allRooms);
         if (allRooms === undefined || allRooms.length == 0) {
           alert('U heeft alle kamers bekeken');
+          window.location.replace('/#/student-listview');
         } else {
           currentRoom = allRooms[indexCurrentRoom];
           let thisRoomKey = roomKeys[indexCurrentRoom];
