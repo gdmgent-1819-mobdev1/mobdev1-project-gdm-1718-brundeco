@@ -39,7 +39,6 @@ export default () => {
           });
 
         let ref = database.ref('roomdata');
-
         let imagePathInStorage;
         let imageUpload = document.getElementById('roomImage');
         imageUpload.addEventListener('change', (evt) => {
@@ -74,7 +73,7 @@ export default () => {
         });
 
         function collectFormData(e) {
-          e.preventDefault();
+          // e.preventDefault();
           let rentalPrice = document.getElementById("rentalPrice").value;
           let warrant = document.getElementById("warrant").value;
           let surface = document.getElementById("surface").value;
@@ -106,31 +105,32 @@ export default () => {
               console.log(lat);
               console.log(lon);
 
-              Room = {
-                type: type,
-                rentalPrice: rentalPrice,
-                warrant: warrant,
-                surface: surface,
-                address: address,
-                floors: floors,
-                numberOfPersons: numberOfPersons,
-                toilet: toilet,
-                douche: douche,
-                bath: bath,
-                kitchen: kitchen,
-                furnished: furnished,
-                ownerKey: key,
-                lat: lat,
-                lon: lon,
-                image: imageUrl,
-                adminName: adminName
-              }
+            } else {
+              alert('Gelieve een juist adres in te geven');
+            }
+            Room = {
+              type: type,
+              rentalPrice: rentalPrice,
+              warrant: warrant,
+              surface: surface,
+              address: address,
+              floors: floors,
+              numberOfPersons: numberOfPersons,
+              toilet: toilet,
+              douche: douche,
+              bath: bath,
+              kitchen: kitchen,
+              furnished: furnished,
+              ownerKey: key,
+              lat: lat,
+              lon: lon,
+              image: imageUrl,
+              adminName: adminName,
             }
             ref.push(Room);
             allRooms.push(Room);
-            // console.log(allRooms);
+            window.location.reload();
           });
-          window.location.reload();
         }
         addRoomBtn.addEventListener('click', collectFormData);
 
