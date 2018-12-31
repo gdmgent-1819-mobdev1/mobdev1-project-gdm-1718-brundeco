@@ -172,6 +172,29 @@ p.card-surface {
     border-radius: $main-border-radius;
 }
 
+@media only screen and (min-width: 600px) {
+    .image-block {
+        height: 200px;
+    }
+
+    .image-block img {
+        height: auto;
+    }
+}
+
+
+@media only screen and (min-width: 850px) {
+    .image-block {
+        height: 200px;
+    }
+
+    .image-block img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+    }
+}
+
 
 
 // - - - - - student listview  - - - - - -
@@ -396,7 +419,8 @@ p.room-description {
     }
 }
 
-.contact-owner, .share-on-social-media {
+.contact-owner,
+.share-on-social-media {
     @include flex-row;
     border-radius: 7px;
     margin-top: 30px;
@@ -477,6 +501,7 @@ p.room-description {
     min-width: 60%;
     text-align: center;
     transition: 0.2s ease-in-out;
+
     &:hover {
         cursor: pointer;
         margin-left: 20px;
@@ -584,7 +609,8 @@ p.message-timestamp {
 #sortByDistance:hover,
 #addRoomSubmit:hover,
 #btnEditRoom:hover,
-#editRoomSubmit:hover, {
+#editRoomSubmit:hover,
+    {
     background-color: $color-greenblue !important;
     color: $color-white;
     transition: 0.2s ease-in-out;

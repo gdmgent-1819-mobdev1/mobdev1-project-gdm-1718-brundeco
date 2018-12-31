@@ -86,7 +86,7 @@ export default () => {
       // Push the object data to firebase database
       ref.update(userData);
       // sign in and navigate to homepage
-      window.location.replace('#/student-listview');
+      window.location.href = '/#/student-listview';;
     })
     .catch((e) => {
       message.innerHTML = e;

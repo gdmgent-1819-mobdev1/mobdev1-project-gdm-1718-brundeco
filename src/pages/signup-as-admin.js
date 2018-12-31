@@ -52,7 +52,7 @@ export default () => {
       // Push the object data to firebase database
       ref.update(userData);
       // sign in and navigate to homepage
-      window.location.replace('#/admin-home');
+      window.location.href = '/#/admin-home';;
     })
     .catch((e) => {
       message.innerHTML = e;
