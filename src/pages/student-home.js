@@ -16,138 +16,133 @@ export default () => {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      // Return the compiled template to the router
-      update(compile(homeStudentTemplate)({
-        allRooms
-      }));
+      const userType = localStorage.getItem('userType');
+      if (userType == 'student') {
+        update(compile(homeStudentTemplate)({
+          allRooms
+        }));
 
-      let currentUser = localStorage.getItem('currentUserKey');
-      let allRooms = [];
-      let roomKeys = [];
-      let roomKey;
-      let indexCurrentRoom = 0;
-      let currentRoom;
-      let likeBtn = document.getElementById('likeBtn');
-      let skipBtn = document.getElementById('skipBtn');
-      let userLat = parseFloat(localStorage.getItem('userLat'));
-      let userLon = parseFloat(localStorage.getItem('userLon'));
-      likeBtn.addEventListener('click', likeRoom);
-      skipBtn.addEventListener('click', skipRoom);
+        let currentUser = localStorage.getItem('currentUserKey');
+        let allRooms = [];
+        let roomKeys = [];
+        let roomKey;
+        let indexCurrentRoom = 0;
+        let currentRoom;
+        let likeBtn = document.getElementById('likeBtn');
+        let skipBtn = document.getElementById('skipBtn');
+        let userLat = parseFloat(localStorage.getItem('userLat'));
+        let userLon = parseFloat(localStorage.getItem('userLon'));
+        likeBtn.addEventListener('click', likeRoom);
+        skipBtn.addEventListener('click', skipRoom);
 
-      const database = firebase.database();
+        const database = firebase.database();
 
-      // get users name to use in messages
-      const userRef = database.ref('userdata/' + currentUser);
-      userRef.once("value")
-        .then(function (snapshot) {
-          let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
-          localStorage.setItem('currentUserName', name);
-        });
+        // get users name to use in messages
+        const userRef = database.ref('userdata/' + currentUser);
+        userRef.once("value")
+          .then(function (snapshot) {
+            let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+            localStorage.setItem('currentUserName', name);
+          });
 
-      // Switch between game or map view
-      let toggleGameView = document.getElementById('toggleGameView');
-      toggleGameView.addEventListener('click', function () {
-        window.location.replace('/#/student-home');
-      })
-      let toggleMapview = document.getElementById('toggleMapView');
-      toggleMapview.addEventListener('click', function () {
-        window.location.replace('/#/student-mapview');
-      })
-
-      const ref = database.ref('roomdata/');
-
-      ref.on('value', (snapshot) => {
-        snapshot.forEach(function (childSnapshot) {
-          let key = childSnapshot.key;
-          let rooms = childSnapshot.val();
-          roomKeys.push(key);
-          allRooms.push(rooms);
+        // Switch between game or map view
+        let toggleGameView = document.getElementById('toggleGameView');
+        toggleGameView.addEventListener('click', function () {
+          window.location.replace('/#/student-home');
         })
-        // console.log(roomKeys);
-        returnRoom(indexCurrentRoom);
-      })
+        let toggleMapview = document.getElementById('toggleMapView');
+        toggleMapview.addEventListener('click', function () {
+          window.location.replace('/#/student-mapview');
+        })
 
-      function likeRoom() {
-        let tinderRoomKey = localStorage.getItem('roomKey');
-        console.log(tinderRoomKey);
-        const favoRef = database.ref('favorites/' + currentUser + '/' + tinderRoomKey);
-        favoRef.once('value', function (snapshot) {
-          favoRef.set(currentRoom);
-          // console.log(key);
+        const ref = database.ref('roomdata/');
+
+        ref.on('value', (snapshot) => {
+          snapshot.forEach(function (childSnapshot) {
+            let key = childSnapshot.key;
+            let rooms = childSnapshot.val();
+            roomKeys.push(key);
+            allRooms.push(rooms);
+          })
+          // console.log(roomKeys);
           returnRoom(indexCurrentRoom);
+        })
+
+        function likeRoom() {
+          let tinderRoomKey = localStorage.getItem('roomKey');
+          console.log(tinderRoomKey);
+          const favoRef = database.ref('favorites/' + currentUser + '/' + tinderRoomKey);
+          favoRef.once('value', function (snapshot) {
+            favoRef.set(currentRoom);
+            returnRoom(indexCurrentRoom);
+            allRooms.shift();
+          });
+        }
+
+        function skipRoom() {
           allRooms.shift();
-        });
+          returnRoom(indexCurrentRoom);
+        }
 
-        // // allRooms.shift();
-        // // console.log(allRooms);
+        function returnRoom() {
+          if (allRooms === undefined || allRooms.length == 0) {
+            alert('U heeft alle kamers bekeken');
+            window.location.replace('/#/student-listview');
+          } else {
+            currentRoom = allRooms[indexCurrentRoom];
+            let thisRoomKey = roomKeys[indexCurrentRoom];
+            localStorage.setItem('roomKey', thisRoomKey);
 
-        // const likes = database.ref('favorites/' + currentUser);
-        // likes.push(currentRoom)
-      }
+            let box = document.getElementsByClassName('center-all')[0];
+            let roomImage = document.getElementsByClassName('room-picture')[0];
+            let roomType = document.getElementsByClassName('card-room-type')[0];
+            let roomAddress = document.getElementsByClassName('card-address')[0];
+            let roomSurface = document.getElementsByClassName('card-surface')[0];
 
-      function skipRoom() {
-        allRooms.shift();
-        returnRoom(indexCurrentRoom);
-      }
+            roomImage.src = allRooms[indexCurrentRoom].image;
+            roomType.innerHTML = allRooms[indexCurrentRoom].type;
+            roomAddress.innerHTML = allRooms[indexCurrentRoom].address;
 
-      function returnRoom() {
-        console.log('hey');
-        console.log(allRooms);
-        if (allRooms === undefined || allRooms.length == 0) {
-          alert('U heeft alle kamers bekeken');
-          window.location.replace('/#/student-listview');
-        } else {
-          currentRoom = allRooms[indexCurrentRoom];
-          let thisRoomKey = roomKeys[indexCurrentRoom];
-          localStorage.setItem('roomKey', thisRoomKey);
-          let box = document.getElementsByClassName('center-all')[0];
-          let roomImage = document.getElementsByClassName('room-picture')[0];
-          let roomType = document.getElementsByClassName('card-room-type')[0];
-          let roomAddress = document.getElementsByClassName('card-address')[0];
-          let roomSurface = document.getElementsByClassName('card-surface')[0];
+            let roomLat = allRooms[indexCurrentRoom].lat;
+            let roomLon = allRooms[indexCurrentRoom].lon;
 
-          roomImage.src = allRooms[indexCurrentRoom].image;
-          roomType.innerHTML = allRooms[indexCurrentRoom].type;
-          roomAddress.innerHTML = allRooms[indexCurrentRoom].address;
+            function getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon) {
 
-          let roomLat = allRooms[indexCurrentRoom].lat;
-          let roomLon = allRooms[indexCurrentRoom].lon;
+              let R = 6371; // Radius of the earth in km
+              let dLat = deg2rad(roomLat - userLat); // deg2rad below
+              let dLon = deg2rad(roomLon - userLon);
+              let a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(userLat)) * Math.cos(deg2rad(roomLat)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+              let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+              let d = R * c; // Distance in km
+              // console.log(d);
+              roomSurface.innerHTML = 'op ' + parseFloat(d).toFixed(2) + ' km afstand';
+              allRooms[indexCurrentRoom].distance = parseFloat(d).toFixed(2);
+            }
+            getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon);
 
-          function getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon) {
-
-            let R = 6371; // Radius of the earth in km
-            let dLat = deg2rad(roomLat - userLat); // deg2rad below
-            let dLon = deg2rad(roomLon - userLon);
-            let a =
-              Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(deg2rad(userLat)) * Math.cos(deg2rad(roomLat)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            let d = R * c; // Distance in km
-            // console.log(d);
-            roomSurface.innerHTML = 'op ' + parseFloat(d).toFixed(2) + ' km afstand';
-            allRooms[indexCurrentRoom].distance = parseFloat(d).toFixed(2);
-          }
-          getDistanceFromLatLonInKm(userLat, userLon, roomLat, roomLon);
-
-          function deg2rad(deg) {
-            return deg * (Math.PI / 180)
+            function deg2rad(deg) {
+              return deg * (Math.PI / 180)
+            }
           }
         }
-      }
-
-    } else {
-      window.location.replace('/#/');
-      console.log('Logged out');
-    }
-
-    // firebase logout at buttonclick
-    const btnLogout = document.querySelector('.btnLogout');
-    btnLogout.addEventListener('click', e => {
-      firebase.auth().signOut().then(function () {
-        console.log('log uit');
+        // firebase logout at buttonclick
+        const btnLogout = document.querySelector('.btnLogout');
+        btnLogout.addEventListener('click', e => {
+          firebase.auth().signOut().then(function () {
+            console.log('log uit');
+            window.location.replace('/#/');
+          });
+        });
+      } else {
+        console.log('Wrong usertype');
         window.location.replace('/#/');
-      });
-    });
+      }
+    } else {
+      console.log('No valid user');
+      window.location.replace('/#/');
+    }
   });
 }

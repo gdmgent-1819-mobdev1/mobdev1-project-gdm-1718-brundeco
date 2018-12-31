@@ -14,62 +14,70 @@ const firebase = getInstance();
 const studentDetailViewTemplate = require('../templates/student-detailview.handlebars');
 
 export default () => {
-
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      let currentUserKey = localStorage.getItem('currentUserKey');
-      const database = firebase.database();
-      const ref = database.ref('favorites/' + currentUserKey);
-      let clickedRoom = [];
-      let roomDetail = JSON.parse(localStorage.getItem('roomDetail'));
-      let roomKey = localStorage.getItem('roomKey');
-      clickedRoom.push(roomDetail);
-      // console.log(clickedRoom);
+      const userType = localStorage.getItem('userType');
+      if (userType == 'student') {
+        let currentUserKey = localStorage.getItem('currentUserKey');
+        const database = firebase.database();
+        const ref = database.ref('favorites/' + currentUserKey);
+        let clickedRoom = [];
+        let roomDetail = JSON.parse(localStorage.getItem('roomDetail'));
+        let roomKey = localStorage.getItem('roomKey');
+        clickedRoom.push(roomDetail);
+        // console.log(clickedRoom);
 
-      // Return the compiled template to the router
-      update(compile(studentDetailViewTemplate)({
-        clickedRoom
-      }));
+        update(compile(studentDetailViewTemplate)({
+          clickedRoom
+        }));
 
+        let addToFavoritesBtn = document.getElementById('addToFavorites');
+        addToFavoritesBtn.addEventListener('click', addToFavorites);
 
-      let addToFavoritesBtn = document.getElementById('addToFavorites');
-      addToFavoritesBtn.addEventListener('click', addToFavorites);
-
-      function addToFavorites() {
-        const favoRef = database.ref('favorites/' + currentUserKey + '/' + roomKey);
+        function addToFavorites() {
+          const favoRef = database.ref('favorites/' + currentUserKey + '/' + roomKey);
           favoRef.set(roomDetail);
-      }
+          location.reload();
+        }
 
-      let fbButton = document.getElementById('fbShareButton');
-      let url = 'https://www.flavorpaper.com/';
-      fbButton.addEventListener('click', function() {
+        let fbButton = document.getElementById('fbShareButton');
+        let url = 'https://www.flavorpaper.com/';
+        fbButton.addEventListener('click', function () {
           window.open('https://www.facebook.com/sharer/sharer.php?u=' + url,
-              'facebook-share-dialog',
-              'width=800,height=600'
+            'facebook-share-dialog',
+            'width=800,height=600'
           );
           return false;
-      });
-
-
-      let contactOwner = document.getElementById('messageToOwner');
-      contactOwner.addEventListener('click', function () {
-        let ownerKey = clickedRoom[0].ownerKey;
-        console.log(ownerKey);
-        localStorage.setItem('ownerKey', ownerKey);
-        window.location.replace('/#/student-messages-detail');
-      })
-
-      // firebase logout at buttonclick
-      const btnLogout = document.querySelector('.btnLogout');
-      btnLogout.addEventListener('click', e => {
-        firebase.auth().signOut().then(function () {
-          window.location.replace('/#/');
         });
-      });
-      console.log('User check')
 
+
+        let contactOwner = document.getElementById('messageToOwner');
+        contactOwner.addEventListener('click', function () {
+          let ownerKey = clickedRoom[0].ownerKey;
+          console.log(ownerKey);
+          localStorage.setItem('ownerKey', ownerKey);
+          window.location.replace('/#/student-messages-detail');
+        })
+
+        // firebase logout at buttonclick
+        const btnLogout = document.querySelector('.btnLogout');
+        btnLogout.addEventListener('click', e => {
+          firebase.auth().signOut().then(function () {
+            window.location.replace('/#/');
+          });
+        });
+      } else {
+        console.log('Wrong usertype');
+        window.location.replace('/#/');
+      }
     } else {
-      console.log('No valid user!')
+      console.log('No valid user');
+      window.location.replace('/#/');
     }
   });
 };

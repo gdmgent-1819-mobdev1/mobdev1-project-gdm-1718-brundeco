@@ -29,6 +29,7 @@ export default () => {
     const email = document.getElementById('txtEmailSt').value;
     const pass = document.getElementById('txtPasswordSt').value;
     const userType = 'student';
+    localStorage.setItem('userType', userType);
     const message = document.getElementById('message');
     const select = document.getElementById('txtCampusSt');
     const campus = parseInt(select.options[select.selectedIndex].value);

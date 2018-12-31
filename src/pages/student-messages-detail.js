@@ -17,86 +17,85 @@ export default () => {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      const userType = localStorage.getItem('userType');
+      if (userType == 'student') {
+        let currentdate = new Date();
+        let datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
+        // let Message = JSON.parse(localStorage.getItem('messageDetail'));
+        // let mesageList = [];
+        // console.log(Message);
+        // mesageList.push(Message)
+        // console.log(mesageList);
 
-      let currentdate = new Date();
-      let datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
-      // let Message = JSON.parse(localStorage.getItem('messageDetail'));
-      // let mesageList = [];
-      // console.log(Message);
-      // mesageList.push(Message)
-      // console.log(mesageList);
+        let ownerKey = localStorage.getItem('ownerKey');
+        let currentUser = localStorage.getItem('currentUserKey');
+        let userName = localStorage.getItem('currentUserName');
+        let senderName;
+        const database = firebase.database();
 
+        // Get sender name
+        const nameRef = database.ref('userdata/' + currentUser);
+        nameRef.once("value")
+          .then(function (snapshot) {
+            let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+            senderName = name;
+          });
 
-      let ownerKey = localStorage.getItem('ownerKey');
-      let currentUser = localStorage.getItem('currentUserKey');
-      let userName = localStorage.getItem('currentUserName');
-      let senderName;
-      const database = firebase.database();
+        // Return the compiled template to the router
+        update(compile(studentMessagesDetailViewTemplate)({
+          name
+        }));
 
-      // Get sender name
-      const nameRef = database.ref('userdata/' + currentUser);
-      nameRef.once("value")
-        .then(function (snapshot) {
-          let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
-          senderName = name;
-          console.log(senderName);
-        });
+        // let parent = document.querySelector('div.message-sender');
+        // for (let i = 0; i < mesageList.length; i++) {
+        //   let kid = document.createElement('p');
+        //   kid.setAttribute('class', 'message-content');
+        //   console.log(kid);
+        //   kid.innerHTML = mesageList[i].content;
+        //   parent.appendChild(kid);
+        // }
 
+        // Get room owner's name 
+        const ref = database.ref('userdata/' + ownerKey);
+        ref.once("value")
+          .then(function (snapshot) {
+            let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
+            let messageTo = document.getElementsByClassName('message-person')[0];
+            messageTo.textContent = name;
+          });
 
-      // Return the compiled template to the router
-      update(compile(studentMessagesDetailViewTemplate)({
-        name
-      }));
-
-      // let parent = document.querySelector('div.message-sender');
-      // for (let i = 0; i < mesageList.length; i++) {
-      //   let kid = document.createElement('p');
-      //   kid.setAttribute('class', 'message-content');
-      //   console.log(kid);
-      //   kid.innerHTML = mesageList[i].content;
-      //   parent.appendChild(kid);
-      // }
-
-      // Get room owner's name 
-      const ref = database.ref('userdata/' + ownerKey);
-      ref.once("value")
-        .then(function (snapshot) {
-          let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
-          let messageTo = document.getElementsByClassName('message-person')[0];
-          messageTo.textContent = name;
-        });
-
-      // Add message to database
-      function addMessageToDb() {
-        const messageRef = database.ref('messages/');
-        let messageContent = document.querySelectorAll('input.message-type-area')[0].value;
-        let Message = {
-          receiver: ownerKey,
-          senderKey: currentUser,
-          senderName: senderName,
-          content: messageContent,
-          date: datetime
+        // Add message to database
+        function addMessageToDb() {
+          const messageRef = database.ref('messages/');
+          let messageContent = document.querySelectorAll('input.message-type-area')[0].value;
+          let Message = {
+            receiver: ownerKey,
+            senderKey: currentUser,
+            senderName: senderName,
+            content: messageContent,
+            date: datetime
+          }
+          messageRef.push(Message);
+          window.location.replace('#/student-listview');
         }
-        messageRef.push(Message);
-        window.location.replace('#/student-listview');
-      }
 
-      let sendMessage = document.getElementById('sendMessage');
-      sendMessage.addEventListener('click', addMessageToDb);
+        let sendMessage = document.getElementById('sendMessage');
+        sendMessage.addEventListener('click', addMessageToDb);
 
-      // firebase logout at buttonclick
-      const btnLogout = document.querySelector('.btnLogout');
-      console.log(btnLogout);
-      btnLogout.addEventListener('click', e => {
-        firebase.auth().signOut().then(function () {
-          console.log('log uit');
-          window.location.replace('/#/');
+        // firebase logout at buttonclick
+        const btnLogout = document.querySelector('.btnLogout');
+        btnLogout.addEventListener('click', e => {
+          firebase.auth().signOut().then(function () {
+            window.location.replace('/#/');
+          });
         });
-      });
-      console.log('User check')
+      } else {
+        console.log('Wrong usertype');
+        window.location.replace('/#/');
+      }
     } else {
-      console.log('No valid user!')
+      console.log('No valid user');
+      window.location.replace('/#/');
     }
   });
-
 };

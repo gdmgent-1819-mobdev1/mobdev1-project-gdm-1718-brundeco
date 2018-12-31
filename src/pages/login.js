@@ -27,6 +27,7 @@ export default () => {
           ref.once("value")
             .then(function(snapshot) {
               let userType = snapshot.child("type").val();
+              localStorage.setItem('userType', userType);
               if(userType === 'admin') {
                 window.location.replace('/#/admin-home');
               } else {
