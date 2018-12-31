@@ -191,7 +191,7 @@ export default () => {
               'facebook-share-dialog',
               'width=800,height=600'
           );
-          return true;
+          return false;
       });
 
       editRoomSubmit.addEventListener('click', editRoomData);
