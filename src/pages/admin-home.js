@@ -73,7 +73,7 @@ export default () => {
         });
 
         function collectFormData(e) {
-          // e.preventDefault();
+          e.preventDefault();
           let rentalPrice = document.getElementById("rentalPrice").value;
           let warrant = document.getElementById("warrant").value;
           let surface = document.getElementById("surface").value;
