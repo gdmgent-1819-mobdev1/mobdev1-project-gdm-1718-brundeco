@@ -46,7 +46,8 @@ export default () => {
 
         let fbButton = document.getElementById('fbShareButton');
         let url = 'https://www.flavorpaper.com/';
-        fbButton.addEventListener('click', function () {
+        fbButton.addEventListener('click', function (e) {
+          e.preventDefault();
           window.open('https://www.facebook.com/sharer/sharer.php?u=' + url,
             'facebook-share-dialog',
             'width=800,height=600'
