@@ -17,8 +17,7 @@ export default () => {
 
   window.scroll({
     top: 0,
-    left: 0,
-    behavior: 'smooth'
+    left: 0
   });
 
   firebase.auth().onAuthStateChanged(function (user) {
@@ -200,7 +199,6 @@ export default () => {
             'facebook-share-dialog',
             'width=800,height=600'
           );
-          return false;
         });
 
         editRoomSubmit.addEventListener('click', editRoomData);

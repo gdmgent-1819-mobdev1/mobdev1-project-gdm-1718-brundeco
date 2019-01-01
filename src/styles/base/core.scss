@@ -596,6 +596,11 @@ p.message-timestamp {
 
 #sortByRecent {
     display: none;
+    &:hover {
+        cursor: pointer;
+        background-color: $color-greenblue !important;
+        color: $color-white !important;
+    }
 }
 
 

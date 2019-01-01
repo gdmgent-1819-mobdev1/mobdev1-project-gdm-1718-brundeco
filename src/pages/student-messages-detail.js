@@ -21,12 +21,6 @@ export default () => {
       if (userType == 'student') {
         let currentdate = new Date();
         let datetime = currentdate.getDate() + '/' + currentdate.getMonth() + ' om ' + currentdate.getHours() + ':' + currentdate.getMinutes();
-        // let Message = JSON.parse(localStorage.getItem('messageDetail'));
-        // let mesageList = [];
-        // console.log(Message);
-        // mesageList.push(Message)
-        // console.log(mesageList);
-
         let ownerKey = localStorage.getItem('ownerKey');
         let currentUser = localStorage.getItem('currentUserKey');
         let userName = localStorage.getItem('currentUserName');
@@ -45,24 +39,6 @@ export default () => {
         update(compile(studentMessagesDetailViewTemplate)({
           name
         }));
-
-        // let parent = document.querySelector('div.message-sender');
-        // for (let i = 0; i < mesageList.length; i++) {
-        //   let kid = document.createElement('p');
-        //   kid.setAttribute('class', 'message-content');
-        //   console.log(kid);
-        //   kid.innerHTML = mesageList[i].content;
-        //   parent.appendChild(kid);
-        // }
-
-        // Get room owner's name 
-        const ref = database.ref('userdata/' + ownerKey);
-        ref.once("value")
-          .then(function (snapshot) {
-            let name = snapshot.child('firstname').val() + ' ' + snapshot.child('lastname').val();
-            let messageTo = document.getElementsByClassName('message-person')[0];
-            messageTo.textContent = name;
-          });
 
         // Add message to database
         function addMessageToDb() {

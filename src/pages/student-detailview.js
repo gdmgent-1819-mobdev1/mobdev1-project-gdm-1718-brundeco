@@ -16,8 +16,7 @@ const studentDetailViewTemplate = require('../templates/student-detailview.handl
 export default () => {
   window.scroll({
     top: 0,
-    left: 0,
-    behavior: 'smooth'
+    left: 0
   });
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {

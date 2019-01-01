@@ -33,7 +33,6 @@ export default () => {
             console.log('geen data');
           } else {
             let keys = Object.keys(rooms);
-            // console.log(keys[0]);
             roomKeys.push(keys);
 
             for (let i = 0; i < keys.length; i++) {
@@ -87,33 +86,12 @@ export default () => {
             }
 
             update(compile(studentListViewTemplate)({
-              allRooms
+              allRooms,
             }));
-
-            let sortByRecent = document.getElementById('sortByRecent');
-            let sortByDistance = document.getElementById('sortByDistance');
-
-            sortByDistance.addEventListener('click', function (e) {
-              // e.preventDefault();
-              sortByRecent.style.display = 'block';
-              sortByDistance.style.display = 'none';
-              console.log(sortByDistance.style.display);
-              for (let i = 0; i < allRooms.length; i++) {
-                allRooms[i]['distance'] = allRooms[i]['distance'];
-              }
-
-              function compare(a, b) {
-                if (a.distance < b.distance)
-                  return -1;
-                if (a.distance > b.distance)
-                  return 1;
-                return 0;
-              }
-              allRooms.sort(compare);
-            })
-
-            sortByRecent.addEventListener('click', function () {
-              window.location.reload();
+            
+            let sortByDistance = document.querySelector('button#sortByDistance');
+            sortByDistance.addEventListener('click', function() {
+              window.location.replace('/#/student-listview-sorted');
             })
 
             let toggleMapview = document.getElementById('toggleMapView');

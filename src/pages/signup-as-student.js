@@ -28,8 +28,6 @@ export default () => {
     const telephone = document.getElementById('txtTelSt').value;
     const email = document.getElementById('txtEmailSt').value;
     const pass = document.getElementById('txtPasswordSt').value;
-    const userType = 'student';
-    localStorage.setItem('userType', userType);
     const message = document.getElementById('message');
     const select = document.getElementById('txtCampusSt');
     const campus = parseInt(select.options[select.selectedIndex].value);
@@ -63,7 +61,8 @@ export default () => {
 
     firebase.auth().createUserWithEmailAndPassword(email, pass)
     .then((response) => {
-
+      const userType = 'student';
+      localStorage.setItem('userType', userType);
       const email = document.getElementById('txtEmailSt').value;
       localStorage.setItem('currentUser', email);
       let currentUserUid = firebase.auth().currentUser.uid;

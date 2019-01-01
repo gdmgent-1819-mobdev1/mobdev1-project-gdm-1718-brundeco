@@ -27,13 +27,13 @@ export default () => {
     const telephone = document.getElementById('txtTelAd').value;
     const email = document.getElementById('txtEmailAd').value;
     const pass = document.getElementById('txtPasswordAd').value;
-    const userType = 'admin';
-    localStorage.setItem('userType', userType);
+
     const message = document.getElementById('message');
 
     firebase.auth().createUserWithEmailAndPassword(email, pass)
       .then((response) => {
-
+        const userType = 'admin';
+        localStorage.setItem('userType', userType);
         const email = document.getElementById('txtEmailAd').value;
         localStorage.setItem('currentUser', email);
         let currentUserUid = firebase.auth().currentUser.uid;

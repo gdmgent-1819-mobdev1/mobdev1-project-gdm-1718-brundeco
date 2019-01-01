@@ -7,6 +7,7 @@ import SignupAsAdminView from './pages/signup-as-admin';
 
 import StudentHomeView from './pages/student-home';
 import StudentListView from './pages/student-listview';
+import StudentListSortedView from './pages/student-listview-sorted';
 import StudentDetailView from './pages/student-detailview';
 import StudentMessagesView from './pages/student-messages';
 import StudentMessagesDetailView from './pages/student-messages-detail';
@@ -28,6 +29,7 @@ export default [
 
   { path: '/student-home', view: StudentHomeView },
   { path: '/student-listview', view: StudentListView },
+  { path: '/student-listview-sorted', view: StudentListSortedView },
   { path: '/student-detailview', view: StudentDetailView },
   { path: '/student-messages', view: StudentMessagesView },
   { path: '/student-messages-detail', view: StudentMessagesDetailView },
