@@ -93,6 +93,9 @@ export default () => {
             allRooms
           }));
 
+          let activeIcon = document.querySelector('.first-image');
+          activeIcon.style.backgroundImage = 'url("src/images/favoritesFullActive.svg")';
+
           let removeBtns = document.querySelectorAll('button#btnRemoveRoom');
           for (let i = 0; i < removeBtns.length; i++) {
             let clickedRoom = roomKeys[0][i];

@@ -88,6 +88,9 @@ export default () => {
             update(compile(studentListViewTemplate)({
               allRooms,
             }));
+
+            let activeIcon = document.querySelector('.second-image');
+            activeIcon.style.backgroundImage = 'url("src/images/homeFullActive.svg")';
             
             let sortByDistance = document.querySelector('button#sortByDistance');
             sortByDistance.addEventListener('click', function() {
@@ -116,7 +119,6 @@ export default () => {
               localStorage.setItem('roomDetail', JSON.stringify(roomDetail));
               clickedRoomKey = roomKeys[0][index];
               localStorage.setItem('roomKey', clickedRoomKey);
-              console.log(clickedRoomKey);
               window.location.replace('#/student-detailview');
             };
 

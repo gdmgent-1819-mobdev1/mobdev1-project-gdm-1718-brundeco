@@ -18,9 +18,13 @@ export default () => {
     if (user) {
 
       const userType = localStorage.getItem('userType');
+      console.log(userType);
       if (userType == 'admin') {
 
         update(compile(homeAdminTemplate)());
+
+        let activeIcon = document.querySelector('.second-image');
+        activeIcon.style.backgroundImage = 'url("src/images/homeFullActive.svg")';
 
         const addRoomBtn = document.getElementById('addRoomSubmit');
         let allRooms = [];

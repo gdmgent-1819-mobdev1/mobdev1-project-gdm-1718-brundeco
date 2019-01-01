@@ -71,6 +71,9 @@ export default () => {
               allRooms
             }));
 
+            let activeIcon = document.querySelector('.first-image-admin');
+            activeIcon.style.backgroundImage = 'url("src/images/adminRoomsActive.svg")';
+
             let room = document.querySelectorAll('.info-list')
             for (let i = 0; i < room.length; i++) {
               room[i].id = "room" + i;

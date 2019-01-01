@@ -41,16 +41,34 @@ export default () => {
             messageList.push(Message);
             // console.log(messageList);
           });
+          newMessage();
         });
+
+        function newMessage() {
+          const text = 'U heeft een bericht ';
+          if (!("Notification" in window)) {
+            alert("This browser does not support system notifications");
+          } else if (Notification.permission === "granted") {
+            let notification = new Notification("Melding", {
+              body: text
+            });
+          } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+              if (permission === "granted") {
+                let notification = new Notification("Melding", {
+                  body: text
+                });
+              }
+            });
+          }
+        }
 
         const detailRef = database.ref('messages/');
         ref.on("value", function (snap) {
           let messages = snap.val();
           let keys = Object.keys(messages);
           messageKeys.push(keys);
-          // console.log(messageKeys);
         });
-        // console.log(messageList);
 
         function showDetail() {
           index = this.id.substr(13);
@@ -65,24 +83,29 @@ export default () => {
           window.location.replace('#/student-messages-detail');
         };
 
-        // Return the compiled template to the router
-        update(compile(studentMessagesViewTemplate)({
-          messageList
-        }));
+        setTimeout(() => {
+          // Return the compiled template to the router
+          update(compile(studentMessagesViewTemplate)({
+            messageList
+          }));
 
-        let messageDetail = document.querySelectorAll('.messages-list');
-        for (let i = 0; i < messageDetail.length; i++) {
-          messageDetail[i].id = "messageDetail" + i;
-          messageDetail[i].addEventListener('click', showDetail);
-        };
+          let activeIcon = document.querySelector('.third-image');
+          activeIcon.style.backgroundImage = 'url("src/images/messagesFullActive.svg")';
 
-        // firebase logout at buttonclick
-        const btnLogout = document.querySelector('.btnLogout');
-        btnLogout.addEventListener('click', e => {
-          firebase.auth().signOut().then(function () {
-            window.location.replace('#/');
+          let messageDetail = document.querySelectorAll('.messages-list');
+          for (let i = 0; i < messageDetail.length; i++) {
+            messageDetail[i].id = "messageDetail" + i;
+            messageDetail[i].addEventListener('click', showDetail);
+          };
+          // firebase logout at buttonclick
+          const btnLogout = document.querySelector('.btnLogout');
+          btnLogout.addEventListener('click', e => {
+            firebase.auth().signOut().then(function () {
+              window.location.replace('#/');
+            });
           });
-        });
+        }, 1000);
+
       } else {
         console.log('Wrong usertype');
         window.location.replace('/#/');

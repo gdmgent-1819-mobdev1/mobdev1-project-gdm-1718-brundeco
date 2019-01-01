@@ -40,6 +40,9 @@ export default () => {
           name
         }));
 
+        let activeIcon = document.querySelector('.third-image');
+        activeIcon.style.backgroundImage = 'url("src/images/messagesFullActive.svg")';
+
         // Add message to database
         function addMessageToDb() {
           const messageRef = database.ref('messages/');

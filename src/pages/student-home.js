@@ -56,7 +56,6 @@ export default () => {
         })
 
         const ref = database.ref('roomdata/');
-
         ref.on('value', (snapshot) => {
           snapshot.forEach(function (childSnapshot) {
             let key = childSnapshot.key;
@@ -68,9 +67,19 @@ export default () => {
           returnRoom(indexCurrentRoom);
         })
 
+
+        const favoRef = database.ref('favorites/');
+        favoRef.on('value', (data) => {
+          const favoRooms = Object.values(data.val());
+          console.log(favoRooms);
+          console.log(favoRooms[0][0].image);
+          // console.log(roomKeys);
+          returnRoom(indexCurrentRoom);
+        })
+
         function likeRoom() {
           let tinderRoomKey = localStorage.getItem('roomKey');
-          console.log(tinderRoomKey);
+          // console.log(tinderRoomKey);
           const favoRef = database.ref('favorites/' + currentUser + '/' + tinderRoomKey);
           favoRef.once('value', function (snapshot) {
             favoRef.set(currentRoom);

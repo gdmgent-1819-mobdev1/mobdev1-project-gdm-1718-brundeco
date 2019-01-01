@@ -33,6 +33,9 @@ export default () => {
           mesageList
         }));
 
+        let activeIcon = document.querySelector('.third-image');
+        activeIcon.style.backgroundImage = 'url("src/images/messagesFullActive.svg")';
+        
         let senderTitle = document.querySelector('h5.message-person');
         senderTitle.innerHTML = localStorage.getItem('senderName');
 
