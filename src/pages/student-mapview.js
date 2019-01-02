@@ -23,9 +23,6 @@ export default () => {
         const database = firebase.database();
         const ref = database.ref('roomdata');
 
-        let activeIcon = document.querySelector('.second-image');
-        activeIcon.style.backgroundImage = 'url("src/images/homeFullActive.svg")';
-
         let toggleGameView = document.getElementById('toggleGameView');
         toggleGameView.addEventListener('click', function () {
           window.location.replace('/#/student-home');

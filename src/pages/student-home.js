@@ -45,9 +45,6 @@ export default () => {
             localStorage.setItem('currentUserName', name);
           });
 
-        let activeIcon = document.querySelector('.second-image');
-        activeIcon.style.backgroundImage = 'url("src/images/homeFullActive.svg")';
-
         let toggleGameView = document.getElementById('toggleGameView');
         toggleGameView.addEventListener('click', function () {
           window.location.replace('/#/student-home');
