@@ -27,6 +27,10 @@ export default () => {
           ref.once("value")
             .then(function(snapshot) {
               let userType = snapshot.child("type").val();
+              let lon = snapshot.child("lon").val();
+              let lat = snapshot.child("lat").val();
+              localStorage.setItem('userLat', lat);
+              localStorage.setItem('userLon', lon);
               localStorage.setItem('userType', userType);
               if(userType === 'admin') {
                 window.location.replace('/#/admin-home');
