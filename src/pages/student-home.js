@@ -72,7 +72,6 @@ export default () => {
         const favoRef = database.ref('favorites/');
         favoRef.on('value', (data) => {
           const favoRooms = Object.values(data.val());
-          console.log(favoRooms);
           returnRoom(indexCurrentRoom);
         })
 
