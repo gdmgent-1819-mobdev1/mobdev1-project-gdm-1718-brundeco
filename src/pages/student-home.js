@@ -46,6 +46,8 @@ export default () => {
           });
 
         let toggleGameView = document.getElementById('toggleGameView');
+        toggleGameView.style.backgroundColor = '#efefef';
+        toggleGameView.style.boxShadow = 'none';
         toggleGameView.addEventListener('click', function () {
           window.location.replace('/#/student-home');
         })

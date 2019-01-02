@@ -23,6 +23,10 @@ export default () => {
         const database = firebase.database();
         const ref = database.ref('roomdata');
 
+        let toggleMapView = document.getElementById('toggleMapView');
+        toggleMapView.style.backgroundColor = '#efefef';
+        toggleMapView.style.boxShadow = 'none';
+
         let toggleGameView = document.getElementById('toggleGameView');
         toggleGameView.addEventListener('click', function () {
           window.location.replace('/#/student-home');
