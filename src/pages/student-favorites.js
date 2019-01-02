@@ -56,7 +56,8 @@ export default () => {
                 image: rooms[k].image,
                 lat: rooms[k].lat,
                 lon: rooms[k].lon,
-                adminName: rooms[k].adminName
+                adminName: rooms[k].adminName,
+                description: rooms[k].description
               }
               allRooms.push(Room);
             }
