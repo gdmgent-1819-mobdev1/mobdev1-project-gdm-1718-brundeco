@@ -60,6 +60,9 @@ export default () => {
           clickedRoom
         }));
 
+        let activeIcon = document.querySelector('.first-image-admin');
+        activeIcon.style.backgroundImage = 'url("src/images/adminRoomsActive.svg")';
+
         const contentBlock = document.getElementById('contentBlock');
         const roomEditForm = document.getElementById('editRoom');
         const btnEditRoom = document.getElementById('btnEditRoom');

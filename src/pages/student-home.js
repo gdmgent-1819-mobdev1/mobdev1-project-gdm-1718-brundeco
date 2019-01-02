@@ -45,7 +45,9 @@ export default () => {
             localStorage.setItem('currentUserName', name);
           });
 
-        // Switch between game or map view
+        let activeIcon = document.querySelector('.second-image');
+        activeIcon.style.backgroundImage = 'url("src/images/homeFullActive.svg")';
+
         let toggleGameView = document.getElementById('toggleGameView');
         toggleGameView.addEventListener('click', function () {
           window.location.replace('/#/student-home');
@@ -72,8 +74,6 @@ export default () => {
         favoRef.on('value', (data) => {
           const favoRooms = Object.values(data.val());
           console.log(favoRooms);
-          console.log(favoRooms[0][0].image);
-          // console.log(roomKeys);
           returnRoom(indexCurrentRoom);
         })
 
