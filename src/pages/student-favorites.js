@@ -125,6 +125,7 @@ export default () => {
           const btnLogout = document.querySelector('.btnLogout');
           btnLogout.addEventListener('click', e => {
             firebase.auth().signOut().then(function () {
+              localStorage.clear();
               window.location.replace('/#/');
             });
           });

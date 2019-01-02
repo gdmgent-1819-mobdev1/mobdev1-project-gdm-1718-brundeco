@@ -64,8 +64,12 @@ export default () => {
 
         ref.on("value", function (snap) {
           let messages = snap.val();
-          let keys = Object.keys(messages);
-          messageKeys.push(keys);
+          if (messages == null || messages == undefined) {
+            console.log('Nog geen berichten');
+          } else {
+            let keys = Object.keys(messages);
+            messageKeys.push(keys);
+          }
         });
 
         function showDetail() {
@@ -99,6 +103,7 @@ export default () => {
           const btnLogout = document.querySelector('.btnLogout');
           btnLogout.addEventListener('click', e => {
             firebase.auth().signOut().then(function () {
+              localStorage.clear();
               window.location.replace('#/');
             });
           });
