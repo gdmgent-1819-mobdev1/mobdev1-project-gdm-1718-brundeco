@@ -167,7 +167,6 @@ p.card-surface {
     cursor: pointer;
 }
 
-
 .info-block img {
     border-radius: $main-border-radius;
 }
@@ -182,7 +181,6 @@ p.card-surface {
     }
 }
 
-
 @media only screen and (min-width: 850px) {
     .image-block {
         height: 200px;
@@ -196,9 +194,7 @@ p.card-surface {
 }
 
 
-
 // - - - - - student listview  - - - - - -
-
 .content-lv {
     @include flex-column;
     margin-top: 100px;
@@ -215,7 +211,6 @@ p.card-surface {
         margin-bottom: 80px;
     }
 }
-
 
 .extra-box-margin {
     margin-bottom: 80px;
@@ -241,28 +236,25 @@ h6.card-title-lv {
     line-height: 18px;
 }
 
-p.width {
-    background-image: url('../../src/images/ruler.svg');
+p.width,
+p.distance,
+p.price {
     height: 20px;
     width: 20px;
     background-size: cover;
     background-position: center;
+}
+
+p.width {
+    background-image: url('../../src/images/ruler.svg');
 }
 
 p.distance {
     background-image: url('../../src/images/distance.svg');
-    height: 20px;
-    width: 20px;
-    background-size: cover;
-    background-position: center;
 }
 
 p.price {
     background-image: url('../../src/images/euro.svg');
-    height: 20px;
-    width: 20px;
-    background-size: cover;
-    background-position: center;
 }
 
 p.card-values-lv {
@@ -279,17 +271,12 @@ p.card-values-lv {
     position: relative;
     flex: 1;
     transition: 0.2s ease-in-out;
-}
-
-.info-list:hover {
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-    box-shadow: 0px 0px 0px #fff;
-    transform: scale(1.04);
-}
-
-.info-list:hover {
-    flex-grow: 2;
+    &:hover {
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        box-shadow: 0px 0px 0px #fff;
+        transform: scale(1.04);
+    }
 }
 
 .info-list-img {
@@ -336,9 +323,8 @@ img.room-picture-list {
     }
 }
 
+
 // - - - - - - room detail view - - - - - - 
-
-
 .content-wrapper {
     display: flex;
     flex-direction: column;
@@ -355,7 +341,6 @@ img.room-picture-list {
     }
 }
 
-
 .content-wrapper-2 {
     display: flex;
     flex-direction: column;
@@ -369,7 +354,6 @@ img.room-picture-list {
         margin-bottom: 80px;
     }
 }
-
 
 h5.property-title {
     font-size: 80%;
@@ -430,11 +414,10 @@ p.room-description {
 .fa-facebook-f {
     font-size: 18px;
     transition: 0.2s ease-in-out;
-}
-
-.fa-facebook-f:hover {
-    transform: scale(1.2);
-    transition: 0.2s ease-in-out;
+    &:hover {
+        transform: scale(1.2);
+        transition: 0.2s ease-in-out;
+    }
 }
 
 .edit-owner {
@@ -456,17 +439,15 @@ p.room-description {
     border-radius: 80px;
     transition: 0.2s ease-in-out;
     border: 1px solid $color-greenblue !important;
-}
-
-#messageToOwner:hover {
-    background-color: $color-greenblue;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-    color: $color-white;
-}
-
-#messageToOwner:focus {
-    outline: none !important;
+    &:hover {
+        background-color: $color-greenblue;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        color: $color-white;
+    }
+    &:focus {
+        outline: none !important;
+    }
 }
 
 #addToFavorites {
@@ -476,18 +457,18 @@ p.room-description {
     border: none;
     outline: none;
     font-size: 18px;
-}
-
-#addToFavorites:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: ease-in-out 0.2s;
-    opacity: 0.8;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+        transition: ease-in-out 0.2s;
+        opacity: 0.8;
+    }
 }
 
 .fas .fa-star {
     font-size: 100%;
 }
+
 
 // - - - - - student messages - - - - - -
 .messages-list {
@@ -502,7 +483,6 @@ p.room-description {
     min-width: 60%;
     text-align: center;
     transition: 0.2s ease-in-out;
-
     &:hover {
         cursor: pointer;
         margin-left: 20px;
@@ -628,13 +608,12 @@ p.message-timestamp {
     background-color: $color-pink !important;
     border: 1px solid $color-pink !important;
     color: $color-white;
-}
-
-#btnRemoveRoom:hover {
-    background-color: $color-white !important;
-    color: $color-pink;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
+    &:hover {
+        background-color: $color-white !important;
+        color: $color-pink;
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+    }
 }
 
 #addRoomSubmit,
@@ -661,21 +640,6 @@ input.message-type-area {
     width: 100%;
 }
 
-button.add-room-picture {
-    @include flex-row;
-    border: 1px solid $color-lighter-grey;
-    border-radius: $main-border-radius;
-    padding: 30px;
-}
-
-button.add-room-picture:hover {
-    background-color: $color-lighter-grey;
-    cursor: pointer;
-}
-
-button.add-room-picture img {
-    width: 40px;
-}
 
 // - - - - - forms - - - - - -
 input,
@@ -795,6 +759,7 @@ input#roomImage:hover::before {
 input#roomImage:active {
     outline: 0 !important;
 }
+
 
 // - - - - - trivia - - - - - -
 h1 {
