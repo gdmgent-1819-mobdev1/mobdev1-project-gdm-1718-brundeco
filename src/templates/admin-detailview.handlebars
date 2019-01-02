@@ -3,11 +3,12 @@
 <div class="content-wrapper-2" id="contentBlock">
     <div class="center-all">
         {{#each clickedRoom }}
-        <h2>{{ this.address }}</h2>
+        <h2 class="address-detail">{{ this.address }}</h2>
         <div class="room-image-block">
             <img src="{{ this.image }}" class="room-image-detail" alt="">
         </div>
         <div class="room-properties">
+            <h5 class="property-title">Beschrijving<span class="property-info"> {{ this.description }}</span></h5>
             <h5 class="property-title">Type<span class="property-info"> {{ this.type }}</span></h5>
             <h5 class="property-title">Locatie<span class="property-info"> {{ this.address }}</span></h5>
             <h5 class="property-title">Oppervlakte<span class="property-info"> {{ this.surface }} m²</span></h5>
@@ -38,19 +39,21 @@
         <form class="just-a-box-2" id="editRoom">
             {{#each clickedRoom }}
             <h2>Kot wijzigen</h2>
-            <p style="display:inline">Prijs</p>
-            <input class="edit-room-input" type="text" value="{{ this.rentalPrice }}" id="rentalPrice">
-            <input class="edit-room-input" type="text" value="{{ this.warrant }}" id="warrant">
-            <input class="edit-room-input" type="text" value="{{ this.surface }}" id="surface">
-            <input class="edit-room-input" type="text" value="{{ this.address }}" id="address">
-            <input class="edit-room-input" type="text" value="{{ this.type }}" id="roomType">
-            <input class="edit-room-input" type="text" value="{{ this.floors }}" id="floors">
-            <input class="edit-room-input" type="text" value="{{ this.numberOfPersons }}" id="numberOfPersons">
-            <input class="edit-room-input" type="text" value="{{ this.toilet }}" id="toilet">
-            <input class="edit-room-input" type="text" value="{{ this.douche }}" id="douche">
-            <input class="edit-room-input" type="text" value="{{ this.bath }}" id="bath">
-            <input class="edit-room-input" type="text" value="{{ this.kitchen }}" id="kitchen">
-            <input class="edit-room-input" type="text" value="{{ this.furnished }}" id="furnished">
+            <input class="edit-room-input" type="text" value="{{ this.description }}" id="description" placeholder="beschrijving">
+            <input class="edit-room-input" type="text" value="{{ this.rentalPrice }}" id="rentalPrice" placeholder="huurprijs">
+            <input class="edit-room-input" type="text" value="{{ this.warrant }}" id="warrant" placeholder="waarborg">
+            <input class="edit-room-input" type="text" value="{{ this.surface }}" id="surface" placeholder="oppervlakte">
+            <input class="edit-room-input" type="text" value="{{ this.address }}" id="address" placeholder="adres">
+            <input class="edit-room-input" type="text" value="{{ this.type }}" id="roomType" placeholder="type">
+            <input class="edit-room-input" type="text" value="{{ this.floors }}" id="floors" placeholder="aantal verdiepingen">
+            <input class="edit-room-input" type="text" value="{{ this.numberOfPersons }}" id="numberOfPersons"
+                placeholder="aantal personen">
+            <input class="edit-room-input" type="text" value="{{ this.toilet }}" id="toilet" placeholder="toilet">
+            <input class="edit-room-input" type="text" value="{{ this.douche }}" id="douche" placeholder="douche">
+            <input class="edit-room-input" type="text" value="{{ this.bath }}" id="bath" placeholder="bad">
+            <input class="edit-room-input" type="text" value="{{ this.kitchen }}" id="kitchen" placeholder="keuken">
+            <input class="edit-room-input" type="text" value="{{ this.furnished }}" id="furnished" placeholder="bemeubled">
+            <input class="edit-room-input" type="text" value="{{ this.adminName }}" id="adminName" placeholder="eigenaar">
             <input type="file" name="image" id="roomImage">
             <p id="fullImageName"></p>
             <p id="progress" style="display:none">Even geduld ... uw foto wordt verwerkt</p>

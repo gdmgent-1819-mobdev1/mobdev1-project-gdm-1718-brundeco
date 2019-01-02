@@ -62,7 +62,6 @@ export default () => {
           }
         }
 
-        const detailRef = database.ref('messages/');
         ref.on("value", function (snap) {
           let messages = snap.val();
           if (messages == null || messages == undefined) {

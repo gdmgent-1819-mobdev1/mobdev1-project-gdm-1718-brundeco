@@ -39,7 +39,6 @@ export default () => {
               }
             }
             messageList.push(Message);
-            // console.log(messageList);
           });
           newMessage();
         });

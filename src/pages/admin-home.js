@@ -90,6 +90,7 @@ export default () => {
           let bath = document.getElementById("bath").value;
           let kitchen = document.getElementById("kitchen").value;
           let furnished = document.getElementById("furnished").value;
+          let description = document.getElementById("description").value;
           let key = localStorage.getItem('currentUserKey');
           let adminName = localStorage.getItem('currentUserName');
 
@@ -130,6 +131,7 @@ export default () => {
               lon: lon,
               image: imageUrl,
               adminName: adminName,
+              description: description
             }
             ref.push(Room);
             allRooms.push(Room);

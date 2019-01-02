@@ -64,7 +64,8 @@ export default () => {
                   })
                   .setHTML(
                     `<p class='mapbox-pop-up-title'>${allRooms[i].address}</p>
-            <p>€ ${allRooms[i].rentalPrice}</p>
+            <p class='mapbox-pop-up-title-2'>€ ${allRooms[i].rentalPrice} per maand</p>
+            <p class='mapbox-pop-up-title-2'> ${allRooms[i].surface}</p>
             `))
                 .addTo(map);
             }

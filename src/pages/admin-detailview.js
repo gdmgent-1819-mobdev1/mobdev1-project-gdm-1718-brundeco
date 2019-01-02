@@ -109,6 +109,7 @@ export default () => {
 
         function editRoomData(e) {
           e.preventDefault();
+          let description = document.getElementById("description").value;
           let rentalPrice = document.getElementById("rentalPrice").value;
           let warrant = document.getElementById("warrant").value;
           let surface = document.getElementById("surface").value;
@@ -121,6 +122,7 @@ export default () => {
           let bath = document.getElementById("bath").value;
           let kitchen = document.getElementById("kitchen").value;
           let furnished = document.getElementById("furnished").value;
+          let adminName = document.getElementById("adminName").value;
           let key = localStorage.getItem('currentUserKey');
 
           let geocoder = new google.maps.Geocoder();
@@ -158,7 +160,9 @@ export default () => {
                 ownerKey: key,
                 lat: lat,
                 lon: lon,
-                image: currentRoomImgUrl
+                image: currentRoomImgUrl,
+                description: description,
+                adminName: adminName
               });
             } else {
               ref.set({
@@ -177,7 +181,9 @@ export default () => {
                 ownerKey: key,
                 lat: lat,
                 lon: lon,
-                image: imageUrl
+                image: imageUrl,
+                description: description,
+                adminName: adminName
               });
             }
             roomEditSucces();
