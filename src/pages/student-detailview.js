@@ -26,6 +26,7 @@ export default () => {
         const database = firebase.database();
         const ref = database.ref('favorites/' + currentUserKey);
         let clickedRoom = [];
+        console.log(clickedRoom);
         let roomDetail = JSON.parse(localStorage.getItem('roomDetail'));
         let roomKey = localStorage.getItem('roomKey');
         clickedRoom.push(roomDetail);
